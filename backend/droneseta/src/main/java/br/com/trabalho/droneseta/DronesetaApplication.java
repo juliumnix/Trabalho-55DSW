@@ -1,13 +1,13 @@
-package br.com.trabalho.trabalho55DSW;
+package br.com.trabalho.droneseta;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class Trabalho55DswApplication {
+public class DronesetaApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(Trabalho55DswApplication.class, args);
+		SpringApplication.run(DronesetaApplication.class, args);
 	}
 
 }

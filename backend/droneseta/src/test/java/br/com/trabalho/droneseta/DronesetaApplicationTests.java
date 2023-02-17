@@ -1,10 +1,10 @@
-package br.com.trabalho.trabalho55DSW;
+package br.com.trabalho.droneseta;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Trabalho55DswApplicationTests {
+class DronesetaApplicationTests {
 
 	@Test
 	void contextLoads() {
