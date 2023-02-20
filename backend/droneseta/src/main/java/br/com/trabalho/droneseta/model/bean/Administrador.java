@@ -26,11 +26,6 @@ public class Administrador {
         this.senha = senha;
     }
 
-    public Administrador(long id, String nome, String email, String senha) {
-        this(nome, email, senha);
-        this.id = id;
-    }
-
     public long getId() {
         return id;
     }

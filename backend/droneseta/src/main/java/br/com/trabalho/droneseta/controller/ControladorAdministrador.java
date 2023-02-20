@@ -1,5 +1,6 @@
 package br.com.trabalho.droneseta.controller;
 
+import br.com.trabalho.droneseta.DAO.AdministradorDAO;
 import br.com.trabalho.droneseta.model.bean.Administrador;
 import br.com.trabalho.droneseta.repository.RepositorioAdministrador;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import static br.com.trabalho.droneseta.DAO.AdministradorDAO.procurarAdministrador;
+
 @CrossOrigin
 @RestController
 public class ControladorAdministrador {
@@ -17,14 +20,9 @@ public class ControladorAdministrador {
     @Autowired
     RepositorioAdministrador repositorioAdministrador;
     
-    private Administrador procurarAdministrador(long id) {
-        Optional<Administrador> administrador = repositorioAdministrador.findById(id);
-        return administrador.isPresent() ? administrador.get() : null;
-    }
-    
     @PutMapping("/administradores/{id}")
     public ResponseEntity<Administrador> atualizarAdministrador(@PathVariable("id") long id, @RequestBody Administrador administradorAtualizado) {
-        Administrador administrador = procurarAdministrador(id);
+        Administrador administrador = AdministradorDAO.procurarAdministrador(id, repositorioAdministrador);
         if (administrador != null) {
             administrador.setNome(administradorAtualizado.getNome());
             administrador.setEmail(administradorAtualizado.getEmail());
@@ -37,7 +35,7 @@ public class ControladorAdministrador {
     @DeleteMapping("/administradores/{id}")
     public ResponseEntity<HttpStatus> deletarAdministrador(@PathVariable("id") long id) {
         try {
-            Administrador administrador = procurarAdministrador(id);
+            Administrador administrador = AdministradorDAO.procurarAdministrador(id, repositorioAdministrador);
             if (administrador != null) {
                 repositorioAdministrador.deleteById(id);
                 return new ResponseEntity<>(HttpStatus.OK);
@@ -56,7 +54,7 @@ public class ControladorAdministrador {
     @GetMapping("/administradores/{id}")
     public ResponseEntity<Administrador> recuperarAdministrador(@PathVariable("id") long id) {
         try {
-            Administrador administrador = procurarAdministrador(id);
+            Administrador administrador = AdministradorDAO.procurarAdministrador(id, repositorioAdministrador);
             if (administrador != null) {
                 return new ResponseEntity<>(administrador, HttpStatus.OK);
             }
