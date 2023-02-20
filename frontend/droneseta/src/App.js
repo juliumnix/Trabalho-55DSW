@@ -1,17 +1,19 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes , Navigate} from 'react-router-dom';
 import ErrorScreen from './pages/ErrorScreen';
 import HomeScreen from './pages/HomeScreen';
-import Login from './pages/LoginScreen';
+import LoginScreen from './pages/LoginScreen';
 import ShoppingCart from './pages/ShoppingCartScreen';
+import PrivatedRoute from './routes/PrivatedRoute';
 
 function App() {
+
   return (
-      <Routes>
-        <Route path="*" element={<ErrorScreen/>} />
-        <Route path='/' element={<HomeScreen />} />
-        <Route path='rota2' element={<HomeScreen />} />
-        <Route path='rota3' element={<ShoppingCart />} />
-      </Routes>
+    <Routes>
+      <Route path="/erro" element={<ErrorScreen />} />
+      <Route path='/' element={<LoginScreen />} />
+      <Route path='/home' element={<PrivatedRoute><HomeScreen/></PrivatedRoute>} />
+      <Route path='rota3' element={<PrivatedRoute><ShoppingCart /></PrivatedRoute>} />
+    </Routes>
   );
 }
 
