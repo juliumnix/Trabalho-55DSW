@@ -1,5 +1,6 @@
 package br.com.trabalho.droneseta.controller;
 
+import br.com.trabalho.droneseta.DAO.ProdutoDAO;
 import br.com.trabalho.droneseta.model.bean.Produto;
 import br.com.trabalho.droneseta.repository.RepositorioProduto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +18,9 @@ public class ControladorProduto {
     @Autowired
     RepositorioProduto repositorioProduto;
     
-    private Produto procurarProduto(long id) {
-        Optional<Produto> produto = repositorioProduto.findById(id);
-        return produto.isPresent() ? produto.get() : null;
-    }
-    
     @PutMapping("/produtos/{id}")
     public ResponseEntity<Produto> atualizarProduto(@PathVariable("id") long id, @RequestBody Produto produtoAtualizado) {
-        Produto produto = procurarProduto(id);
+        Produto produto = ProdutoDAO.procurarProduto(id, repositorioProduto);
         if (produto != null) {
             produto.setDescricao(produtoAtualizado.getDescricao());
             produto.setUrlImagem(produtoAtualizado.getUrlImagem());
@@ -39,7 +35,7 @@ public class ControladorProduto {
     @DeleteMapping("/produtos/{id}")
     public ResponseEntity<HttpStatus> deletarProduto(@PathVariable("id") long id) {
         try {
-            Produto produto = procurarProduto(id);
+            Produto produto = ProdutoDAO.procurarProduto(id, repositorioProduto);
             if (produto != null) {
                 repositorioProduto.deleteById(id);
                 return new ResponseEntity<>(HttpStatus.OK);
@@ -58,7 +54,7 @@ public class ControladorProduto {
     @GetMapping("/produtos/{id}")
     public ResponseEntity<Produto> recuperarProduto(@PathVariable("id") long id) {
         try {
-            Produto produto = procurarProduto(id);
+            Produto produto = ProdutoDAO.procurarProduto(id, repositorioProduto);
             if (produto != null) {
                 return new ResponseEntity<>(produto, HttpStatus.OK);
             }

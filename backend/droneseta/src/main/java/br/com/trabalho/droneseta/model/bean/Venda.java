@@ -36,11 +36,6 @@ public class Venda {
         this.isEntregue = isEntregue;
     }
 
-    public Venda(long id, Cliente cliente, List<Produto> produtos, double valor, boolean isPagAprovado, boolean isEntregue) {
-        this(cliente, produtos, valor, isPagAprovado, isEntregue);
-        this.id = id;
-    }
-
     public long getId() {
         return id;
     }

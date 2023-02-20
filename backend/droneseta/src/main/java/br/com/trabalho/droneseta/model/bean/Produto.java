@@ -42,11 +42,6 @@ public class Produto {
         this.estoques = estoques;
     }
 
-    public Produto(long id, String descricao, String urlImagem, double preco, List<String> tamanhos, Map<String, Integer> estoques) {
-        this(descricao, urlImagem, preco, tamanhos, estoques);
-        this.id = id;
-    }
-
     public long getId() {
         return id;
     }

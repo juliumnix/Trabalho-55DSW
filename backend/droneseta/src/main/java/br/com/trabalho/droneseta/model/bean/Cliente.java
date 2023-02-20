@@ -48,11 +48,6 @@ public class Cliente {
         this.carrinho = carrinho;
     }
 
-    public Cliente (Long id, String nome, String email, String senha, String cpf, String numCartao, String endCobranca, String endEntrega, List<Produto> carrinho) {
-        this(nome, email, senha, cpf, numCartao, endCobranca, endEntrega, carrinho);
-        this.id = id;
-    }
-
     public long getId() {
         return id;
     }

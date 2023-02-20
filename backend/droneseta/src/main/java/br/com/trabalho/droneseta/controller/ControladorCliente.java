@@ -1,5 +1,6 @@
 package br.com.trabalho.droneseta.controller;
 
+import br.com.trabalho.droneseta.DAO.ClienteDAO;
 import br.com.trabalho.droneseta.model.bean.Cliente;
 import br.com.trabalho.droneseta.repository.RepositorioCliente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+import static br.com.trabalho.droneseta.DAO.ClienteDAO.procurarCliente;
+
 @CrossOrigin
 @RestController
 public class ControladorCliente {
@@ -17,14 +20,11 @@ public class ControladorCliente {
     @Autowired
     RepositorioCliente repositorioCliente;
     
-    private Cliente procurarCliente(long id) {
-        Optional<Cliente> cliente = repositorioCliente.findById(id);
-        return cliente.isPresent() ? cliente.get() : null;
-    }
+
     
     @PutMapping("/clientes/{id}")
     public ResponseEntity<Cliente> atualizarCliente(@PathVariable("id") long id, @RequestBody Cliente clienteAtualizado) {
-        Cliente cliente = procurarCliente(id);
+        Cliente cliente = ClienteDAO.procurarCliente(id, repositorioCliente);
         if (cliente != null) {
             cliente.setNome(clienteAtualizado.getNome());
             cliente.setEmail(clienteAtualizado.getEmail());
@@ -42,7 +42,7 @@ public class ControladorCliente {
     @DeleteMapping("/clientes/{id}")
     public ResponseEntity<HttpStatus> deletarCliente(@PathVariable("id") long id) {
         try {
-            Cliente cliente = procurarCliente(id);
+            Cliente cliente = ClienteDAO.procurarCliente(id, repositorioCliente);
             if (cliente != null) {
                 repositorioCliente.deleteById(id);
                 return new ResponseEntity<>(HttpStatus.OK);
@@ -61,7 +61,7 @@ public class ControladorCliente {
     @GetMapping("/clientes/{id}")
     public ResponseEntity<Cliente> recuperarCliente(@PathVariable("id") long id) {
         try {
-            Cliente cliente = procurarCliente(id);
+            Cliente cliente = ClienteDAO.procurarCliente(id, repositorioCliente);
             if (cliente != null) {
                 return new ResponseEntity<>(cliente, HttpStatus.OK);
             }

@@ -1,5 +1,6 @@
 package br.com.trabalho.droneseta.controller;
 
+import br.com.trabalho.droneseta.DAO.VendaDAO;
 import br.com.trabalho.droneseta.model.bean.Venda;
 import br.com.trabalho.droneseta.repository.RepositorioVenda;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,14 +18,11 @@ public class ControladorVenda {
     @Autowired
     RepositorioVenda repositorioVenda;
     
-    private Venda procurarVenda(long id) {
-        Optional<Venda> venda = repositorioVenda.findById(id);
-        return venda.isPresent() ? venda.get() : null;
-    }
+
     
     @PutMapping("/vendas/{id}")
     public ResponseEntity<Venda> atualizarVenda(@PathVariable("id") long id, @RequestBody Venda vendaAtualizada) {
-        Venda venda = procurarVenda(id);
+        Venda venda = VendaDAO.procurarVenda(id, repositorioVenda);
         if (venda != null) {
             venda.setCliente(vendaAtualizada.getCliente());
             venda.setProdutos(vendaAtualizada.getProdutos());
@@ -39,7 +37,7 @@ public class ControladorVenda {
     @DeleteMapping("/vendas/{id}")
     public ResponseEntity<HttpStatus> deletarVenda(@PathVariable("id") long id) {
         try {
-            Venda venda = procurarVenda(id);
+            Venda venda = VendaDAO.procurarVenda(id, repositorioVenda);
             if (venda != null) {
                 repositorioVenda.deleteById(id);
                 return new ResponseEntity<>(HttpStatus.OK);
@@ -58,7 +56,7 @@ public class ControladorVenda {
     @GetMapping("/vendas/{id}")
     public ResponseEntity<Venda> recuperarVenda(@PathVariable("id") long id) {
         try {
-            Venda venda = procurarVenda(id);
+            Venda venda = VendaDAO.procurarVenda(id, repositorioVenda);
             if (venda != null) {
                 return new ResponseEntity<>(venda, HttpStatus.OK);
             }
