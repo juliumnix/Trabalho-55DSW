@@ -1,7 +1,7 @@
 import { useState, React } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginService from "../../services/LoginService";
-import { ContainerLogin, Container, ImageLogin, Label, Button } from "./styles";
+import { ContainerLogin, Container, ImageLogin, Button } from "./styles";
 import { ItemContainer, ItemButton, Spacer, Logo } from "../../components/Header/styles";
 import Input from "../../components/Input";
 

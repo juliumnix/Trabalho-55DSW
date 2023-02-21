@@ -18,20 +18,6 @@ border: none;
 background: none;
 `;
 
-export const Input = styled.input`
-  margin: 30px;
-  background: none;
-  border: none;
-  outline: none;
-  max-width: 190px;
-  padding: 10px 20px;
-  font-size: 16px;
-  font-family: 'Inter', sans-serif;
-  border-radius: 9999px;
-  box-shadow: inset 5px 5px 10px rgb(243, 243, 243);
-  color: #000;
-`;
-
 export const Button = styled.button`
   padding: 1em 2.5em;
   cursor: pointer;
