@@ -6,8 +6,7 @@ export const Container = styled.div`
 `;
 
 export const ContainerLogin = styled.div`
-padding-top: 450px;
-padding-left: 200px;
+  padding-left: 5vw; 
 `;
 
 export const Label = styled.label`
@@ -30,11 +29,12 @@ export const Input = styled.input`
   font-family: 'Inter', sans-serif;
   border-radius: 9999px;
   box-shadow: inset 5px 5px 10px rgb(243, 243, 243);
-  color: #fff;
+  color: #000;
 `;
 
 export const Button = styled.button`
   padding: 1em 2.5em;
+  cursor: pointer;
   font-size: 15px;
   color: #ffffff;
   font-weight: bold;
@@ -44,10 +44,22 @@ export const Button = styled.button`
   border: 1px solid #e8e8e8;
   box-shadow: 6px 6px 12px #c5c5c5,
               -6px -6px 12px #ffffff;
+  transition: 0.2s;
+  :hover{
+    padding: 1em 3em;
+    transition: 0.2s;
+  }
 `
 
 export const ImageLogin = styled.div`
+background: url(${require("../../assets/login_background.png")});
+background-repeat: no-repeat;
+background-position: right;
+flex-direction: column;
+display: flex;
+justify-content: center;
+align-items: center;
 float: right;
-width: 40vw;
+width: 35vw;
 height: 100vh;
 text-align: center;`;

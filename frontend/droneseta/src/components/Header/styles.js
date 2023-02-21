@@ -3,7 +3,15 @@ import styled from 'styled-components';
 export const Container = styled.header`
   background-color: #FFFFFF;
   height: 10vh;
+  /* box-shadow: ${(props) => (props.noShadow === true ? "none" : "18px 18px 30px rgba(209, 217, 230, 0.5" )}; */
   box-shadow: 18px 18px 30px rgba(209, 217, 230, 0.5);
+  display: flex;
+  justify-content: space-between;
+`;
+
+export const ContainerNoShadow = styled.header`
+  background-color: #FFFFFF;
+  height: 10vh;
   display: flex;
   justify-content: space-between;
 `;

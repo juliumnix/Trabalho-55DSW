@@ -26,7 +26,7 @@ export const ContainerInactive = styled.button`
     background: linear-gradient(145deg, #ffffff, #e6e6e6);
     box-shadow:  18px 18px 40px #adadad,
              -18px -18px 40px #ffffff;
-             :hover{
+    :hover{
     background: #ffffff;
     padding: 10px;
     box-shadow:  18px 18px 40px #d9d9d9,
