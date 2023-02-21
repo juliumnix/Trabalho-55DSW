@@ -119,4 +119,33 @@ public class Cliente {
     public void setCarrinho(List<Produto> carrinho) {
         this.carrinho = carrinho;
     }
+    
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{")
+                .append("'").append("id").append("'").append(": ")
+                .append(id).append(", ")
+                .append("'").append("nome").append("'").append(": ")
+                .append("'").append(nome).append("'").append(", ")
+                .append("'").append("email").append("'").append(": ")
+                .append("'").append(email).append("'").append(", ")
+                .append("'").append("senha").append("'").append(": ")
+                .append("'").append(senha).append("'").append(", ")
+                .append("'").append("cpf").append("'").append(": ")
+                .append("'").append(cpf).append("'").append(", ")
+                .append("'").append("numCartao").append("'").append(": ")
+                .append("'").append(numCartao).append("'").append(", ")
+                .append("'").append("endCobranca").append("'").append(": ")
+                .append("'").append(endCobranca).append("'").append(", ")
+                .append("'").append("endEntrega").append("'").append(": ")
+                .append("'").append(endEntrega).append("'").append(", ")
+                .append("'").append("carrinho").append("'").append(": ")
+                .append("[");
+        for (int i = 0; i < carrinho.size(); i++) {
+            if (i > 0) sb.append(", ");
+            sb.append(carrinho.get(i).toString());
+        }
+        sb.append("]").append("}");
+        return sb.toString();
+    }
 }

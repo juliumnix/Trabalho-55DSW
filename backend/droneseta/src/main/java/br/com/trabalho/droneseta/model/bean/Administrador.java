@@ -57,4 +57,18 @@ public class Administrador {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+    
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{")
+                .append("'").append("id").append("'").append(": ")
+                .append(id).append(", ")
+                .append("'").append("nome").append("'").append(": ")
+                .append("'").append(nome).append("'").append(", ")
+                .append("'").append("email").append("'").append(": ")
+                .append("'").append(email).append("'").append(", ")
+                .append("'").append("senha").append("'").append(": ")
+                .append("'").append(senha).append("'").append("}");
+        return sb.toString();
+    }
 }

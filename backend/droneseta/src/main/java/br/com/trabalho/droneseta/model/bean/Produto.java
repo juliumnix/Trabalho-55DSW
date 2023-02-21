@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Entity
 @Table(name = "produtos")
@@ -88,5 +89,36 @@ public class Produto {
     
     public void setEstoques(Map<String, Integer> estoques) {
         this.estoques = estoques;
+    }
+    
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{")
+                .append("'").append("id").append("'").append(": ")
+                .append(id).append(", ")
+                .append("'").append("descricao").append("'").append(": ")
+                .append("'").append(descricao).append("'").append(", ")
+                .append("'").append("urlImagem").append("'").append(": ")
+                .append("'").append(urlImagem).append("'").append(", ")
+                .append("'").append("preco").append("'").append(": ")
+                .append(preco).append(", ")
+                .append("'").append("tamanhos").append("'").append(": ")
+                .append("[");
+        for (int i = 0; i < tamanhos.size(); i++) {
+            if (i > 0) sb.append(", ");
+            sb.append("'").append(tamanhos.get(i)).append("'");
+        }
+        sb.append("]").append(", ")
+                .append("'").append("estoques").append("'").append(": ");
+        sb.append("{");
+        Set<String> keyset = estoques.keySet();
+        int count = 0;
+        for (String key: keyset) {
+            if (count > 0) sb.append(", ");
+            sb.append("'").append(key).append("'").append(": ").append(estoques.get(key));
+            count++;
+        }
+        sb.append("}").append("}");
+        return sb.toString();
     }
 }
