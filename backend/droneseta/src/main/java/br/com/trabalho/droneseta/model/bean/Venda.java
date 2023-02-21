@@ -83,4 +83,27 @@ public class Venda {
     public void setEntregue(boolean entregue) {
         isEntregue = entregue;
     }
+    
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("{")
+                .append("'").append("id").append("'").append(": ")
+                .append(id).append(", ")
+                .append("'").append("cliente").append("'").append(": ")
+                .append(cliente.toString()).append(", ")
+                .append("'").append("produtos").append("'").append(": ")
+                .append("[");
+        for (int i = 0; i < produtos.size(); i++) {
+            if (i > 0) sb.append(", ");
+            sb.append(produtos.get(i).toString());
+        }
+        sb.append("]").append(", ")
+                .append("'").append("valor").append("'").append(": ")
+                .append(valor).append(", ")
+                .append("'").append("pagAprovado").append("'").append(": ")
+                .append(isPagAprovado).append(", ")
+                .append("'").append("entregue").append("'").append(": ")
+                .append(isEntregue).append("}");
+        return sb.toString();
+    }
 }
