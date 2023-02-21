@@ -1,7 +1,7 @@
 import { useState, React } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginService from "../../services/LoginService";
-import { ContainerLogin, Container, ImageLogin, Button } from "./styles";
+import { ContainerLogin, Container, ImageLogin, Label, Button } from "./styles";
 import { ItemContainer, ItemButton, Spacer, Logo } from "../../components/Header/styles";
 import Input from "../../components/Input";
 
@@ -21,8 +21,9 @@ export default function Login() {
   }
 
   function loginHandler() {
-    const respose = loginService.validaLogin(email, pass);
-    if (respose) {
+    //TODO validar com a funcao correta depois
+    const {response} = loginService.validaLogin(email, pass);
+    if (response) {
       navigate('/home');
     }
   }

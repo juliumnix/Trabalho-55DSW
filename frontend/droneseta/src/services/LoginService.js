@@ -1,14 +1,7 @@
-import axios from "axios";
+import api from "./AxiosConfig";
 
-export default function LoginService() {
-
-    function validaLogin(email, pass) {
-    axios.get("http://localhost:8080/findUser", { email }, { pass })
-        .then((response) => {
-            localStorage.setItem("email", response.user.email);
-            localStorage.setItem("pass", response.user.pass);
-            localStorage.setItem("authLogin", true);
-        })
-        .catch()
-}
+export default class LoginService {
+    async validaLogin(email, pass) {
+        return await api.get("findUser", {email, pass});
+    }
 }
