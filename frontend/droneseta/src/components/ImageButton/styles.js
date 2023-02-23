@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const Button = styled.button`
-    type: submit;
+    cursor: pointer;
+    background: none;
     border: 0px;
 `;

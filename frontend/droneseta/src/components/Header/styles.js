@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const Container = styled.header`
   background-color: #FFFFFF;
   height: 6vh;
-  /* box-shadow: ${(props) => (props.noShadow === true ? "none" : "18px 18px 30px rgba(209, 217, 230, 0.5" )}; */
   box-shadow: 18px 18px 30px rgba(209, 217, 230, 0.5);
   display: flex;
   justify-content: space-between;
@@ -33,6 +32,7 @@ export const Spacer = styled.div`
 `;
 
 export const ItemButton = styled.button`
+
     font-family: 'Inter', sans-serif;
     font-size: 12px;
     height: 10vh;

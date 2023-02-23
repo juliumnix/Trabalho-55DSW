@@ -1,8 +1,9 @@
 import { useState, React } from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import AuthenticationService from "../../../services/AuthenticationService";
-import { Container, ContainerLogin, Button, ImageLogin } from "./styles";
+import { Container, ContainerLogin, ImageLogin } from "./styles";
 
 export default function AuthenticationScreen() {
 
@@ -39,7 +40,7 @@ export default function AuthenticationScreen() {
             <Input type="password" placeholder="Senha" name="pass" value={pass} onChange={(event) => passwordHandler(event.target.value)} />
           </div>
           <div>
-            <Button type="button" name="login" onClick={loginHandler}>ENTRAR</Button>
+            <Button type="button" name="login" onClick={loginHandler} title="ENTRAR" />
           </div>
         </ContainerLogin>
       </ImageLogin>

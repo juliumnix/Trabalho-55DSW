@@ -1,17 +1,13 @@
 import React from 'react';
 
-import { ContainerActive, ContainerInactive } from './styles';
+import { Container } from './styles';
 
-function Button({title, isActive}) {
+function Button({title, isActive, ...rest}) {
   return (
     <>
-    {isActive ?  <ContainerActive>
-        {title}
-    </ContainerActive> : 
-        <ContainerInactive>
-        {title}
-     </ContainerInactive>}
-   
+    <Container {...rest}>
+      {title}
+    </Container>
     </>
     );
 }

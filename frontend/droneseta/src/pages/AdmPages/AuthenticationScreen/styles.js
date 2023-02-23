@@ -7,7 +7,7 @@ export const Container = styled.div`
 `;
 
 export const ContainerLogin = styled.div`
-  padding-left: 7vw; 
+  padding-left: 7vw;
 `;
 
 export const Button = styled.button`
@@ -40,4 +40,5 @@ align-items: center;
 width: 100vw;
 height: 100vh;
 padding-right: 7vw; 
-text-align: center;`;
+text-align: center;
+`;
