@@ -3,7 +3,7 @@ import { Button } from './styles';
 
 function ImageButton({ image, width, height }) {
     return (
-    <Button>
+    <Button type='submit'>
         <img src={image} width={width} height={height} />
     </Button>
     );

@@ -1,9 +1,10 @@
 import { useState, React } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginService from "../../services/LoginService";
-import { ContainerLogin, Container, ImageLogin, Label, Button } from "./styles";
+import { ContainerLogin, Container, ImageLogin } from "./styles";
 import { ItemContainer, ItemButton, Spacer, Logo } from "../../components/Header/styles";
 import Input from "../../components/Input";
+import Button from "../../components/Button";
 
 export default function Login() {
 
@@ -48,7 +49,7 @@ export default function Login() {
             <Input type="password" placeholder="Senha" name="pass" value={pass} onChange={(event) => passwordHandler(event.target.value)} />
           </div>
           <div>
-            <Button type="button" name="login" onClick={loginHandler}>ENTRAR</Button>
+            <Button title={"ENTRAR"} onClick={loginHandler} />
           </div>
         </ContainerLogin>
       </ImageLogin>
