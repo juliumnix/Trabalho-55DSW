@@ -38,7 +38,7 @@ export const Button = styled.button`
 `
 
 export const ImageLogin = styled.div`
-background: url(${require("../../assets/login_background.png")});
+background: url(${require("../../assets/background-login.png")});
 background-repeat: no-repeat;
 background-position: right;
 flex-direction: column;
