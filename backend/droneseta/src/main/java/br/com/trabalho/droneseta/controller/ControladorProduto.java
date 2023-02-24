@@ -1,9 +1,9 @@
 package br.com.trabalho.droneseta.controller;
 
 import br.com.trabalho.droneseta.DAO.ProdutoDAO;
-import br.com.trabalho.droneseta.model.bean.Estoque;
 import br.com.trabalho.droneseta.model.bean.Produto;
 import br.com.trabalho.droneseta.repository.RepositorioProduto;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +19,7 @@ public class ControladorProduto {
     RepositorioProduto repositorioProduto;
     
     @PutMapping("/produtos/{id}")
-    public ResponseEntity<Produto> atualizarProduto(@PathVariable("id") long id, @RequestBody Produto produtoAtualizado) {
+    public ResponseEntity<Produto> atualizarProduto(@PathVariable("id") long id, @Valid @RequestBody Produto produtoAtualizado) {
         Produto produto = ProdutoDAO.procurarProduto(id, repositorioProduto);
         if (produto != null) {
             produto.setDescricao(produtoAtualizado.getDescricao());
@@ -48,7 +48,7 @@ public class ControladorProduto {
     }
     
     @PostMapping("/produtos")
-    public ResponseEntity<Produto> publicarProduto(@RequestBody Produto produto) {
+    public ResponseEntity<Produto> publicarProduto(@Valid @RequestBody Produto produto) {
         return new ResponseEntity<>(repositorioProduto.save(produto), HttpStatus.OK);
     }
     

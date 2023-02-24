@@ -3,6 +3,7 @@ package br.com.trabalho.droneseta.controller;
 import br.com.trabalho.droneseta.DAO.ClienteDAO;
 import br.com.trabalho.droneseta.model.bean.Cliente;
 import br.com.trabalho.droneseta.repository.RepositorioCliente;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class ControladorCliente {
     RepositorioCliente repositorioCliente;
     
     @PutMapping("/clientes/{id}")
-    public ResponseEntity<Cliente> atualizarCliente(@PathVariable("id") long id, @RequestBody Cliente clienteAtualizado) {
+    public ResponseEntity<Cliente> atualizarCliente(@PathVariable("id") long id, @Valid @RequestBody Cliente clienteAtualizado) {
         Cliente cliente = ClienteDAO.procurarCliente(id, repositorioCliente);
         if (cliente != null) {
             cliente.setNome(clienteAtualizado.getNome());
@@ -52,7 +53,7 @@ public class ControladorCliente {
     }
     
     @PostMapping("/clientes")
-    public ResponseEntity<Cliente> publicarCliente(@RequestBody Cliente cliente) {
+    public ResponseEntity<Cliente> publicarCliente(@Valid @RequestBody Cliente cliente) {
         return new ResponseEntity<>(repositorioCliente.save(cliente), HttpStatus.OK);
     }
     

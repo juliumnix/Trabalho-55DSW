@@ -3,6 +3,7 @@ package br.com.trabalho.droneseta.controller;
 import br.com.trabalho.droneseta.DAO.AdministradorDAO;
 import br.com.trabalho.droneseta.model.bean.Administrador;
 import br.com.trabalho.droneseta.repository.RepositorioAdministrador;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class ControladorAdministrador {
     RepositorioAdministrador repositorioAdministrador;
     
     @PutMapping("/administradores/{id}")
-    public ResponseEntity<Administrador> atualizarAdministrador(@PathVariable("id") long id, @RequestBody Administrador administradorAtualizado) {
+    public ResponseEntity<Administrador> atualizarAdministrador(@PathVariable("id") long id, @Valid @RequestBody Administrador administradorAtualizado) {
         Administrador administrador = AdministradorDAO.procurarAdministrador(id, repositorioAdministrador);
         if (administrador != null) {
             administrador.setNome(administradorAtualizado.getNome());
@@ -44,7 +45,7 @@ public class ControladorAdministrador {
     }
     
     @PostMapping("/administradores")
-    public ResponseEntity<Administrador> publicarAdministrador(@RequestBody Administrador administrador) {
+    public ResponseEntity<Administrador> publicarAdministrador(@Valid @RequestBody Administrador administrador) {
         return new ResponseEntity<>(repositorioAdministrador.save(administrador), HttpStatus.OK);
     }
     

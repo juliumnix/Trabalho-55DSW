@@ -3,6 +3,7 @@ package br.com.trabalho.droneseta.controller;
 import br.com.trabalho.droneseta.DAO.TamanhoDAO;
 import br.com.trabalho.droneseta.model.bean.Tamanho;
 import br.com.trabalho.droneseta.repository.RepositorioTamanho;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class ControladorTamanho {
     RepositorioTamanho repositorioTamanho;
     
     @PutMapping("/tamanhos/{id}")
-    public ResponseEntity<Tamanho> atualizarTamanho(@PathVariable("id") long id, @RequestBody Tamanho tamanhoAtualizado) {
+    public ResponseEntity<Tamanho> atualizarTamanho(@PathVariable("id") long id, @Valid @RequestBody Tamanho tamanhoAtualizado) {
         Tamanho tamanho = TamanhoDAO.procurarTamanho(id, repositorioTamanho);
         if (tamanho != null) {
             tamanho.setSigla(tamanhoAtualizado.getSigla());
@@ -42,7 +43,7 @@ public class ControladorTamanho {
     }
     
     @PostMapping("/tamanhos")
-    public ResponseEntity<Tamanho> publicarTamanho(@RequestBody Tamanho tamanho) {
+    public ResponseEntity<Tamanho> publicarTamanho(@Valid @RequestBody Tamanho tamanho) {
         return new ResponseEntity<>(repositorioTamanho.save(tamanho), HttpStatus.OK);
     }
     
