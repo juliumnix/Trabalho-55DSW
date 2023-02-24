@@ -1,6 +1,7 @@
 package br.com.trabalho.droneseta.model.bean;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 @Entity
 @Table(name = "administradores")
@@ -9,13 +10,14 @@ public class Administrador {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Size(min = 1)
     private String nome;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
+    @Size(min = 1)
     private String email;
 
-    @Column(nullable = false)
+    @Size(min = 8)
     private String senha;
 
     public Administrador() {}

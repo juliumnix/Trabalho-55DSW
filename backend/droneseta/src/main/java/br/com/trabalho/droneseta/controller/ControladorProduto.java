@@ -1,6 +1,7 @@
 package br.com.trabalho.droneseta.controller;
 
 import br.com.trabalho.droneseta.DAO.ProdutoDAO;
+import br.com.trabalho.droneseta.model.bean.Estoque;
 import br.com.trabalho.droneseta.model.bean.Produto;
 import br.com.trabalho.droneseta.repository.RepositorioProduto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -26,7 +26,8 @@ public class ControladorProduto {
             produto.setUrlImagem(produtoAtualizado.getUrlImagem());
             produto.setPreco(produtoAtualizado.getPreco());
             produto.setTamanhos(produtoAtualizado.getTamanhos());
-            produto.setEstoques(produtoAtualizado.getEstoques());
+            produto.getEstoques().clear();
+            produto.getEstoques().addAll(produtoAtualizado.getEstoques());
             return new ResponseEntity<>(repositorioProduto.save(produto), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

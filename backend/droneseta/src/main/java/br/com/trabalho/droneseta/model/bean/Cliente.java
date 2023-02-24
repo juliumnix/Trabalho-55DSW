@@ -1,6 +1,7 @@
 package br.com.trabalho.droneseta.model.bean;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
 
@@ -11,33 +12,42 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Size(min = 1)
     private String nome;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
+    @Size(min = 1)
     private String email;
 
-    @Column(nullable = false)
+    @Size(min = 8)
     private String senha;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
+    @Size(min = 11, max = 11)
     private String cpf;
 
-    @Column(name = "num_cartao", nullable = false)
+    @Column(name = "num_cartao")
+    @Size(min = 13, max = 16)
     private String numCartao;
 
-    @Column(name = "end_cobranca", nullable = false)
+    @Column(name = "end_cobranca")
+    @Size(min = 1)
     private String endCobranca;
 
-    @Column(name = "end_entrega", nullable = false)
+    @Column(name = "end_entrega")
+    @Size(min = 1)
     private String endEntrega;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY)
     private List<Produto> carrinho;
+    
+    @OneToMany
+    @JoinTable(name = "compras_cliente", joinColumns = {@JoinColumn(name = "cliente_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "venda_id" , referencedColumnName = "id")})
+    private List<Venda> compras;
 
     public Cliente() {}
 
-    public Cliente (String nome, String email, String senha, String cpf, String numCartao, String endCobranca, String endEntrega, List<Produto> carrinho) {
+    public Cliente (String nome, String email, String senha, String cpf, String numCartao, String endCobranca, String endEntrega, List<Produto> carrinho, List<Venda> compras) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -46,13 +56,14 @@ public class Cliente {
         this.endCobranca = endCobranca;
         this.endEntrega = endEntrega;
         this.carrinho = carrinho;
+        this.compras = compras;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
@@ -120,6 +131,14 @@ public class Cliente {
         this.carrinho = carrinho;
     }
     
+    public List<Venda> getCompras() {
+        return compras;
+    }
+    
+    public void setCompras(List<Venda> compras) {
+        this.compras = compras;
+    }
+    
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{")
@@ -144,6 +163,13 @@ public class Cliente {
         for (int i = 0; i < carrinho.size(); i++) {
             if (i > 0) sb.append(", ");
             sb.append(carrinho.get(i).toString());
+        }
+        sb.append("]").append(", ")
+                .append("'").append("compras").append("'").append(": ");
+        sb.append("[");
+        for (int i = 0; i < compras.size(); i++) {
+            if (i > 0) sb.append(", ");
+            sb.append(compras.get(i).toString());
         }
         sb.append("]").append("}");
         return sb.toString();

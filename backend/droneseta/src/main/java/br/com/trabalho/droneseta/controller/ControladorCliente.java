@@ -9,9 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
-
-import static br.com.trabalho.droneseta.DAO.ClienteDAO.procurarCliente;
 
 @CrossOrigin
 @RestController
@@ -19,8 +16,6 @@ public class ControladorCliente {
     
     @Autowired
     RepositorioCliente repositorioCliente;
-    
-
     
     @PutMapping("/clientes/{id}")
     public ResponseEntity<Cliente> atualizarCliente(@PathVariable("id") long id, @RequestBody Cliente clienteAtualizado) {
@@ -33,7 +28,10 @@ public class ControladorCliente {
             cliente.setNumCartao(clienteAtualizado.getNumCartao());
             cliente.setEndCobranca(clienteAtualizado.getEndCobranca());
             cliente.setEndEntrega(clienteAtualizado.getEndEntrega());
-            cliente.setCarrinho(clienteAtualizado.getCarrinho());
+            cliente.getCarrinho().clear();
+            cliente.getCarrinho().addAll(clienteAtualizado.getCarrinho());
+            cliente.getCompras().clear();
+            cliente.getCompras().addAll(clienteAtualizado.getCompras());
             return new ResponseEntity<>(repositorioCliente.save(cliente), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
