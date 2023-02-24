@@ -157,21 +157,7 @@ public class Cliente {
                 .append("'").append("endCobranca").append("'").append(": ")
                 .append("'").append(endCobranca).append("'").append(", ")
                 .append("'").append("endEntrega").append("'").append(": ")
-                .append("'").append(endEntrega).append("'").append(", ")
-                .append("'").append("carrinho").append("'").append(": ")
-                .append("[");
-        for (int i = 0; i < carrinho.size(); i++) {
-            if (i > 0) sb.append(", ");
-            sb.append(carrinho.get(i).toString());
-        }
-        sb.append("]").append(", ")
-                .append("'").append("compras").append("'").append(": ");
-        sb.append("[");
-        for (int i = 0; i < compras.size(); i++) {
-            if (i > 0) sb.append(", ");
-            sb.append(compras.get(i).toString());
-        }
-        sb.append("]").append("}");
+                .append("'").append(endEntrega).append("'").append("}");
         return sb.toString();
     }
 }
