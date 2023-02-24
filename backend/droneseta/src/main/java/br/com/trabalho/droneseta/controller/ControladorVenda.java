@@ -2,14 +2,15 @@ package br.com.trabalho.droneseta.controller;
 
 import br.com.trabalho.droneseta.DAO.VendaDAO;
 import br.com.trabalho.droneseta.model.bean.Venda;
+import br.com.trabalho.droneseta.repository.RepositorioCliente;
 import br.com.trabalho.droneseta.repository.RepositorioVenda;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @CrossOrigin
 @RestController
@@ -18,10 +19,11 @@ public class ControladorVenda {
     @Autowired
     RepositorioVenda repositorioVenda;
     
-
+    @Autowired
+    RepositorioCliente repositorioCliente;
     
     @PutMapping("/vendas/{id}")
-    public ResponseEntity<Venda> atualizarVenda(@PathVariable("id") long id, @RequestBody Venda vendaAtualizada) {
+    public ResponseEntity<Venda> atualizarVenda(@PathVariable("id") long id, @Valid @RequestBody Venda vendaAtualizada) {
         Venda venda = VendaDAO.procurarVenda(id, repositorioVenda);
         if (venda != null) {
             venda.setCliente(vendaAtualizada.getCliente());
@@ -49,7 +51,7 @@ public class ControladorVenda {
     }
     
     @PostMapping("/vendas")
-    public ResponseEntity<Venda> publicarVenda(@RequestBody Venda venda) {
+    public ResponseEntity<Venda> publicarVenda(@Valid @RequestBody Venda venda) {
         return new ResponseEntity<>(repositorioVenda.save(venda), HttpStatus.OK);
     }
     

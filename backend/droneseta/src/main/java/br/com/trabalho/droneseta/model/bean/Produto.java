@@ -1,10 +1,10 @@
 package br.com.trabalho.droneseta.model.bean;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 @Entity
 @Table(name = "produtos")
@@ -13,29 +13,26 @@ public class Produto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
+    @Size(min = 1)
     private String descricao;
 
-    @Column(name = "url_imagem", nullable = false)
+    @Column(name = "url_imagem")
+    @Size(min = 1)
     private String urlImagem;
 
-    @Column(scale = 2, nullable = false)
+    @Column(scale = 2)
+    @Min(0)
     private double preco;
     
-    @ElementCollection
-    @CollectionTable(name = "tamanhos", joinColumns = @JoinColumn(name = "id"))
-    @Column(name = "sigla")
-    private List<String> tamanhos;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private List<Tamanho> tamanhos;
     
-    @ElementCollection
-    @CollectionTable(name = "estoques", joinColumns = @JoinColumn(name = "id"))
-    @MapKeyColumn(name = "sigla")
-    @Column(name = "quantidade")
-    private Map<String, Integer> estoques;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Estoque> estoques;
 
     public Produto() {}
 
-    public Produto(String descricao, String urlImagem, double preco, List<String> tamanhos, Map<String, Integer> estoques) {
+    public Produto(String descricao, String urlImagem, double preco, List<Tamanho> tamanhos, List<Estoque> estoques) {
         this.descricao = descricao;
         this.urlImagem = urlImagem;
         this.preco= preco;
@@ -75,19 +72,19 @@ public class Produto {
         this.preco = preco;
     }
 
-    public List<String> getTamanhos() {
+    public List<Tamanho> getTamanhos() {
         return tamanhos;
     }
 
-    public void setTamanhos(List<String> tamanhos) {
+    public void setTamanhos(List<Tamanho> tamanhos) {
         this.tamanhos = tamanhos;
     }
     
-    public Map<String, Integer> getEstoques() {
+    public List<Estoque> getEstoques() {
         return estoques;
     }
     
-    public void setEstoques(Map<String, Integer> estoques) {
+    public void setEstoques(List<Estoque> estoques) {
         this.estoques = estoques;
     }
     
@@ -106,19 +103,16 @@ public class Produto {
                 .append("[");
         for (int i = 0; i < tamanhos.size(); i++) {
             if (i > 0) sb.append(", ");
-            sb.append("'").append(tamanhos.get(i)).append("'");
+            sb.append(tamanhos.get(i).toString());
         }
         sb.append("]").append(", ")
                 .append("'").append("estoques").append("'").append(": ");
-        sb.append("{");
-        Set<String> keyset = estoques.keySet();
-        int count = 0;
-        for (String key: keyset) {
-            if (count > 0) sb.append(", ");
-            sb.append("'").append(key).append("'").append(": ").append(estoques.get(key));
-            count++;
+        sb.append("[");
+        for (int i = 0; i < estoques.size(); i++) {
+            if (i > 0) sb.append(", ");
+            sb.append(estoques.get(i).toString());
         }
-        sb.append("}").append("}");
+        sb.append("]").append("}");
         return sb.toString();
     }
 }

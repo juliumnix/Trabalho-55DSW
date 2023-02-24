@@ -1,6 +1,8 @@
 package br.com.trabalho.droneseta.model.bean;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
 
 import java.util.List;
 
@@ -11,19 +13,22 @@ public class Venda {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "compras_cliente", joinColumns = {@JoinColumn(name = "venda_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "cliente_id" , referencedColumnName = "id")})
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Cliente cliente;
 
-    @OneToMany
+    @ManyToMany(fetch = FetchType.LAZY)
     private List<Produto> produtos;
 
-    @Column(scale = 2, nullable = false)
+    @Column(scale = 2)
+    @Min(0)
     private double valor;
 
-    @Column(name = "is_pag_aprovado", nullable = false)
+    @Column(name = "is_pag_aprovado")
     private boolean isPagAprovado;
 
-    @Column(name = "is_entregue", nullable = false)
+    @Column(name = "is_entregue")
     private boolean isEntregue;
 
     public Venda() {}
