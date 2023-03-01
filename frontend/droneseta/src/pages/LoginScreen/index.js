@@ -27,7 +27,7 @@ export default function Login() {
     if (data === "Logou") {
       const { data } = await loginService.getuserByEmail(email);
       console.log("data", data);
-      // navigate("/home");
+      navigate("/home");
     } else {
       alert(data);
     }
