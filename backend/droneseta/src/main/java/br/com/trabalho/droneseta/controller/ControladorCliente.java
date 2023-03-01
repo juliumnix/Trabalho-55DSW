@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin
+@CrossOrigin(origins = "*")
 @RestController
 public class ControladorCliente {
-    
+
     @Autowired
     RepositorioCliente repositorioCliente;
-    
+
     @PutMapping("/clientes/{id}")
     public ResponseEntity<Cliente> atualizarCliente(@PathVariable("id") long id, @Valid @RequestBody Cliente clienteAtualizado) {
         Cliente cliente = ClienteDAO.procurarCliente(id, repositorioCliente);
@@ -37,7 +37,7 @@ public class ControladorCliente {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    
+
     @DeleteMapping("/clientes/{id}")
     public ResponseEntity<HttpStatus> deletarCliente(@PathVariable("id") long id) {
         try {
@@ -51,12 +51,23 @@ public class ControladorCliente {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     @PostMapping("/clientes")
     public ResponseEntity<Cliente> publicarCliente(@Valid @RequestBody Cliente cliente) {
         return new ResponseEntity<>(repositorioCliente.save(cliente), HttpStatus.OK);
     }
-    
+
+    @GetMapping("/clientes/email/{email}")
+    public Cliente recuperaClientePeloEmail(@PathVariable String email){
+        return repositorioCliente.findByEmail(email).get();
+    }
+
+    @GetMapping("/clientes/email/{email}/{senha}")
+    public String login(@PathVariable String email, @PathVariable String senha) throws Exception {
+        String haveAccount = ClienteDAO.temContaCriada(email, senha, repositorioCliente);
+        return haveAccount;
+    }
+
     @GetMapping("/clientes/{id}")
     public ResponseEntity<Cliente> recuperarCliente(@PathVariable("id") long id) {
         try {
@@ -69,7 +80,7 @@ public class ControladorCliente {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    
+
     @GetMapping("/clientes")
     public ResponseEntity<List<Cliente>> recuperarClientes() {
         try {
