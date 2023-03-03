@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
 export const Container = styled.input`
-  margin: 30px;
+  margin: 15px 30px;
   background: none;
   border: none;
   outline: none;
-  max-width: 190px;
+  width: 270px;
   padding: 10px 20px;
   font-size: 16px;
   font-family: 'Inter', sans-serif;

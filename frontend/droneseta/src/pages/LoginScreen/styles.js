@@ -18,25 +18,6 @@ border: none;
 background: none;
 `;
 
-export const Button = styled.button`
-  padding: 1em 2.5em;
-  cursor: pointer;
-  font-size: 15px;
-  color: #ffffff;
-  font-weight: bold;
-  font-family: 'Inter', sans-serif;
-  border-radius: 0.5em;
-  background: #000000;
-  border: 1px solid #e8e8e8;
-  box-shadow: 6px 6px 12px #c5c5c5,
-              -6px -6px 12px #ffffff;
-  transition: 0.2s;
-  :hover{
-    padding: 1em 3em;
-    transition: 0.2s;
-  }
-`
-
 export const ImageLogin = styled.div`
 background: url(${require("../../assets/background-login.png")});
 background-repeat: no-repeat;
@@ -49,3 +30,52 @@ float: right;
 width: 35vw;
 height: 100vh;
 text-align: center;`;
+
+
+export const SizeButton = styled.input`
+  position: absolute;
+  opacity: 1;
+  -webkit-appearance: none;
+  cursor: pointer;
+  height: 50px;
+  width: 50px;
+  box-shadow: -10px -10px 15px rgba(255,255,255,0.5),
+  10px 10px 15px rgba(0,0,70,0.12);
+  border-radius: 50%;
+  border: 8px solid #ececec;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: .5s;
+
+ :after {
+  transition: .5s;
+  font-family: monospace;
+  content: '';
+  color: #7a7a7a;
+  font-size: 25px;
+  left: 0.45em;
+  top: 0.25em;
+  width: 0.25em;
+  height: 0.5em;
+  border: solid #7a7a7a;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(45deg);
+}
+
+:checked {
+  box-shadow: -10px -10px 15px rgba(255,255,255,0.5),
+  10px 10px 15px rgba(70,70,70,0.12),
+  inset -10px -10px 15px rgba(255,255,255,0.5),
+  inset 10px 10px 15px rgba(70,70,70,0.12);
+  transition: .5s;
+}
+
+.container input:checked::after {
+  transition: .5s;
+  border: solid #15e38a;
+  border-width: 0 0.15em 0.15em 0;
+  transform: rotate(45deg);
+}
+`
