@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Header from "../../components/Header";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -11,9 +11,15 @@ import {
   Logo,
   Spacer,
 } from "./styles";
+import { useUsuario } from "../../hooks/UsuarioHook";
 
 function HomeScreen() {
   const [visibleSidebar, setVisibleSide] = useState(false);
+  const { setUsuarioFromLocalState, clearUsuarioFromLocalState } = useUsuario();
+
+  useEffect(() => {
+    setUsuarioFromLocalState();
+  }, []);
 
   const handleClick = () => {
     setVisibleSide(!visibleSidebar);
@@ -49,10 +55,8 @@ function HomeScreen() {
             <Spacer />
           </>
         }
-      >
-        <h1>oi</h1>
-      </Header>
-      <Button />
+      ></Header>
+      <Button onClick={() => clearUsuarioFromLocalState()} />
     </Container>
   );
 }
