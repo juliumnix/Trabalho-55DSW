@@ -10,14 +10,21 @@ import {
 } from "../../components/Header/styles";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
+import { useUsuario } from "../../hooks/UsuarioHook";
 
 export default function Login() {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
   const navigate = useNavigate();
+  const { handleUsuario, getUsuarioFromLocalState } = useUsuario();
   const loginService = new LoginService();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    document.title = "Droneseta";
+    if (getUsuarioFromLocalState()) {
+      navigate("/home");
+    }
+  }, []);
 
   async function loginHandler() {
     if (email.length <= 0) {
@@ -26,7 +33,10 @@ export default function Login() {
     const { data } = await loginService.login(email, pass);
     if (data === "Logou") {
       const { data } = await loginService.getuserByEmail(email);
-      console.log("data", data);
+      console.log("data", data.email);
+      handleUsuario(data);
+      localStorage.setItem("authLogin", JSON.stringify(data));
+
       navigate("/home");
     } else {
       alert(data);
