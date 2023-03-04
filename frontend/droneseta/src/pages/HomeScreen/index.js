@@ -15,7 +15,8 @@ import { useUsuario } from "../../hooks/UsuarioHook";
 
 function HomeScreen() {
   const [visibleSidebar, setVisibleSide] = useState(false);
-  const { setUsuarioFromLocalState, clearUsuarioFromLocalState } = useUsuario();
+  const { setUsuarioFromLocalState, clearUsuarioFromLocalState, getUsuario } =
+    useUsuario();
 
   useEffect(() => {
     setUsuarioFromLocalState();

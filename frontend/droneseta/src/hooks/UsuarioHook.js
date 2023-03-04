@@ -36,6 +36,7 @@ export const UsuarioProvider = ({ children }) => {
         "setUsuarioFromLocalState",
         JSON.parse(localStorage.getItem("authLogin"))
       );
+      setUsuario(JSON.parse(localStorage.getItem("authLogin")));
       return handleUsuario(JSON.parse(localStorage.getItem("authLogin")));
     }
   }
