@@ -42,7 +42,7 @@ export const UploadLabel = styled.label`
 `
 
 export const Label = styled.label`
-    margin: 0px 10px;
+    margin: 0px 20px;
     align-items: center;
     border: 3px solid transparent;
     box-shadow:
@@ -62,10 +62,10 @@ export const Label = styled.label`
 `
 export const ItemContainer = styled.div`
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    margin-bottom: 20px;
+    width: 310px;
 `;
 
 export const InputCheckBox = styled.input`
@@ -88,7 +88,6 @@ export const InputCheckBox = styled.input`
 export const ContainerLeft = styled.div`
     height: 94vh;
     width: 30vw;
-    border: 1px solid black;
     background-position: left;
     flex-direction: column;
     display: flex;
@@ -101,5 +100,4 @@ export const ContainerRight = styled.div`
     float: right;
     height: 94vh;
     width: 68vw;
-    border: 1px solid aqua;
 `

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const Container = styled.input`
-  margin: 15px 30px;
+  margin: 15px 0px;
   background: none;
   border: none;
   outline: none;
@@ -16,6 +16,12 @@ export const Container = styled.input`
   :focus{
     transition: 0.5s;
     color: black;
+  }
+  :disabled{
+    color: #e8e8e8;
+  }
+  :disabled::-webkit-input-placeholder{
+    color: #e8e8e8;
   }
 
 `;
