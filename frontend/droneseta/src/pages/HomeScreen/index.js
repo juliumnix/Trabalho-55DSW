@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Header from "../../components/Header";
 import MenuIcon from "@mui/icons-material/Menu";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import {
   ClickMenu,
@@ -10,6 +12,16 @@ import {
   ItemButton,
   Logo,
   Spacer,
+  Content,
+  InfoWrapper,
+  ContainerTitleBar,
+  TitleBar,
+  Title,
+  Paragraph,
+  CollectionButton,
+  ImagemProvisoriaRemover,
+  CollectionButtonContent,
+  CollectionButtonIconWrapper,
 } from "./styles";
 import { useUsuario } from "../../hooks/UsuarioHook";
 
@@ -48,7 +60,13 @@ function HomeScreen() {
         }
         rightChildren={
           <>
-            <ItemButton>CARRINHO</ItemButton>
+            <ClickMenu onClick={handleClick}>
+              <ShoppingCartIcon
+                style={{ cursor: "pointer" }}
+                fontSize="medium"
+              />
+            </ClickMenu>
+
             <Spacer />
             <ClickMenu onClick={handleClick}>
               <MenuIcon style={{ cursor: "pointer" }} fontSize="large" />
@@ -57,7 +75,38 @@ function HomeScreen() {
           </>
         }
       ></Header>
-      <Button onClick={() => clearUsuarioFromLocalState()} />
+      <Content>
+        <ImagemProvisoriaRemover />
+        <InfoWrapper>
+          <ContainerTitleBar>
+            <TitleBar>
+              <Title>
+                <b>
+                  NOVA
+                  <br />
+                  COLEÇÃO
+                </b>
+              </Title>
+            </TitleBar>
+          </ContainerTitleBar>
+          <Paragraph>
+            <p>
+              Lorem Ipsum is simply dummy text of the printing and typesetting
+              industry.Lorem Ipsum is simply dummy text of the printing and
+              typesetting industry.Lorem Ipsum is simply dummy text of the
+              printing and typesetting industry.
+            </p>
+          </Paragraph>
+          <CollectionButton>
+            <CollectionButtonContent>
+              CONHEÇA A NOVA COLEÇÃO
+              <CollectionButtonIconWrapper>
+                <ArrowForwardIosIcon />
+              </CollectionButtonIconWrapper>
+            </CollectionButtonContent>
+          </CollectionButton>
+        </InfoWrapper>
+      </Content>
     </Container>
   );
 }
