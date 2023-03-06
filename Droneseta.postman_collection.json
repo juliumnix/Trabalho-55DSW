@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "a87347b2-ec00-402c-978a-5532485fd4be",
+		"_postman_id": "d79d745f-f3ce-4b1f-8f01-f17b56653480",
 		"name": "Droneseta",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "17757230"
+		"_exporter_id": "12872349"
 	},
 	"item": [
 		{
@@ -433,6 +433,40 @@
 			"response": []
 		},
 		{
+			"name": "Resgatar Cliente pelo Email",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"mateus.nosse@edu.udesc.br\",\r\n    \"senha\": \"mateus123\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/clientes/email/mateus.nosse@edu.udesc.br/mateus123",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"email",
+						"mateus.nosse@edu.udesc.br",
+						"mateus123"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Resgatar Cliente",
 			"request": {
 				"method": "GET",
@@ -618,6 +652,40 @@
 					"path": [
 						"vendas",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"mateus.nosse@edu.udesc.br\",\r\n    \"senha\": \"mateus123\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/clientes/email/mateus.nosse@edu.udesc.br/mateus123",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"email",
+						"mateus.nosse@edu.udesc.br",
+						"mateus123"
 					]
 				}
 			},

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "../../components/Button";
 import Header from "../../components/Header";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -23,9 +23,16 @@ import {
   CollectionButtonContent,
   CollectionButtonIconWrapper,
 } from "./styles";
+import { useUsuario } from "../../hooks/UsuarioHook";
 
 function HomeScreen() {
   const [visibleSidebar, setVisibleSide] = useState(false);
+  const { setUsuarioFromLocalState, clearUsuarioFromLocalState, getUsuario } =
+    useUsuario();
+
+  useEffect(() => {
+    setUsuarioFromLocalState();
+  }, []);
 
   const handleClick = () => {
     setVisibleSide(!visibleSidebar);
@@ -59,6 +66,7 @@ function HomeScreen() {
                 fontSize="medium"
               />
             </ClickMenu>
+
             <Spacer />
             <ClickMenu onClick={handleClick}>
               <MenuIcon style={{ cursor: "pointer" }} fontSize="large" />
