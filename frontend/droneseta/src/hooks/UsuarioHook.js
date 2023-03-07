@@ -14,6 +14,8 @@ export function useUsuario() {
 
 export const UsuarioProvider = ({ children }) => {
   const [usuario, setUsuario] = useState({});
+  const [carrinho, setCarrinho] = useState([]);
+  const [compras, setCompras] = useState([]);
 
   function getUsuario() {
     return usuario;
