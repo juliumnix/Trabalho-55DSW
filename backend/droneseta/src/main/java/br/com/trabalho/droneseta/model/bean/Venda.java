@@ -18,7 +18,7 @@ public class Venda {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Cliente cliente;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Produto> produtos;
 
     @Column(scale = 2)
