@@ -40,15 +40,6 @@ function HomeScreen() {
   return (
     <Container>
       <Header
-        dropdown={
-          visibleSidebar && (
-            <ContainerSidebar>
-              <Button title="Botão 1" isActive={true} />
-              <Button title="Botão 2" onClick={handleClick} />
-              <Button title="Botão 3" />
-            </ContainerSidebar>
-          )
-        }
         leftChildren={
           <>
             <Logo src={require("../../assets/logo.png")} />

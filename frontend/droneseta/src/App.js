@@ -33,7 +33,7 @@ function App() {
           }
         />
         <Route
-          path="rota3"
+          path="/shoppingCart"
           element={
             <PrivatedRoute>
               <ShoppingCart />
