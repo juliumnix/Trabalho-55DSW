@@ -24,7 +24,7 @@ public class Produto {
     @Min(0)
     private double preco;
     
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<Tamanho> tamanhos;
     
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)

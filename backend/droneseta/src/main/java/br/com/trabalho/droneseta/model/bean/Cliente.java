@@ -38,8 +38,8 @@ public class Cliente {
     @Size(min = 1)
     private String endEntrega;
 
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Produto> carrinho;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProdutoCarrinho> carrinho;
     
     @OneToMany
     @JoinTable(name = "compras_cliente", joinColumns = {@JoinColumn(name = "cliente_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "venda_id" , referencedColumnName = "id")})
@@ -47,7 +47,7 @@ public class Cliente {
 
     public Cliente() {}
 
-    public Cliente (String nome, String email, String senha, String cpf, String numCartao, String endCobranca, String endEntrega, List<Produto> carrinho, List<Venda> compras) {
+    public Cliente (String nome, String email, String senha, String cpf, String numCartao, String endCobranca, String endEntrega, List<ProdutoCarrinho> carrinho, List<Venda> compras) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -123,11 +123,11 @@ public class Cliente {
         this.endEntrega = endEntrega;
     }
 
-    public List<Produto> getCarrinho() {
+    public List<ProdutoCarrinho> getCarrinho() {
         return carrinho;
     }
 
-    public void setCarrinho(List<Produto> carrinho) {
+    public void setCarrinho(List<ProdutoCarrinho> carrinho) {
         this.carrinho = carrinho;
     }
     

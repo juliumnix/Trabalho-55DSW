@@ -50,11 +50,6 @@ public class ControladorVenda {
         }
     }
     
-    @PostMapping("/vendas")
-    public ResponseEntity<Venda> publicarVenda(@Valid @RequestBody Venda venda) {
-        return new ResponseEntity<>(repositorioVenda.save(venda), HttpStatus.OK);
-    }
-    
     @GetMapping("/vendas/{id}")
     public ResponseEntity<Venda> recuperarVenda(@PathVariable("id") long id) {
         try {

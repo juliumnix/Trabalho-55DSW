@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "d79d745f-f3ce-4b1f-8f01-f17b56653480",
+		"_postman_id": "a87347b2-ec00-402c-978a-5532485fd4be",
 		"name": "Droneseta",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "12872349"
+		"_exporter_id": "17757230"
 	},
 	"item": [
 		{
@@ -142,7 +142,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"descricao\": \"Camiseta Branca Masculina\",\r\n    \"urlImagem\": \"https://img.elo7.com.br/product/zoom/366D2CF/camisetas-branca-masculina-basica-algodao-100-atacado-revenda.jpg\",\r\n    \"preco\": 49.99,\r\n    \"tamanhos\": \r\n    [\r\n        {\r\n            \"id\": 1\r\n        },\r\n        {\r\n            \"id\": 2\r\n        }\r\n    ],\r\n    \"estoques\":\r\n    [\r\n        {\r\n            \"tamanho\": \r\n            {\r\n            \"id\": 1\r\n            },\r\n            \"quantidade\": 40\r\n        },\r\n        {\r\n            \"tamanho\": \r\n            {\r\n            \"id\": 2\r\n            },\r\n            \"quantidade\": 50\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"descricao\": \"Camiseta Branca Masculina\",\r\n    \"urlImagem\": \"https://img.elo7.com.br/product/zoom/366D2CF/camisetas-branca-masculina-basica-algodao-100-atacado-revenda.jpg\",\r\n    \"preco\": 49.99,\r\n    \"tamanhos\": \r\n    [\r\n        {\r\n            \"id\": 1,\r\n            \"sigla\": \"PP\"\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"sigla\": \"P\"\r\n        }\r\n    ],\r\n    \"estoques\":\r\n    [\r\n        {\r\n            \"tamanho\": \r\n            {\r\n                \"id\": 1,\r\n                \"sigla\": \"PP\"\r\n            },\r\n            \"quantidade\": 40\r\n        },\r\n        {\r\n            \"tamanho\": \r\n            {\r\n                \"id\": 2,\r\n                \"sigla\": \"P\"\r\n            },\r\n            \"quantidade\": 50\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -215,7 +215,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"descricao\": \"Camiseta Branca Masculina\",\r\n    \"urlImagem\": \"https://img.elo7.com.br/product/zoom/366D2CF/camisetas-branca-masculina-basica-algodao-100-atacado-revenda.jpg\",\r\n    \"preco\": 35.99,\r\n    \"tamanhos\": [\r\n        {\r\n            \"id\": 1\r\n        }\r\n    ],\r\n    \"estoques\": [\r\n        {\r\n            \"id\": 1,\r\n            \"tamanho\": {\r\n                \"id\": 1\r\n            },\r\n            \"quantidade\": 39\r\n        }\r\n    ]\r\n}",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"descricao\": \"Camiseta Branca Masculina\",\r\n    \"urlImagem\": \"https://img.elo7.com.br/product/zoom/366D2CF/camisetas-branca-masculina-basica-algodao-100-atacado-revenda.jpg\",\r\n    \"preco\": 35.99,\r\n    \"tamanhos\": [\r\n        {\r\n            \"id\": 1,\r\n            \"sigla\": \"PP\"\r\n        }\r\n    ],\r\n    \"estoques\": [\r\n        {\r\n            \"id\": 1,\r\n            \"tamanho\": {\r\n                \"id\": 1,\r\n                \"sigla\": \"PP\"\r\n            },\r\n            \"quantidade\": 39\r\n        }\r\n    ]\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -389,10 +389,16 @@
 			"name": "Publicar Cliente",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"nome\": \"mateus\",\r\n    \"email\": \"mateus.nosse@edu.udesc.br\",\r\n    \"senha\": \"mateus123\",\r\n    \"cpf\": \"12345678900\",\r\n    \"numCartao\": \"1234567890123456\",\r\n    \"endCobranca\": \"Rua Mateus 1\",\r\n    \"endEntrega\": \"Rua Mateus 1\",\r\n    \"carrinho\": [],\r\n    \"compras\": []\r\n}",
+					"raw": "{\r\n    \"nome\": \"mateus\",\r\n    \"email\": \"mateus.nosse@edu.udesc.br\",\r\n    \"senha\": \"mateus123\",\r\n    \"cpf\": \"12345678900\",\r\n    \"numCartao\": \"1234567890123456\",\r\n    \"endCobranca\": \"Rua Mateus 1\",\r\n    \"endEntrega\": \"Rua Mateus 1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -433,40 +439,6 @@
 			"response": []
 		},
 		{
-			"name": "Resgatar Cliente pelo Email",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"mateus.nosse@edu.udesc.br\",\r\n    \"senha\": \"mateus123\"\r\n}"
-				},
-				"url": {
-					"raw": "localhost:8080/clientes/email/mateus.nosse@edu.udesc.br/mateus123",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"clientes",
-						"email",
-						"mateus.nosse@edu.udesc.br",
-						"mateus123"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "Resgatar Cliente",
 			"request": {
 				"method": "GET",
@@ -493,7 +465,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"mateus\",\r\n    \"email\": \"mateus.nosse@edu.udesc.br\",\r\n    \"senha\": \"mateus1234\",\r\n    \"cpf\": \"12345678900\",\r\n    \"numCartao\": \"1234567890123456\",\r\n    \"endCobranca\": \"Rua Mateus 1\",\r\n    \"endEntrega\": \"Rua Mateus 1\",\r\n    \"carrinho\": \r\n    [\r\n        {\r\n            \"id\": 1\r\n        }\r\n    ],\r\n    \"compras\": []\r\n}",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"mateus\",\r\n    \"email\": \"mateus.nosse@edu.udesc.br\",\r\n    \"senha\": \"mateus1234\",\r\n    \"cpf\": \"12345678900\",\r\n    \"numCartao\": \"1234567890123456\",\r\n    \"endCobranca\": \"Rua Mateus 1\",\r\n    \"endEntrega\": \"Rua Mateus 1\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -536,7 +508,7 @@
 			"response": []
 		},
 		{
-			"name": "Publicar Venda",
+			"name": "Publicar ProdutoCarrinho",
 			"request": {
 				"method": "POST",
 				"header": [
@@ -548,7 +520,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"cliente\":\r\n    {\r\n        \"id\": 1\r\n    },\r\n    \"produtos\":\r\n    [\r\n        {\r\n            \"id\": 1\r\n        }\r\n    ],\r\n    \"valor\": 35.99,\r\n    \"pagAprovado\": true,\r\n    \"entregue\": false\r\n}",
+					"raw": "{\r\n    \"produto\":\r\n    {\r\n        \"id\": 1,\r\n        \"descricao\": \"Camiseta Branca Masculina\",\r\n        \"urlImagem\": \"https://img.elo7.com.br/product/zoom/366D2CF/camisetas-branca-masculina-basica-algodao-100-atacado-revenda.jpg\",\r\n        \"preco\": 49.99,\r\n        \"tamanhos\": [\r\n            {\r\n                \"id\": 1,\r\n                \"sigla\": \"PP\"\r\n            },\r\n            {\r\n                \"id\": 2,\r\n                \"sigla\": \"P\"\r\n            }\r\n        ],\r\n        \"estoques\": [\r\n            {\r\n                \"id\": 1,\r\n                \"tamanho\": {\r\n                    \"id\": 1,\r\n                    \"sigla\": \"PP\"\r\n                },\r\n                \"quantidade\": 40\r\n            },\r\n            {\r\n                \"id\": 2,\r\n                \"tamanho\": {\r\n                    \"id\": 2,\r\n                    \"sigla\": \"P\"\r\n                },\r\n                \"quantidade\": 50\r\n            }\r\n        ]\r\n    },\r\n    \"tamanho\":\r\n    {\r\n        \"id\": 1,\r\n        \"sigla\": \"PP\"\r\n    },\r\n    \"quantidade\": 2\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -556,14 +528,220 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8080/vendas",
+					"raw": "http://localhost:8080/clientes/1/carrinho",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"vendas"
+						"clientes",
+						"1",
+						"carrinho"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resgatar ProdutoCarrinhos",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/clientes/1/carrinho",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"1",
+						"carrinho"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resgatar ProdutoCarrinho",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/clientes/1/carrinho/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"1",
+						"carrinho",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Atualizar ProdutoCarrinho",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": 1,\r\n    \"produto\": {\r\n        \"id\": 1,\r\n        \"descricao\": \"Camiseta Branca Masculina\",\r\n        \"urlImagem\": \"https://img.elo7.com.br/product/zoom/366D2CF/camisetas-branca-masculina-basica-algodao-100-atacado-revenda.jpg\",\r\n        \"preco\": 49.99,\r\n        \"tamanhos\": [\r\n            {\r\n                \"id\": 1,\r\n                \"sigla\": \"PP\"\r\n            },\r\n            {\r\n                \"id\": 2,\r\n                \"sigla\": \"P\"\r\n            }\r\n        ],\r\n        \"estoques\": [\r\n            {\r\n                \"id\": 1,\r\n                \"tamanho\": {\r\n                    \"id\": 1,\r\n                    \"sigla\": \"PP\"\r\n                },\r\n                \"quantidade\": 40\r\n            },\r\n            {\r\n                \"id\": 2,\r\n                \"tamanho\": {\r\n                    \"id\": 2,\r\n                    \"sigla\": \"P\"\r\n                },\r\n                \"quantidade\": 50\r\n            }\r\n        ]\r\n    },\r\n    \"tamanho\": {\r\n        \"id\": 1,\r\n        \"sigla\": \"PP\"\r\n    },\r\n    \"quantidade\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/clientes/1/carrinho/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"1",
+						"carrinho",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Deletar ProdutoCarrinho",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/clientes/1/carrinho/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"1",
+						"carrinho",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Publicar Compra",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"produtos\":\r\n    [\r\n        {\r\n            \"id\": 1,\r\n            \"descricao\": \"Camiseta Branca Masculina\",\r\n            \"urlImagem\": \"https://img.elo7.com.br/product/zoom/366D2CF/camisetas-branca-masculina-basica-algodao-100-atacado-revenda.jpg\",\r\n            \"preco\": 49.99,\r\n            \"tamanhos\": [\r\n                {\r\n                    \"id\": 1,\r\n                    \"sigla\": \"PP\"\r\n                },\r\n                {\r\n                    \"id\": 2,\r\n                    \"sigla\": \"P\"\r\n                }\r\n            ],\r\n            \"estoques\": [\r\n                {\r\n                    \"id\": 1,\r\n                    \"tamanho\": {\r\n                        \"id\": 1,\r\n                        \"sigla\": \"PP\"\r\n                    },\r\n                    \"quantidade\": 40\r\n                },\r\n                {\r\n                    \"id\": 2,\r\n                    \"tamanho\": {\r\n                        \"id\": 2,\r\n                        \"sigla\": \"P\"\r\n                    },\r\n                    \"quantidade\": 50\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"valor\": 49.99,\r\n    \"pagAprovado\": true,\r\n    \"entregue\": false\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/clientes/1/compras",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"1",
+						"compras"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resgatar Compras",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/clientes/1/compras",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"clientes",
+						"1",
+						"compras"
 					]
 				}
 			},
@@ -612,10 +790,16 @@
 			"name": "Atualizar Venda",
 			"request": {
 				"method": "PUT",
-				"header": [],
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"cliente\":\r\n     {\r\n        \"id\": 2,\r\n        \"nome\": \"mateus\",\r\n        \"email\": \"mateus.nosse@edu.udesc.br\",\r\n        \"senha\": \"mateus\",\r\n        \"cpf\": \"12345678900\",\r\n        \"numCartao\": \"1234567890123456\",\r\n        \"endCobranca\": \"Rua Mateus 1\",\r\n        \"endEntrega\": \"Rua Mateus 1\",\r\n        \"carrinho\": [\r\n            {\r\n                \"id\": 2,\r\n                \"descricao\": \"Camiseta Branca Masculina\",\r\n                \"urlImagem\": \"a\",\r\n                \"preco\": 40.0,\r\n                \"tamanhos\": [\r\n                    \"PP\",\r\n                    \"P\",\r\n                    \"M\",\r\n                    \"G\",\r\n                    \"GG\"\r\n                ],\r\n                \"estoques\": {\r\n                    \"GG\": 50,\r\n                    \"P\": 20,\r\n                    \"PP\": 10,\r\n                    \"M\": 30,\r\n                    \"G\": 40\r\n                }\r\n            }\r\n        ]\r\n    },\r\n    \"produtos\":\r\n    [\r\n        {\r\n            \"id\": 2,\r\n            \"descricao\": \"Camiseta Branca Masculina\",\r\n            \"urlImagem\": \"a\",\r\n            \"preco\": 40.0,\r\n            \"tamanhos\": [\r\n                \"PP\",\r\n                \"P\",\r\n                \"M\",\r\n                \"G\",\r\n                \"GG\"\r\n            ],\r\n            \"estoques\": {\r\n                \"GG\": 50,\r\n                \"P\": 20,\r\n                \"PP\": 10,\r\n                \"M\": 30,\r\n                \"G\": 40\r\n            }\r\n        },\r\n        {\r\n            \"id\": 3,\r\n            \"descricao\": \"Camiseta Preta Masculina\",\r\n            \"urlImagem\": \"a\",\r\n            \"preco\": 40.0,\r\n            \"tamanhos\": [\r\n                \"PP\",\r\n                \"P\",\r\n                \"M\",\r\n                \"G\",\r\n                \"GG\"\r\n            ],\r\n            \"estoques\": {\r\n                \"GG\": 50,\r\n                \"P\": 20,\r\n                \"PP\": 10,\r\n                \"M\": 30,\r\n                \"G\": 40\r\n            }\r\n        }\r\n    ],\r\n    \"valor\": 80.0,\r\n    \"pagAprovado\": true,\r\n    \"entregue\": true\r\n}",
+					"raw": "{\r\n    \"produtos\":\r\n    [\r\n        {\r\n            \"id\": 1,\r\n            \"descricao\": \"Camiseta Branca Masculina\",\r\n            \"urlImagem\": \"https://img.elo7.com.br/product/zoom/366D2CF/camisetas-branca-masculina-basica-algodao-100-atacado-revenda.jpg\",\r\n            \"preco\": 49.99,\r\n            \"tamanhos\": [\r\n                {\r\n                    \"id\": 1,\r\n                    \"sigla\": \"PP\"\r\n                },\r\n                {\r\n                    \"id\": 2,\r\n                    \"sigla\": \"P\"\r\n                }\r\n            ],\r\n            \"estoques\": [\r\n                {\r\n                    \"id\": 1,\r\n                    \"tamanho\": {\r\n                        \"id\": 1,\r\n                        \"sigla\": \"PP\"\r\n                    },\r\n                    \"quantidade\": 40\r\n                },\r\n                {\r\n                    \"id\": 2,\r\n                    \"tamanho\": {\r\n                        \"id\": 2,\r\n                        \"sigla\": \"P\"\r\n                    },\r\n                    \"quantidade\": 50\r\n                }\r\n            ]\r\n        }\r\n    ],\r\n    \"valor\": 49.99,\r\n    \"pagAprovado\": true,\r\n    \"entregue\": true\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -652,40 +836,6 @@
 					"path": [
 						"vendas",
 						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Login",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"mateus.nosse@edu.udesc.br\",\r\n    \"senha\": \"mateus123\"\r\n}"
-				},
-				"url": {
-					"raw": "localhost:8080/clientes/email/mateus.nosse@edu.udesc.br/mateus123",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"clientes",
-						"email",
-						"mateus.nosse@edu.udesc.br",
-						"mateus123"
 					]
 				}
 			},
