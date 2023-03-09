@@ -25,10 +25,12 @@ import {
   CollectionButtonIconWrapper,
 } from "./styles";
 import { useUsuario } from "../../hooks/UsuarioHook";
+import { useNavigate } from "react-router-dom";
 
 function HomeScreen() {
   const navigate = useNavigate();
   const { setUsuarioFromLocalState, clearUsuarioFromLocalState } = useUsuario();
+
 
   useEffect(() => {
     setUsuarioFromLocalState();
@@ -47,6 +49,7 @@ function HomeScreen() {
             <Logo src={require("../../assets/logo.png")} />
             <Spacer />
             <ItemButton>PRODUTOS</ItemButton>
+
           </>
         }
         rightChildren={
