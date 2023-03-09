@@ -3,48 +3,6 @@ import styled from "styled-components";
 export const Container = styled.div`
   background-color: #fffdfc;
   height: 100vh;
-  -moz-text-size-adjust: none;
-  -webkit-text-size-adjust: none;
-  text-size-adjust: none;
-`;
-
-export const ItemButton = styled.button`
-  cursor: pointer;
-  font-family: "Inter", sans-serif;
-  font-size: 12px;
-  height: 10vh;
-  font-weight: bold;
-  border: none;
-  background: none;
-`;
-
-export const Spacer = styled.div`
-  width: 5vh;
-`;
-
-export const Logo = styled.img`
-  width: 83px;
-  height: 42px;
-  padding-left: 20px;
-`;
-
-export const ClickMenu = styled.button`
-  border: none;
-  background: none;
-`;
-
-export const ContainerSidebar = styled.div`
-  position: fixed;
-  right: 0;
-  top: 0;
-  height: 100vh;
-  width: 260px;
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  box-shadow: 18px 18px 30px rgba(209, 217, 230, 0.5);
-  justify-content: center;
-  align-items: center;
 `;
 
 export const Content = styled.div`

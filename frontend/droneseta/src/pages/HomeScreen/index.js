@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
-import Button from "../../components/Button";
 import Header from "../../components/Header";
+import {
+  ClickMenu,
+  ItemButton,
+  Spacer,
+  Logo,
+} from "../../components/Header/styles";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 import {
-  ClickMenu,
   Container,
-  ContainerSidebar,
-  ItemButton,
-  Logo,
-  Spacer,
   Content,
   InfoWrapper,
   ContainerTitleBar,
