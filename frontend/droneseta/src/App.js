@@ -8,6 +8,7 @@ import PrivatedRoute from "./routes/PrivatedRoute";
 import AdminRoute from "./routes/AdminRoute";
 import RegisterScreen from "./pages/AdmPages/RegisterScreen";
 import AppProvider from "./AppProvider";
+import MenStoreScreen from "./pages/MenStoreScreen";
 
 function App() {
   return (
@@ -16,6 +17,14 @@ function App() {
         <Route path="/erro" element={<ErrorScreen />} />
         <Route path="/" element={<LoginScreen />} />
         <Route path="/admin" element={<AuthenticationScreen />} />
+        <Route
+          path="/menStore"
+          element={
+            <PrivatedRoute>
+              <MenStoreScreen />
+            </PrivatedRoute>
+          }
+        />
         <Route
           path="/home/admin"
           element={
