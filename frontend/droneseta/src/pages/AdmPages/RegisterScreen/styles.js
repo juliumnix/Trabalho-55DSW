@@ -19,8 +19,8 @@ export const Logo = styled.img`
 `;
 
 export const UploadImage = styled.img`
-    width: 200px;
-    height: 200px;
+    width: 10vw;
+    height: 10vw;
 `;
 
 export const InputImage = styled.input`
@@ -54,10 +54,10 @@ export const Label = styled.label`
     display: flex;
     font-size: 1em;
     font-weight: bold;
-    height: 35px;
+    height: 2.5em;
     justify-content: center;
     position: relative;
-    width: 35px;
+    width: 2.5em;
     border-radius: 50%;
 `
 export const ItemContainer = styled.div`
@@ -65,7 +65,7 @@ export const ItemContainer = styled.div`
     justify-content: space-between;
     align-items: center;
     flex-direction: row;
-    width: 310px;
+    width: 19.5em;
 `;
 
 export const InputCheckBox = styled.input`
@@ -100,4 +100,23 @@ export const ContainerRight = styled.div`
     float: right;
     height: 94vh;
     width: 68vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: left;
+    text-align: center;
+`
+export const TableProduct = styled.table`
+    font-size: 16px;
+    width: 100vw;
+    border-collapse: collapse;
+
+`
+export const TableHeader = styled.th`
+    border: 1px solid black;
+    max-height: 40vh;
+    background-color: aqua;
+`
+export const TableData = styled.th`
+    border: 1px solid  #c6c6c6;
 `

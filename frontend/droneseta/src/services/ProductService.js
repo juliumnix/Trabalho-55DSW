@@ -10,4 +10,9 @@ export default class ProductService {
     const response = await api.get("tamanhos");
     return response;
   }
+
+  async resgataProdutos() {
+    const response = await api.get("produtos");
+    return response;
+  }
 }

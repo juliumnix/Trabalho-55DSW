@@ -1,6 +1,6 @@
-import { useState, React } from "react";
+import { useState, React, useEffect } from "react";
 import Header from '../../../components/Header';
-import { Logo, ItemButton, Spacer, ContainerRight, ContainerLeft, Label, InputCheckBox, ItemContainer, InputImage, UploadImage, UploadLabel } from "./styles";
+import { Logo, ItemButton, Spacer, ContainerRight, ContainerLeft, Label, InputCheckBox, ItemContainer, InputImage, UploadImage, UploadLabel, TableProduct, TableHeader, TableData } from "./styles";
 import ImageButton from "../../../components/ImageButton";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
@@ -9,7 +9,7 @@ import ProductService from "../../../services/ProductService";
 export default function RegisterScreen() {
 
   const [dsc, setDsc] = useState('');
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState('');
   const [qtdPP, setQtdPP] = useState('');
   const [qtdP, setQtdP] = useState('');
   const [qtdM, setQtdM] = useState('');
@@ -22,7 +22,8 @@ export default function RegisterScreen() {
   const [gg, setGG] = useState(false);
   const [file, setFile] = useState()
   const productService = new ProductService();
-  let sizes = '';
+  const [products, setProducts] = useState([]);
+  const [sizes, setSizes] = useState([]);
   const jsonSizes = [
     {
       "sigla": "PP",
@@ -49,21 +50,37 @@ export default function RegisterScreen() {
   const arrayEstoque = [];
   const arrayTamanho = [];
 
-  async function registerHandler() {
-    const { data } = await productService.resgataTamanhos();
-    sizes = data;
-    for (let i = 0; i < jsonSizes.length; i++) {
-      //Caminha pelo array de json verificando qual dos tamanhos foi selecionado pelo usuário
-      if (jsonSizes[i].ativo) {
-        //Chama o método passando o json
-        getId(jsonSizes[i]);
-      }
-    }
-    productService.cadastraProduto(createJson());
-    cleanFields();
+  useEffect(() => {
+    initProduct();
+    initSize();
+  }, [products]);
+
+  async function initProduct() {
+    const { data } = await productService.resgataProdutos();
+    setProducts(data);
   }
 
-  function getId(jsonPosition) {
+  async function initSize() {
+    const { data } = await productService.resgataTamanhos();
+    setSizes(data);
+  }
+
+  async function registerHandler() {
+    if (validateFields()) {
+      for (let i = 0; i < jsonSizes.length; i++) {
+        //Caminha pelo array de json verificando qual dos tamanhos foi selecionado pelo usuário
+        if (jsonSizes[i].ativo) {
+          //Chama o método passando o json
+          getEstoqueETamanho(jsonSizes[i]);
+        }
+      }
+      productService.cadastraProduto(createJson());
+      cleanFields();
+      initProduct();
+    }
+  }
+
+  function getEstoqueETamanho(jsonPosition) {
     //Caminha pela lista de tamanhos vinda do banco
     for (let i = 0; i < sizes.length; i++) {
       //Se a sigla da lista de tamanho for igual a sigla do json que o usuario selecionou
@@ -108,11 +125,36 @@ export default function RegisterScreen() {
     setQtdG('');
     setQtdGG('');
     setDsc('');
-    setPrice(0);
+    setPrice('');
+    document.getElementById("PPsize").checked = false;
+    document.getElementById("Psize").checked = false;
+    document.getElementById("Msize").checked = false;
+    document.getElementById("Gsize").checked = false;
+    document.getElementById("GGsize").checked = false;
   }
 
   function handleChange(event) {
     setFile(event.target.files[0]);
+  }
+
+  function validateFields() {
+    let aux = 0;
+    jsonSizes.forEach(element => {
+      if (element.ativo && element.quantidade === '') {
+        aux++;
+      }
+    });
+    return (dsc !== '' && price !== '' && aux === 0);
+  }
+
+  function validateSizes(estoques, tamanho) {
+    const lista = [];
+    for (let i = 0; i < estoques.length; i++) {
+      if (estoques[i].tamanho.sigla === tamanho) {
+        lista.push(estoques[i].quantidade);
+      }
+    }
+    return lista;
   }
 
   return (
@@ -191,13 +233,32 @@ export default function RegisterScreen() {
           </div>
         </ItemContainer>
         <div>
-          <Button title={"CADASTRAR"} onClick={registerHandler} />
+          <Button type="submit" title={"CADASTRAR"} onClick={registerHandler} />
         </div>
       </ContainerLeft>
       <ContainerRight>
-        <table>
-        
-        </table>
+        <TableProduct>
+          <thead>
+            <tr>
+              <TableHeader>Descrição</TableHeader>
+              <TableHeader>Preço</TableHeader>
+              {sizes.map((size, index) => (
+                <TableHeader key={index}>ESTOQUE {size.sigla}</TableHeader>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {products.map(product => (
+              <tr key={product.id}>
+                <TableData>{product.descricao}</TableData>
+                <TableData>{product.preco}</TableData>
+                {sizes.map((size, index) => (
+                  <TableData key={index}>{validateSizes(product.estoques, size.sigla)}</TableData>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </TableProduct>
       </ContainerRight>
     </>
 
