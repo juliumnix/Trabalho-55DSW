@@ -1,81 +1,64 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
-  float: left;
+  background-color: #fffdfc;
   height: 100vh;
 `;
 
-export const ContainerLogin = styled.div`
-  padding-left: 5vw; 
-`;
-
-export const Label = styled.label`
-font-family: 'Inter', sans-serif;
-font-size: 16px;
-height: 10vh;
-font-weight: bold;
-border: none;
-background: none;
-`;
-
-export const ImageLogin = styled.div`
-background: url(${require("../../assets/background-login.png")});
-background-repeat: no-repeat;
-background-position: right;
-flex-direction: column;
-display: flex;
-justify-content: center;
-align-items: center;
-float: right;
-width: 35vw;
-height: 100vh;
-text-align: center;`;
-
-
-export const SizeButton = styled.input`
-  position: absolute;
-  opacity: 1;
-  -webkit-appearance: none;
-  cursor: pointer;
-  height: 50px;
-  width: 50px;
-  box-shadow: -10px -10px 15px rgba(255,255,255,0.5),
-  10px 10px 15px rgba(0,0,70,0.12);
-  border-radius: 50%;
-  border: 8px solid #ececec;
-  outline: none;
+export const Content = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
-  transition: .5s;
+  justify-content: flex-end;
+  height: 94vh;
+  width: 100vw;
+`;
 
- :after {
-  transition: .5s;
-  font-family: monospace;
-  content: '';
-  color: #7a7a7a;
-  font-size: 25px;
-  left: 0.45em;
-  top: 0.25em;
-  width: 0.25em;
-  height: 0.5em;
-  border: solid #7a7a7a;
-  border-width: 0 0.15em 0.15em 0;
-  transform: rotate(45deg);
-}
+export const Title = styled.h2`
+  font-family: "Inter", sans-serif;
+  margin-bottom: 2vh;
+`;
 
-:checked {
-  box-shadow: -10px -10px 15px rgba(255,255,255,0.5),
-  10px 10px 15px rgba(70,70,70,0.12),
-  inset -10px -10px 15px rgba(255,255,255,0.5),
-  inset 10px 10px 15px rgba(70,70,70,0.12);
-  transition: .5s;
-}
+export const LoginDataWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 94vh;
+  width: 55vh;
+`;
 
-.container input:checked::after {
-  transition: .5s;
-  border: solid #15e38a;
-  border-width: 0 0.15em 0.15em 0;
-  transform: rotate(45deg);
-}
-`
+export const LoginImage = styled.img`
+  position: absolute;
+  z-index: 0;
+  height: 94vh;
+  width: 55vh;
+`;
+
+export const LoginData = styled.div`
+  position: absolute;
+  z-index: 1;
+  height: 94vh;
+  width: 55vh;
+  padding-top: 5vh;
+  padding-left: 4vh;
+  padding-right: 6vh;
+  padding-bottom: 9vh;
+  box-sizing: border-box;
+`;
+
+export const LoginDataContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 80vh;
+  width: 45vh;
+  padding: 2vh 0;
+  box-sizing: border-box;
+`;
+
+export const LoginDataContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;

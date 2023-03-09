@@ -1,4 +1,5 @@
 import { useState, React } from "react";
+import { useNavigate } from "react-router-dom";
 import {
   Check,
   CheckWrapper,
@@ -6,6 +7,7 @@ import {
   Content,
   SignUpData,
   SignUpDataContent,
+  SignUpDataContentWrapper,
   SignUpDataWrapper,
   SignUpImage,
   Title,
@@ -17,6 +19,7 @@ import Button from "../../components/Button";
 import signUpBackgroundImage from "../../assets/background-login.png";
 
 export default function SignUp() {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
@@ -35,7 +38,11 @@ export default function SignUp() {
   }
 
   function cpfHandler(text) {
-    setCpf(text);
+    let regex = /^[0-9]{0,11}$/;
+    let contains = regex.test(text);
+    if (contains) {
+      setCpf(text);
+    }
   }
 
   function passwordHandler(text) {
@@ -55,7 +62,11 @@ export default function SignUp() {
   }
 
   function cardNumberHandler(text) {
-    setCardNumber(text);
+    let regex = /^[0-9]{0,16}$/;
+    let contains = regex.test(text);
+    if (contains) {
+      setCardNumber(text);
+    }
   }
 
   return (
@@ -65,9 +76,7 @@ export default function SignUp() {
           <>
             <Logo src={require("../../assets/logo.png")} />
             <Spacer />
-            <ItemButton>FEMININO</ItemButton>
-            <Spacer />
-            <ItemButton>MASCULINO</ItemButton>
+            <ItemButton>PRODUTOS</ItemButton>
           </>
         }
         rightChildren={<></>}
@@ -76,9 +85,9 @@ export default function SignUp() {
         <SignUpDataWrapper>
           <SignUpImage src={signUpBackgroundImage}></SignUpImage>
           <SignUpData>
-            <SignUpDataContent>
-              <Title>Droneseta</Title>
-              <div>
+            <SignUpDataContentWrapper>
+              <SignUpDataContent>
+                <Title>Droneseta</Title>
                 <div>
                   <Input
                     type="text"
@@ -105,7 +114,7 @@ export default function SignUp() {
                 </div>
                 <div>
                   <Input
-                    type="number"
+                    type="text"
                     placeholder="CPF"
                     name="cpf"
                     value={cpf}
@@ -156,19 +165,17 @@ export default function SignUp() {
                     disabled={useSameAddress}
                   />
                 </div>
-                <div>
-                  <CheckWrapper>
-                    <Check
-                      type="checkbox"
-                      checked={useSameAddress}
-                      onChange={useSameAddressHandler}
-                    />
-                    Utilizar endereço de entrega
-                  </CheckWrapper>
-                </div>
+                <CheckWrapper>
+                  <Check
+                    type="checkbox"
+                    checked={useSameAddress}
+                    onChange={useSameAddressHandler}
+                  />
+                  Utilizar endereço de entrega
+                </CheckWrapper>
                 <div>
                   <Input
-                    type="number"
+                    type="text"
                     placeholder="Número do cartão"
                     name="cardNumber"
                     value={cardNumber}
@@ -178,11 +185,16 @@ export default function SignUp() {
                     margin={"0 0 3vh 0"}
                   />
                 </div>
-              </div>
+              </SignUpDataContent>
               <div>
-                <Button title={"CADASTRAR"} width={"41vh"} />
+                <Button
+                  title={"CADASTRAR"}
+                  height={"6vh"}
+                  width={"41vh"}
+                  padding={0}
+                />
               </div>
-            </SignUpDataContent>
+            </SignUpDataContentWrapper>
           </SignUpData>
         </SignUpDataWrapper>
       </Content>

@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "../../components/Header";
 import {
   ClickMenu,
@@ -6,7 +7,7 @@ import {
   Spacer,
   Logo,
 } from "../../components/Header/styles";
-import MenuIcon from "@mui/icons-material/Menu";
+import LogoutIcon from "@mui/icons-material/Logout";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
@@ -26,17 +27,18 @@ import {
 import { useUsuario } from "../../hooks/UsuarioHook";
 
 function HomeScreen() {
-  const [visibleSidebar, setVisibleSide] = useState(false);
-  const { setUsuarioFromLocalState, clearUsuarioFromLocalState, getUsuario } =
-    useUsuario();
+  const navigate = useNavigate();
+  const { setUsuarioFromLocalState, clearUsuarioFromLocalState } = useUsuario();
 
   useEffect(() => {
     setUsuarioFromLocalState();
   }, []);
 
-  const handleClick = () => {
-    setVisibleSide(!visibleSidebar);
-  };
+  function logout() {
+    clearUsuarioFromLocalState();
+    navigate("/");
+  }
+
   return (
     <Container>
       <Header
@@ -44,14 +46,12 @@ function HomeScreen() {
           <>
             <Logo src={require("../../assets/logo.png")} />
             <Spacer />
-            <ItemButton>FEMININO</ItemButton>
-            <Spacer />
-            <ItemButton>MASCULINO</ItemButton>
+            <ItemButton>PRODUTOS</ItemButton>
           </>
         }
         rightChildren={
           <>
-            <ClickMenu onClick={handleClick}>
+            <ClickMenu>
               <ShoppingCartIcon
                 style={{ cursor: "pointer" }}
                 fontSize="medium"
@@ -59,8 +59,8 @@ function HomeScreen() {
             </ClickMenu>
 
             <Spacer />
-            <ClickMenu onClick={handleClick}>
-              <MenuIcon style={{ cursor: "pointer" }} fontSize="large" />
+            <ClickMenu onClick={logout}>
+              <LogoutIcon style={{ cursor: "pointer" }} fontSize="medium" />
             </ClickMenu>
             <Spacer />
           </>

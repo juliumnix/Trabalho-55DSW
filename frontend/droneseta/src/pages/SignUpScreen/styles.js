@@ -15,6 +15,7 @@ export const Content = styled.div`
 
 export const Title = styled.h2`
   font-family: "Inter", sans-serif;
+  margin-bottom: 2vh;
 `;
 
 export const SignUpDataWrapper = styled.div`
@@ -45,7 +46,7 @@ export const SignUpData = styled.div`
   box-sizing: border-box;
 `;
 
-export const SignUpDataContent = styled.div`
+export const SignUpDataContentWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -56,10 +57,17 @@ export const SignUpDataContent = styled.div`
   box-sizing: border-box;
 `;
 
+export const SignUpDataContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
 export const CheckWrapper = styled.div`
   display: flex;
   align-items: center;
   align-content: center;
+  align-self: flex-start;
   font-size: 12px;
   font-family: "Inter", sans-serif;
   color: #8d8d8d;
@@ -72,7 +80,7 @@ export const Check = styled.input`
   margin-right: 1vh;
   background-color: white;
   border-radius: 100%;
-  box-shadow: inset 0 0 0.5vh 0.5vh rgb(243, 243, 243);
+  box-shadow: inset 0 0 0.5vh 0.5vh rgb(204, 204, 204);
   appearance: none;
   -webkit-appearance: none;
   outline: none;
@@ -81,6 +89,6 @@ export const Check = styled.input`
     height: 2vh;
     width: 2vh;
     margin: 0.5vh 1.5vh 0.5vh 0.5vh;
-    box-shadow: 0 0 0.5vh 0.5vh rgb(243, 243, 243);
+    box-shadow: 0 0 0.5vh 0.5vh rgb(204, 204, 204);
   }
 `;

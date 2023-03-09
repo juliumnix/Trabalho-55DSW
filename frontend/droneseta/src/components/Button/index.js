@@ -2,10 +2,13 @@ import React from "react";
 
 import { Container } from "./styles";
 
-function Button({ title, isActive, width, ...rest }) {
+function Button({ title, isActive, height, width, padding, ...rest }) {
   return (
     <>
-      <Container style={{ width: width }} {...rest}>
+      <Container
+        style={{ height: height, width: width, padding: padding }}
+        {...rest}
+      >
         {title}
       </Container>
     </>
