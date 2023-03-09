@@ -10,6 +10,8 @@ import {
   LoginDataWrapper,
   Title,
   LoginDataContentWrapper,
+  ButtonsWrapper,
+  SignUpRedirect,
 } from "./styles";
 import { ItemButton, Spacer, Logo } from "../../components/Header/styles";
 import Input from "../../components/Input";
@@ -83,7 +85,7 @@ export default function Login() {
                     onChange={(event) => emailHandler(event.target.value)}
                     width={"35vh"}
                     height={"2vh"}
-                    margin={"0 0 3vh 0"}
+                    margin={"0 0 2.5vh 0"}
                   />
                 </div>
                 <div>
@@ -95,11 +97,11 @@ export default function Login() {
                     onChange={(event) => passwordHandler(event.target.value)}
                     width={"35vh"}
                     height={"2vh"}
-                    margin={"0 0 3vh 0"}
+                    margin={"0 0 2.5vh 0"}
                   />
                 </div>
               </LoginDataContent>
-              <div>
+              <ButtonsWrapper>
                 <Button
                   title={"ENTRAR"}
                   height={"6vh"}
@@ -107,7 +109,10 @@ export default function Login() {
                   padding={0}
                   onClick={loginHandler}
                 />
-              </div>
+                <SignUpRedirect href="/signUp">
+                  Não possui uma conta? Cadastre-se
+                </SignUpRedirect>
+              </ButtonsWrapper>
             </LoginDataContentWrapper>
           </LoginData>
         </LoginDataWrapper>

@@ -2,10 +2,12 @@ import { useState, React, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUsuario } from "../../hooks/UsuarioHook";
 import {
+  ButtonsWrapper,
   Check,
   CheckWrapper,
   Container,
   Content,
+  LoginRedirect,
   SignUpData,
   SignUpDataContent,
   SignUpDataContentWrapper,
@@ -145,7 +147,7 @@ export default function SignUp() {
                     onChange={(event) => nameHandler(event.target.value)}
                     width={"35vh"}
                     height={"2vh"}
-                    margin={"0 0 3vh 0"}
+                    margin={"0 0 2.5vh 0"}
                   />
                 </div>
                 <div>
@@ -157,7 +159,7 @@ export default function SignUp() {
                     onChange={(event) => emailHandler(event.target.value)}
                     width={"35vh"}
                     height={"2vh"}
-                    margin={"0 0 3vh 0"}
+                    margin={"0 0 2.5vh 0"}
                   />
                 </div>
                 <div>
@@ -169,7 +171,7 @@ export default function SignUp() {
                     onChange={(event) => cpfHandler(event.target.value)}
                     width={"35vh"}
                     height={"2vh"}
-                    margin={"0 0 3vh 0"}
+                    margin={"0 0 2.5vh 0"}
                   />
                 </div>
                 <div>
@@ -181,7 +183,7 @@ export default function SignUp() {
                     onChange={(event) => passwordHandler(event.target.value)}
                     width={"35vh"}
                     height={"2vh"}
-                    margin={"0 0 3vh 0"}
+                    margin={"0 0 2.5vh 0"}
                   />
                 </div>
                 <div>
@@ -195,7 +197,7 @@ export default function SignUp() {
                     }
                     width={"35vh"}
                     height={"2vh"}
-                    margin={"0 0 3vh 0"}
+                    margin={"0 0 2.5vh 0"}
                   />
                 </div>
                 <div>
@@ -230,11 +232,11 @@ export default function SignUp() {
                     onChange={(event) => cardNumberHandler(event.target.value)}
                     width={"35vh"}
                     height={"2vh"}
-                    margin={"0 0 3vh 0"}
+                    margin={"0 0 2.5vh 0"}
                   />
                 </div>
               </SignUpDataContent>
-              <div>
+              <ButtonsWrapper>
                 <Button
                   title={"CADASTRAR"}
                   height={"6vh"}
@@ -242,7 +244,10 @@ export default function SignUp() {
                   padding={0}
                   onClick={signUpHandler}
                 />
-              </div>
+                <LoginRedirect href="/">
+                  Já possui uma conta? Entre
+                </LoginRedirect>
+              </ButtonsWrapper>
             </SignUpDataContentWrapper>
           </SignUpData>
         </SignUpDataWrapper>

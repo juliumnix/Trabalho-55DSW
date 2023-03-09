@@ -92,3 +92,17 @@ export const Check = styled.input`
     box-shadow: 0 0 0.5vh 0.5vh rgb(204, 204, 204);
   }
 `;
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+`;
+
+export const LoginRedirect = styled.a`
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  color: #8d8d8d;
+  margin-top: 0.5vh;
+`;
