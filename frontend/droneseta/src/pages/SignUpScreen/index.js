@@ -1,5 +1,6 @@
-import { useState, React } from "react";
+import { useState, React, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUsuario } from "../../hooks/UsuarioHook";
 import {
   Check,
   CheckWrapper,
@@ -17,9 +18,12 @@ import { ItemButton, Spacer, Logo } from "../../components/Header/styles";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import signUpBackgroundImage from "../../assets/background-login.png";
+import SignUpService from "../../services/SignUpService";
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const { handleUsuario, getUsuarioFromLocalState } = useUsuario();
+  const signUpService = new SignUpService();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [cpf, setCpf] = useState("");
@@ -28,6 +32,50 @@ export default function SignUp() {
   const [deliveryAddress, setDeliveryAddress] = useState("");
   const [useSameAddress, setUseSameAddress] = useState(false);
   const [cardNumber, setCardNumber] = useState("");
+
+  useEffect(() => {
+    document.title = "Droneseta";
+    if (getUsuarioFromLocalState()) {
+      navigate("/home");
+    }
+  }, []);
+
+  async function signUpHandler() {
+    if (
+      name === "" ||
+      email === "" ||
+      cpf === "" ||
+      pass === "" ||
+      deliveryAddress === "" ||
+      (billingAddress === "" && !useSameAddress) ||
+      cardNumber === ""
+    ) {
+      return;
+    }
+
+    if (cpf.length < 11 || pass.length < 8 || cardNumber < 16) {
+      return;
+    }
+
+    if (useSameAddress) {
+      setBillingAddress(deliveryAddress);
+    }
+
+    const response = await signUpService.signUp(
+      name,
+      email,
+      cpf,
+      pass,
+      deliveryAddress,
+      billingAddress,
+      cardNumber
+    );
+    if (response.status === 200) {
+      handleUsuario(response.data);
+      localStorage.setItem("authLogin", JSON.stringify(response.data));
+      navigate("/home");
+    }
+  }
 
   function nameHandler(text) {
     setName(text);
@@ -192,6 +240,7 @@ export default function SignUp() {
                   height={"6vh"}
                   width={"41vh"}
                   padding={0}
+                  onClick={signUpHandler}
                 />
               </div>
             </SignUpDataContentWrapper>

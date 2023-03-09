@@ -39,10 +39,8 @@ export default function Login() {
     const { data } = await loginService.login(email, pass);
     if (data === "Logou") {
       const { data } = await loginService.getuserByEmail(email);
-      console.log("data", data.email);
       handleUsuario(data);
       localStorage.setItem("authLogin", JSON.stringify(data));
-
       navigate("/home");
     } else {
       alert(data);
