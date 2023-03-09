@@ -10,6 +10,9 @@ import {
   LoginDataWrapper,
   Title,
   LoginDataContentWrapper,
+  LogoWrapper,
+  LogoSVG,
+  DronesetaTitle,
 } from "./styles";
 import { ItemButton, Spacer, Logo } from "../../components/Header/styles";
 import Input from "../../components/Input";
@@ -17,6 +20,7 @@ import Button from "../../components/Button";
 import { useUsuario } from "../../hooks/UsuarioHook";
 import Header from "../../components/Header";
 import loginBackgroundImage from "../../assets/background-login.png";
+import Vector from "../../assets/Vector.svg";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -68,6 +72,10 @@ export default function Login() {
         rightChildren={<></>}
       ></Header>
       <Content>
+        <LogoWrapper>
+          <LogoSVG src={Vector} />
+          <DronesetaTitle>DRONESETA</DronesetaTitle>
+        </LogoWrapper>
         <LoginDataWrapper>
           <LoginImage src={loginBackgroundImage}></LoginImage>
           <LoginData>
