@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Button from "../../components/Button";
 import Header from "../../components/Header";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
@@ -8,7 +7,6 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import {
   ClickMenu,
   Container,
-  ContainerSidebar,
   ItemButton,
   Logo,
   Spacer,
@@ -24,11 +22,13 @@ import {
   CollectionButtonIconWrapper,
 } from "./styles";
 import { useUsuario } from "../../hooks/UsuarioHook";
+import { useNavigate } from "react-router-dom";
 
 function HomeScreen() {
   const [visibleSidebar, setVisibleSide] = useState(false);
   const { setUsuarioFromLocalState, clearUsuarioFromLocalState, getUsuario } =
     useUsuario();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setUsuarioFromLocalState();
@@ -37,6 +37,10 @@ function HomeScreen() {
   const handleClick = () => {
     setVisibleSide(!visibleSidebar);
   };
+
+  function navigateToMenStore() {
+    navigate("/menStore");
+  }
   return (
     <Container>
       <Header
@@ -46,7 +50,7 @@ function HomeScreen() {
             <Spacer />
             <ItemButton>FEMININO</ItemButton>
             <Spacer />
-            <ItemButton>MASCULINO</ItemButton>
+            <ItemButton onClick={navigateToMenStore}>MASCULINO</ItemButton>
           </>
         }
         rightChildren={
