@@ -1,16 +1,39 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  background-color: #fffdfc;
+  background: linear-gradient(
+    90deg,
+    rgba(94, 146, 162, 1) 0%,
+    rgba(153, 195, 208, 1) 100%
+  );
   height: 100vh;
 `;
 
 export const Content = styled.div`
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   height: 94vh;
   width: 100vw;
+`;
+
+export const LogoWrapper = styled.div`
+  width: 70vw;
+  height: 94vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+`;
+
+export const LogoSVG = styled.img`
+  width: 20vw;
+  height: 20vh;
+`;
+
+export const DronesetaTitle = styled.p`
+  font-weight: bold;
+  font-size: 15vh;
 `;
 
 export const Title = styled.h2`
@@ -91,4 +114,18 @@ export const Check = styled.input`
     margin: 0.5vh 1.5vh 0.5vh 0.5vh;
     box-shadow: 0 0 0.5vh 0.5vh rgb(204, 204, 204);
   }
+`;
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+`;
+
+export const LoginRedirect = styled.a`
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  color: #8d8d8d;
+  margin-top: 0.5vh;
 `;

@@ -16,8 +16,8 @@ export const ContainerNoShadow = styled.header`
 `;
 
 export const Logo = styled.img`
-  width: 83px;
-  height: 42px;
+  width: 9.88vh;
+  height: 5vh;
   padding-left: 20px;
 `;
 
@@ -37,7 +37,6 @@ export const ItemButton = styled.button`
   font-weight: bold;
   border: none;
   background: none;
-  cursor: pointer;
 `;
 
 export const ItemContainer = styled.div`
