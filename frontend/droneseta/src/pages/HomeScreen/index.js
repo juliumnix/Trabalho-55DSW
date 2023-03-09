@@ -46,12 +46,22 @@ function HomeScreen() {
           <>
             <Logo src={require("../../assets/logo.png")} />
             <Spacer />
-            <ItemButton>PRODUTOS</ItemButton>
+            <ItemButton
+              onClick={() => {
+                navigate("/products");
+              }}
+            >
+              PRODUTOS
+            </ItemButton>
           </>
         }
         rightChildren={
           <>
-            <ClickMenu>
+            <ClickMenu
+              onClick={() => {
+                navigate("/shoppingCart");
+              }}
+            >
               <ShoppingCartIcon
                 style={{ cursor: "pointer" }}
                 fontSize="medium"

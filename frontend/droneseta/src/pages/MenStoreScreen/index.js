@@ -1,18 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUsuario } from "../../hooks/UsuarioHook";
 import Header from "../../components/Header";
-import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
-import {
-  ClickMenu,
-  Container,
-  ContainerProdutos,
-  ItemButton,
-  Logo,
-  Spacer,
-} from "./styles";
+import { ClickMenu, Container, ContainerProdutos } from "./styles";
 import TopHeader from "../../components/TopHeader";
 import MenStoreItem from "../../components/MenStoreItem";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { ItemButton, Logo, Spacer } from "../../components/Header/styles";
+import ProductService from "../../services/ProductService";
 
 const teste = [
   {
@@ -81,15 +78,26 @@ const teste = [
 ];
 
 function MenStoreScreen() {
+  const navigate = useNavigate();
+  const productService = new ProductService();
+  const { clearUsuarioFromLocalState } = useUsuario();
   const [produtos, setProdutos] = useState([]);
+
+  function logout() {
+    clearUsuarioFromLocalState();
+    navigate("/");
+  }
+
   useEffect(() => {
     splitArrayToLines();
   }, []);
 
-  function splitArrayToLines() {
+  async function splitArrayToLines() {
+    const response = await productService.resgataProdutos();
+    console.log(response);
     const arrayDeArrays = [];
-    for (let index = 0; index < teste.length; index += 4) {
-      arrayDeArrays.push(teste.slice(index, index + 4));
+    for (let index = 0; index < response.data.length; index += 4) {
+      arrayDeArrays.push(response.data.slice(index, index + 4));
     }
     setProdutos(arrayDeArrays);
   }
@@ -101,14 +109,22 @@ function MenStoreScreen() {
           <>
             <Logo src={require("../../assets/logo.png")} />
             <Spacer />
-            <ItemButton>FEMININO</ItemButton>
-            <Spacer />
-            <ItemButton onClick={() => {}}>MASCULINO</ItemButton>
+            <ItemButton
+              onClick={() => {
+                navigate("/products");
+              }}
+            >
+              PRODUTOS
+            </ItemButton>
           </>
         }
         rightChildren={
           <>
-            <ClickMenu onClick={() => {}}>
+            <ClickMenu
+              onClick={() => {
+                navigate("/shoppingCart");
+              }}
+            >
               <ShoppingCartIcon
                 style={{ cursor: "pointer" }}
                 fontSize="medium"
@@ -116,21 +132,20 @@ function MenStoreScreen() {
             </ClickMenu>
 
             <Spacer />
-            <ClickMenu onClick={() => {}}>
-              <MenuIcon style={{ cursor: "pointer" }} fontSize="large" />
+            <ClickMenu onClick={logout}>
+              <LogoutIcon style={{ cursor: "pointer" }} fontSize="medium" />
             </ClickMenu>
             <Spacer />
           </>
         }
-      />
-      <TopHeader title="MASCULINO" />
+      ></Header>
+      <TopHeader title="PRODUTOS" />
       <ContainerProdutos>
         {produtos.map((item, index) => (
           <div
             key={index}
             style={{
               display: "flex",
-              justifyContent: "space-between",
               alignItems: "flex-start",
               width: "100%",
             }}

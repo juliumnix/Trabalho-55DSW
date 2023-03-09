@@ -37,6 +37,7 @@ export const ItemButton = styled.button`
   font-weight: bold;
   border: none;
   background: none;
+  cursor: pointer;
 `;
 
 export const ItemContainer = styled.div`

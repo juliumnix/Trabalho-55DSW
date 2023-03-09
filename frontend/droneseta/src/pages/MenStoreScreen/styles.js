@@ -8,20 +8,6 @@ export const Container = styled.div`
   text-size-adjust: none;
 `;
 
-export const ItemButton = styled.button`
-  cursor: pointer;
-  font-family: "Inter", sans-serif;
-  font-size: 12px;
-  height: 10vh;
-  font-weight: bold;
-  border: none;
-  background: none;
-`;
-
-export const Spacer = styled.div`
-  width: 5vh;
-`;
-
 export const ContainerProdutos = styled.div`
   height: 82vh;
   margin-left: 9.5vw;
@@ -41,12 +27,6 @@ export const ContainerProdutos = styled.div`
     border-radius: 15px;
     height: 0.5vh;
   }
-`;
-
-export const Logo = styled.img`
-  width: 83px;
-  height: 42px;
-  padding-left: 20px;
 `;
 
 export const ClickMenu = styled.button`
