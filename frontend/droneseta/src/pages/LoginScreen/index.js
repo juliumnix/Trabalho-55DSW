@@ -1,16 +1,28 @@
 import { useState, React, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginService from "../../services/LoginService";
-import { ContainerLogin, Container, ImageLogin } from "./styles";
 import {
-  ItemContainer,
-  ItemButton,
-  Spacer,
-  Logo,
-} from "../../components/Header/styles";
+  Container,
+  Content,
+  LoginImage,
+  LoginData,
+  LoginDataContent,
+  LoginDataWrapper,
+  Title,
+  LoginDataContentWrapper,
+  LogoWrapper,
+  LogoSVG,
+  DronesetaTitle,
+  ButtonsWrapper,
+  SignUpRedirect,
+} from "./styles";
+import { ItemButton, Spacer, Logo } from "../../components/Header/styles";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import { useUsuario } from "../../hooks/UsuarioHook";
+import Header from "../../components/Header";
+import loginBackgroundImage from "../../assets/background-login.png";
+import Vector from "../../assets/Vector.svg";
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -33,10 +45,8 @@ export default function Login() {
     const { data } = await loginService.login(email, pass);
     if (data === "Logou") {
       const { data } = await loginService.getuserByEmail(email);
-      console.log("data", data.email);
       handleUsuario(data);
       localStorage.setItem("authLogin", JSON.stringify(data));
-
       navigate("/home");
     } else {
       alert(data);
@@ -52,41 +62,69 @@ export default function Login() {
   }
 
   return (
-    <div>
-      <Container>
-        <ItemContainer>
-          <Logo src={require("../../assets/logo.png")} />
-          <Spacer />
-          <ItemButton>FEMININO</ItemButton>
-          <Spacer />
-          <ItemButton>MASCULINO</ItemButton>
-        </ItemContainer>
-      </Container>
-      <ImageLogin>
-        <ContainerLogin>
-          <div>
-            <Input
-              type="text"
-              placeholder="Email"
-              name="email"
-              value={email}
-              onChange={(event) => emailHandler(event.target.value)}
-            />
-          </div>
-          <div>
-            <Input
-              type="password"
-              placeholder="Senha"
-              name="pass"
-              value={pass}
-              onChange={(event) => passwordHandler(event.target.value)}
-            />
-          </div>
-          <div>
-            <Button title={"ENTRAR"} onClick={loginHandler} />
-          </div>
-        </ContainerLogin>
-      </ImageLogin>
-    </div>
+    <Container>
+      <Header
+        leftChildren={
+          <>
+            <Logo src={require("../../assets/logo.png")} />
+            <Spacer />
+            <ItemButton>PRODUTOS</ItemButton>
+          </>
+        }
+        rightChildren={<></>}
+      ></Header>
+      <Content>
+        <LogoWrapper>
+          <LogoSVG src={Vector} />
+          <DronesetaTitle>DRONESETA</DronesetaTitle>
+        </LogoWrapper>
+        <LoginDataWrapper>
+          <LoginImage src={loginBackgroundImage}></LoginImage>
+          <LoginData>
+            <LoginDataContentWrapper>
+              <LoginDataContent>
+                <Title>Droneseta</Title>
+                <div>
+                  <Input
+                    type="text"
+                    placeholder="Email"
+                    name="email"
+                    value={email}
+                    onChange={(event) => emailHandler(event.target.value)}
+                    width={"35vh"}
+                    height={"2vh"}
+                    margin={"0 0 2.5vh 0"}
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="password"
+                    placeholder="Senha"
+                    name="pass"
+                    value={pass}
+                    onChange={(event) => passwordHandler(event.target.value)}
+                    width={"35vh"}
+                    height={"2vh"}
+                    margin={"0 0 2.5vh 0"}
+                  />
+                </div>
+              </LoginDataContent>
+              <ButtonsWrapper>
+                <Button
+                  title={"ENTRAR"}
+                  height={"6vh"}
+                  width={"41vh"}
+                  padding={0}
+                  onClick={loginHandler}
+                />
+                <SignUpRedirect href="/signUp">
+                  Não possui uma conta? Cadastre-se
+                </SignUpRedirect>
+              </ButtonsWrapper>
+            </LoginDataContentWrapper>
+          </LoginData>
+        </LoginDataWrapper>
+      </Content>
+    </Container>
   );
 }
