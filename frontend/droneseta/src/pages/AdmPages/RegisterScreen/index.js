@@ -1,10 +1,11 @@
 import { useState, React, useEffect } from "react";
 import Header from '../../../components/Header';
-import { Logo, ItemButton, Spacer, ContainerRight, ContainerLeft, Label, InputCheckBox, ItemContainer, InputImage, UploadImage, UploadLabel, TableProduct, TableHeader, TableData } from "./styles";
+import { Logo, ItemButton, Spacer, ContainerRight, ContainerLeft, Label, InputCheckBox, ItemContainer, InputImage, UploadImage, UploadLabel, TableProduct, TableHeader, TableData, ContainerCad } from "./styles";
 import ImageButton from "../../../components/ImageButton";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import ProductService from "../../../services/ProductService";
+import TopHeader from "../../../components/TopHeader";
 
 export default function RegisterScreen() {
 
@@ -53,7 +54,7 @@ export default function RegisterScreen() {
   useEffect(() => {
     initProduct();
     initSize();
-  }, [products]);
+  }, []);
 
   async function initProduct() {
     const { data } = await productService.resgataProdutos();
@@ -74,7 +75,7 @@ export default function RegisterScreen() {
           getEstoqueETamanho(jsonSizes[i]);
         }
       }
-      productService.cadastraProduto(createJson());
+      await productService.cadastraProduto(createJson());
       cleanFields();
       initProduct();
     }
@@ -176,65 +177,70 @@ export default function RegisterScreen() {
       />
       <ContainerLeft>
         <div>
-          <InputImage id="inputImage" type="file" name="file" accept="image/png, image/jpeg" multiple onChange={handleChange} />
-          <UploadLabel htmlFor="inputImage"><UploadImage src={require("../../../assets/upload_image.png")} /></UploadLabel>
+          <TopHeader title={"CADASTRO DE PRODUTOS"} />
         </div>
-        <div>
-          <Input type="text" placeholder="Descrição" name="dsc" value={dsc} onChange={(event) => setDsc(event.target.value)} />
-        </div>
-        <div>
-          <Input type="number" placeholder="Preço" name="price" value={price} onChange={(event) => setPrice(event.target.value)} />
-        </div>
-        <ItemContainer>
+        <ContainerCad>
           <div>
-            <InputCheckBox id="PPsize" type="checkbox" onChange={(event) => setPP(event.target.checked)} />
-            <Label htmlFor="PPsize">PP</Label>
+            <InputImage id="inputImage" type="file" name="file" accept="image/png, image/jpeg" multiple onChange={handleChange} />
+            <UploadLabel htmlFor="inputImage"><UploadImage src={require("../../../assets/upload_image.png")} /></UploadLabel>
           </div>
           <div>
-            <Input disabled={!pp} type="number" placeholder="Quantidade" name="qtdPP" value={qtdPP} width={"170px"} onChange={(event) => setQtdPP(event.target.value)} />
+            <Input type="text" placeholder="Descrição" name="dsc" value={dsc} onChange={(event) => setDsc(event.target.value)} />
           </div>
-        </ItemContainer>
+          <div>
+            <Input type="number" placeholder="Preço" name="price" value={price} onChange={(event) => setPrice(event.target.value)} />
+          </div>
+          <ItemContainer>
+            <div>
+              <InputCheckBox id="PPsize" type="checkbox" onChange={(event) => setPP(event.target.checked)} />
+              <Label htmlFor="PPsize">PP</Label>
+            </div>
+            <div>
+              <Input disabled={!pp} type="number" placeholder="Quantidade" name="qtdPP" value={qtdPP} width={"170px"} onChange={(event) => setQtdPP(event.target.value)} />
+            </div>
+          </ItemContainer>
 
-        <ItemContainer>
-          <div>
-            <InputCheckBox id="Psize" type="checkbox" onChange={(event) => setP(event.target.checked)} />
-            <Label htmlFor="Psize">P</Label>
-          </div>
-          <div>
-            <Input disabled={!p} type="number" placeholder="Quantidade" name="qtdP" value={qtdP} width={"170px"} onChange={(event) => setQtdP(event.target.value)} />
-          </div>
-        </ItemContainer>
+          <ItemContainer>
+            <div>
+              <InputCheckBox id="Psize" type="checkbox" onChange={(event) => setP(event.target.checked)} />
+              <Label htmlFor="Psize">P</Label>
+            </div>
+            <div>
+              <Input disabled={!p} type="number" placeholder="Quantidade" name="qtdP" value={qtdP} width={"170px"} onChange={(event) => setQtdP(event.target.value)} />
+            </div>
+          </ItemContainer>
 
-        <ItemContainer>
+          <ItemContainer>
+            <div>
+              <InputCheckBox id="Msize" type="checkbox" onChange={(event) => setM(event.target.checked)} />
+              <Label htmlFor="Msize">M</Label>
+            </div>
+            <div>
+              <Input disabled={!m} type="number" placeholder="Quantidade" name="qtdM" value={qtdM} width={"170px"} onChange={(event) => setQtdM(event.target.value)} />
+            </div>
+          </ItemContainer>
+          <ItemContainer>
+            <div>
+              <InputCheckBox id="Gsize" type="checkbox" onChange={(event) => setG(event.target.checked)} />
+              <Label htmlFor="Gsize">G</Label>
+            </div>
+            <div>
+              <Input disabled={!g} type="number" placeholder="Quantidade" name="qtdG" value={qtdG} width={"170px"} onChange={(event) => setQtdG(event.target.value)} />
+            </div>
+          </ItemContainer>
+          <ItemContainer>
+            <div>
+              <InputCheckBox id="GGsize" type="checkbox" onChange={(event) => setGG(event.target.checked)} />
+              <Label htmlFor="GGsize">GG</Label>
+            </div>
+            <div>
+              <Input disabled={!gg} type="number" placeholder="Quantidade" name="qtdGG" value={qtdGG} width={"170px"} onChange={(event) => setQtdGG(event.target.value)} />
+            </div>
+          </ItemContainer>
           <div>
-            <InputCheckBox id="Msize" type="checkbox" onChange={(event) => setM(event.target.checked)} />
-            <Label htmlFor="Msize">M</Label>
+            <Button type="submit" title={"CADASTRAR"} onClick={registerHandler} />
           </div>
-          <div>
-            <Input disabled={!m} type="number" placeholder="Quantidade" name="qtdM" value={qtdM} width={"170px"} onChange={(event) => setQtdM(event.target.value)} />
-          </div>
-        </ItemContainer>
-        <ItemContainer>
-          <div>
-            <InputCheckBox id="Gsize" type="checkbox" onChange={(event) => setG(event.target.checked)} />
-            <Label htmlFor="Gsize">G</Label>
-          </div>
-          <div>
-            <Input disabled={!g} type="number" placeholder="Quantidade" name="qtdG" value={qtdG} width={"170px"} onChange={(event) => setQtdG(event.target.value)} />
-          </div>
-        </ItemContainer>
-        <ItemContainer>
-          <div>
-            <InputCheckBox id="GGsize" type="checkbox" onChange={(event) => setGG(event.target.checked)} />
-            <Label htmlFor="GGsize">GG</Label>
-          </div>
-          <div>
-            <Input disabled={!gg} type="number" placeholder="Quantidade" name="qtdGG" value={qtdGG} width={"170px"} onChange={(event) => setQtdGG(event.target.value)} />
-          </div>
-        </ItemContainer>
-        <div>
-          <Button type="submit" title={"CADASTRAR"} onClick={registerHandler} />
-        </div>
+        </ContainerCad>
       </ContainerLeft>
       <ContainerRight>
         <TableProduct>

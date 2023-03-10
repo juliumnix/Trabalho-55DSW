@@ -19,8 +19,7 @@ export const Logo = styled.img`
 `;
 
 export const UploadImage = styled.img`
-    width: 10vw;
-    height: 10vw;
+    width: 8vw;
 `;
 
 export const InputImage = styled.input`
@@ -85,7 +84,7 @@ export const InputCheckBox = styled.input`
         }
 `
 
-export const ContainerLeft = styled.div`
+export const ContainerCad = styled.div`
     height: 94vh;
     width: 30vw;
     background-position: left;
@@ -93,8 +92,16 @@ export const ContainerLeft = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    float: left;
     text-align: center;
+`
+
+export const ContainerLeft = styled.div`
+    height: 94vh;
+    width: 30vw;
+    background-position: left;
+    flex-direction: column;
+    display: flex;
+    float: left;
 `
 export const ContainerRight = styled.div`
     float: right;
@@ -108,14 +115,17 @@ export const ContainerRight = styled.div`
 `
 export const TableProduct = styled.table`
     font-size: 16px;
-    width: 100vw;
+    height: 80vh;
     border-collapse: collapse;
+    display: block;
+    overflow-y: scroll;
 
 `
 export const TableHeader = styled.th`
     border: 1px solid black;
     max-height: 40vh;
-    background-color: aqua;
+    background-color: #5e92a2;
+    color: white;
 `
 export const TableData = styled.th`
     border: 1px solid  #c6c6c6;
