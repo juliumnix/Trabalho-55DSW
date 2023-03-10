@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useUsuario } from "../../hooks/UsuarioHook";
 import Header from "../../components/Header";
-import MenuIcon from "@mui/icons-material/Menu";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-
+import TopHeader from "../../components/TopHeader";
+import Button from "../../components/Button";
+import ShoppingCartItem from "../../components/ShoppingCartItem";
 import {
-  Container,
+  ClickMenu,
   ItemButton,
   Logo,
   Spacer,
-  ClickMenu,
+} from "../../components/Header/styles";
+import {
+  Container,
   ContainerList,
   BottomItems,
   ContainerBottom,
@@ -19,9 +23,8 @@ import {
   InternalContainer,
   TextPay,
 } from "./styles";
-import TopHeader from "../../components/TopHeader";
-import ShoppingCartItem from "../../components/ShoppingCartItem";
-import Button from "../../components/Button";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 const teste = [
   {
     id: 1,
@@ -689,12 +692,19 @@ const teste = [
 ];
 
 function ShoppingCart() {
+  const navigate = useNavigate();
+  const { clearUsuarioFromLocalState } = useUsuario();
   const [produtos, setProdutos] = useState([]);
   const [valorTotal, setValorTotal] = useState(0);
 
   useEffect(() => {
     getTotal();
   }, []);
+
+  function logout() {
+    clearUsuarioFromLocalState();
+    navigate("/");
+  }
 
   function getTotal() {
     let somatorio = 0;
@@ -708,25 +718,39 @@ function ShoppingCart() {
       <Header
         leftChildren={
           <>
-            <Logo src={require("../../assets/logo.png")} />
             <Spacer />
-            <ItemButton>FEMININO</ItemButton>
+            <Logo
+              src={require("../../assets/logo.png")}
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                navigate("/home");
+              }}
+            />
             <Spacer />
-            <ItemButton>MASCULINO</ItemButton>
+            <ItemButton
+              onClick={() => {
+                navigate("/products");
+              }}
+            >
+              PRODUTOS
+            </ItemButton>
           </>
         }
         rightChildren={
           <>
-            <ClickMenu onClick={() => {}}>
+            <ClickMenu
+              onClick={() => {
+                navigate("/shopping-cart");
+              }}
+            >
               <ShoppingCartIcon
-                style={{ cursor: "pointer" }}
-                fontSize="medium"
+                style={{ fontSize: "4vh", cursor: "pointer" }}
               />
             </ClickMenu>
 
             <Spacer />
-            <ClickMenu onClick={() => {}}>
-              <MenuIcon style={{ cursor: "pointer" }} fontSize="large" />
+            <ClickMenu onClick={logout}>
+              <LogoutIcon style={{ fontSize: "4vh", cursor: "pointer" }} />
             </ClickMenu>
             <Spacer />
           </>

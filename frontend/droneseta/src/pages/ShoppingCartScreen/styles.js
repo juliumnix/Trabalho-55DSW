@@ -4,31 +4,6 @@ export const Container = styled.div`
   height: 94svh;
 `;
 
-export const ItemButton = styled.button`
-  cursor: pointer;
-  font-family: "Inter", sans-serif;
-  font-size: 12px;
-  height: 10vh;
-  font-weight: bold;
-  border: none;
-  background: none;
-`;
-
-export const Spacer = styled.div`
-  width: 5vh;
-`;
-
-export const Logo = styled.img`
-  width: 83px;
-  height: 42px;
-  padding-left: 20px;
-`;
-
-export const ClickMenu = styled.button`
-  border: none;
-  background: none;
-`;
-
 export const ContainerList = styled.div`
   display: flex;
   flex-direction: column;

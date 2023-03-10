@@ -29,11 +29,6 @@ export const ContainerProdutos = styled.div`
   }
 `;
 
-export const ClickMenu = styled.button`
-  border: none;
-  background: none;
-`;
-
 export const ContainerSidebar = styled.div`
   position: fixed;
   right: 0;
