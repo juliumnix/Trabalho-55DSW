@@ -35,6 +35,8 @@ export const ItemContainer = styled.div`
 `;
 
 export const ClickMenu = styled.button`
+  display: flex;
+  align-items: center;
   border: none;
   background: none;
 `;

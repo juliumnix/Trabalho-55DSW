@@ -739,18 +739,17 @@ function ShoppingCart() {
         rightChildren={
           <>
             <ClickMenu
+              style={{ padding: 0 }}
               onClick={() => {
                 navigate("/shopping-cart");
               }}
             >
-              <ShoppingCartIcon
-                style={{ fontSize: "4vh", cursor: "pointer" }}
-              />
+              <ShoppingCartIcon sx={{ fontSize: "4vh", cursor: "pointer" }} />
             </ClickMenu>
 
             <Spacer />
-            <ClickMenu onClick={logout}>
-              <LogoutIcon style={{ fontSize: "4vh", cursor: "pointer" }} />
+            <ClickMenu style={{ padding: 0 }} onClick={logout}>
+              <LogoutIcon sx={{ fontSize: "4vh", cursor: "pointer" }} />
             </ClickMenu>
             <Spacer />
           </>
