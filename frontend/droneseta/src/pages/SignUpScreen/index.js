@@ -18,8 +18,6 @@ import {
   SignUpImage,
   Title,
 } from "./styles";
-import Header from "../../components/Header";
-import { ItemButton, Spacer, Logo } from "../../components/Header/styles";
 import Input from "../../components/Input";
 import Button from "../../components/Button";
 import signUpBackgroundImage from "../../assets/background-login.png";
@@ -126,16 +124,6 @@ export default function SignUp() {
 
   return (
     <Container>
-      <Header
-        leftChildren={
-          <>
-            <Logo src={require("../../assets/logo.png")} />
-            <Spacer />
-            <ItemButton>PRODUTOS</ItemButton>
-          </>
-        }
-        rightChildren={<></>}
-      ></Header>
       <Content>
         <LogoWrapper>
           <LogoSVG src={Vector} />

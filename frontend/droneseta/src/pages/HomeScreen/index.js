@@ -1,16 +1,13 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUsuario } from "../../hooks/UsuarioHook";
 import Header from "../../components/Header";
 import {
   ClickMenu,
   ItemButton,
-  Spacer,
   Logo,
+  Spacer,
 } from "../../components/Header/styles";
-import LogoutIcon from "@mui/icons-material/Logout";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-
 import {
   Container,
   Content,
@@ -24,7 +21,9 @@ import {
   CollectionButtonContent,
   CollectionButtonIconWrapper,
 } from "./styles";
-import { useUsuario } from "../../hooks/UsuarioHook";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import LogoutIcon from "@mui/icons-material/Logout";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 function HomeScreen() {
   const navigate = useNavigate();
@@ -44,28 +43,44 @@ function HomeScreen() {
       <Header
         leftChildren={
           <>
-            <Logo src={require("../../assets/logo.png")} />
             <Spacer />
-            <ItemButton>PRODUTOS</ItemButton>
+            <Logo
+              src={require("../../assets/logo.png")}
+              style={{ cursor: "pointer" }}
+              onClick={() => {
+                navigate("/home");
+              }}
+            />
+            <Spacer />
+            <ItemButton
+              onClick={() => {
+                navigate("/products");
+              }}
+            >
+              PRODUTOS
+            </ItemButton>
           </>
         }
         rightChildren={
           <>
-            <ClickMenu>
+            <ClickMenu
+              onClick={() => {
+                navigate("/shopping-cart");
+              }}
+            >
               <ShoppingCartIcon
-                style={{ cursor: "pointer" }}
-                fontSize="medium"
+                style={{ fontSize: "4vh", cursor: "pointer" }}
               />
             </ClickMenu>
 
             <Spacer />
             <ClickMenu onClick={logout}>
-              <LogoutIcon style={{ cursor: "pointer" }} fontSize="medium" />
+              <LogoutIcon style={{ fontSize: "4vh", cursor: "pointer" }} />
             </ClickMenu>
             <Spacer />
           </>
         }
-      ></Header>
+      />
       <Content>
         <ImagemProvisoriaRemover />
         <InfoWrapper>
@@ -88,7 +103,11 @@ function HomeScreen() {
               printing and typesetting industry.
             </p>
           </Paragraph>
-          <CollectionButton>
+          <CollectionButton
+            onClick={() => {
+              navigate("/products");
+            }}
+          >
             <CollectionButtonContent>
               CONHEÇA A NOVA COLEÇÃO
               <CollectionButtonIconWrapper>

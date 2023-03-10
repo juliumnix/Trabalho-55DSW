@@ -13,7 +13,7 @@ export const Content = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 94vh;
+  height: 100vh;
   width: 100vw;
 `;
 

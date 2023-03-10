@@ -15,12 +15,12 @@ function App() {
   return (
     <AppProvider>
       <Routes>
-        <Route path="/erro" element={<ErrorScreen />} />
+        <Route path="*" element={<ErrorScreen />} />
         <Route path="/" element={<LoginScreen />} />
-        <Route path="/signUp" element={<SignUpScreen />} />
+        <Route path="/sign-up" element={<SignUpScreen />} />
         <Route path="/admin" element={<AuthenticationScreen />} />
         <Route
-          path="/menStore"
+          path="/products"
           element={
             <PrivatedRoute>
               <MenStoreScreen />
@@ -44,7 +44,7 @@ function App() {
           }
         />
         <Route
-          path="/shoppingCart"
+          path="/shopping-cart"
           element={
             <PrivatedRoute>
               <ShoppingCart />
