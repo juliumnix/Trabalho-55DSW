@@ -18,8 +18,7 @@ import {
   Paragraph,
   CollectionButton,
   ImagemProvisoriaRemover,
-  CollectionButtonContent,
-  CollectionButtonIconWrapper,
+  ContainerCollectionButton,
 } from "./styles";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -64,25 +63,23 @@ function HomeScreen() {
         rightChildren={
           <>
             <ClickMenu
+              style={{ padding: 0 }}
               onClick={() => {
                 navigate("/shopping-cart");
               }}
             >
-              <ShoppingCartIcon
-                style={{ fontSize: "4vh", cursor: "pointer" }}
-              />
+              <ShoppingCartIcon sx={{ fontSize: "4vh", cursor: "pointer" }} />
             </ClickMenu>
 
             <Spacer />
-            <ClickMenu onClick={logout}>
-              <LogoutIcon style={{ fontSize: "4vh", cursor: "pointer" }} />
+            <ClickMenu style={{ padding: 0 }} onClick={logout}>
+              <LogoutIcon sx={{ fontSize: "4vh", cursor: "pointer" }} />
             </ClickMenu>
             <Spacer />
           </>
         }
       />
       <Content>
-        <ImagemProvisoriaRemover />
         <InfoWrapper>
           <ContainerTitleBar>
             <TitleBar>
@@ -97,25 +94,23 @@ function HomeScreen() {
           </ContainerTitleBar>
           <Paragraph>
             <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry.Lorem Ipsum is simply dummy text of the printing and
-              typesetting industry.Lorem Ipsum is simply dummy text of the
-              printing and typesetting industry.
+              A nossa loja online de camisetas está lançando a sua mais nova
+              coleção de produtos, com uma grande variedade de estilos, cores e
+              tamanhos para todos os gostos.
             </p>
           </Paragraph>
-          <CollectionButton
-            onClick={() => {
-              navigate("/products");
-            }}
-          >
-            <CollectionButtonContent>
+          <ContainerCollectionButton>
+            <CollectionButton
+              onClick={() => {
+                navigate("/products");
+              }}
+            >
               CONHEÇA A NOVA COLEÇÃO
-              <CollectionButtonIconWrapper>
-                <ArrowForwardIosIcon />
-              </CollectionButtonIconWrapper>
-            </CollectionButtonContent>
-          </CollectionButton>
+              <ArrowForwardIosIcon style={{ fontSize: "1.2vw" }} />
+            </CollectionButton>
+          </ContainerCollectionButton>
         </InfoWrapper>
+        <ImagemProvisoriaRemover src="https://d3ugyf2ht6aenh.cloudfront.net/stores/001/790/777/products/design-sem-nome-361-cb6ce444a4187b999916674541309536-1024-1024.webp" />
       </Content>
     </Container>
   );
