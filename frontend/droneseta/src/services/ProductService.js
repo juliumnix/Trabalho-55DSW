@@ -15,4 +15,9 @@ export default class ProductService {
     const response = await api.get("produtos");
     return response;
   }
+
+  async resgataProduto(id) {
+    const response = await api.get(`produto/${id}`);
+    return response;
+  }
 }
