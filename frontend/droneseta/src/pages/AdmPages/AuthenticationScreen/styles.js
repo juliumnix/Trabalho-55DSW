@@ -1,44 +1,101 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const Container = styled.div`
+  background: linear-gradient(
+    90deg,
+    rgba(94, 146, 162, 1) 0%,
+    rgba(153, 195, 208, 1) 100%
+  );
+  height: 100vh;
+`;
+
+export const Content = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100vh;
+  width: 100vw;
+`;
+
+export const Title = styled.h2`
+  font-family: "Inter", sans-serif;
+  margin-bottom: 2vh;
+`;
+
+export const LoginDataWrapper = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  height: 94vh;
+  width: 55vh;
+`;
+
+export const LoginImage = styled.img`
+  position: absolute;
+  z-index: 0;
+  height: 94vh;
+  width: 55vh;
+`;
+
+export const LoginData = styled.div`
+  position: absolute;
+  z-index: 1;
+  height: 94vh;
+  width: 55vh;
+  padding-top: 5vh;
+  padding-left: 4vh;
+  padding-right: 6vh;
+  padding-bottom: 9vh;
+  box-sizing: border-box;
+`;
+
+export const LoginDataContentWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 80vh;
+  width: 45vh;
+  padding: 2vh 0;
+  box-sizing: border-box;
+`;
+
+export const LoginDataContent = styled.div`
+  display: flex;
+  flex-direction: column;
   align-items: center;
 `;
 
-export const ContainerLogin = styled.div`
-  padding-left: 7vw;
+export const LogoWrapper = styled.div`
+  width: 70vw;
+  height: 94vh;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 `;
 
-export const Button = styled.button`
-  padding: 1em 2.5em;
-  cursor: pointer;
-  font-size: 15px;
-  color: #ffffff;
-  font-weight: bold;
-  font-family: 'Inter', sans-serif;
-  border-radius: 0.5em;
-  background: #000000;
-  border: 1px solid #e8e8e8;
-  box-shadow: 6px 6px 12px #c5c5c5,
-              -6px -6px 12px #ffffff;
-  transition: 0.2s;
-  :hover{
-    padding: 1em 3em;
-    transition: 0.2s;
-  }
-`
+export const LogoSVG = styled.img`
+  width: 20vw;
+  height: 20vh;
+`;
 
-export const ImageLogin = styled.div`
-background: url(${require("../../../assets/background-login.png")});
-background-repeat: no-repeat;
-background-position: center;
-flex-direction: column;
-display: flex;
-justify-content: center;
-align-items: center;
-width: 100vw;
-height: 100vh;
-padding-right: 7vw; 
-text-align: center;
+export const DronesetaTitle = styled.p`
+  font-weight: bold;
+  font-size: 15vh;
+`;
+
+export const ButtonsWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+`;
+
+export const SignUpRedirect = styled.a`
+  font-size: 12px;
+  font-family: "Inter", sans-serif;
+  color: #8d8d8d;
+  margin-top: 0.5vh;
 `;
