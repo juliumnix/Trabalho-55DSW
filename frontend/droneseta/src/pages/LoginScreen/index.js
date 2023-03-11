@@ -98,13 +98,7 @@ export default function Login() {
                 </div>
               </LoginDataContent>
               <ButtonsWrapper>
-                <Button
-                  title={"ENTRAR"}
-                  height={"6vh"}
-                  width={"41vh"}
-                  padding={0}
-                  onClick={loginHandler}
-                />
+                <Button title={"ENTRAR"} onClick={loginHandler} />
                 <SignUpRedirect href="/sign-up">
                   Não possui uma conta? Cadastre-se
                 </SignUpRedirect>

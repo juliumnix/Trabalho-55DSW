@@ -3,8 +3,8 @@ import styled from "styled-components";
 export const Container = styled.div`
   display: flex;
   height: 20vh;
-  border: 1px solid #e3e3e3;
-  box-shadow: 0px 0px 20px #c6c6c6;
+  border: 0.1vh solid #e3e3e3;
+  box-shadow: 0px 0px 2.6vh #c6c6c6;
 `;
 
 export const ContainerImage = styled.img`
@@ -46,13 +46,14 @@ export const ContainerRight = styled.div`
 export const Delete = styled.button`
   color: white;
   font-weight: bold;
-  font-size: 20px;
+  font-size: 2.2vh;
   background-color: #c55757;
   border: none;
   cursor: pointer;
   height: 5vh;
   width: 5vh;
-  border-radius: 25px;
+  padding: 0;
+  border-radius: 100%;
 `;
 
 export const Price = styled.p`
@@ -62,24 +63,24 @@ export const Price = styled.p`
 
 export const Title = styled.p`
   font-weight: bold;
-  font-size: 20px;
+  font-size: 2.6vh;
   padding-bottom: 1vh;
 `;
 
 export const Subtitle = styled.p`
   font-weight: bold;
-  font-size: 16px;
+  font-size: 2vh;
 `;
 
 export const QuantityText = styled.p`
   font-weight: bold;
-  font-size: 16px;
+  font-size: 2vh;
   padding-right: 0.5vw;
 `;
 
 export const QuantityIndicator = styled.p`
   font-weight: bold;
-  font-size: 16px;
+  font-size: 2vh;
   padding-left: 1vh;
   padding-right: 1vh;
   background-color: #f0f0f0;
@@ -87,8 +88,9 @@ export const QuantityIndicator = styled.p`
 
 export const QuantityButton = styled.button`
   font-weight: bold;
-  font-size: 16px;
-  margin-left: 10px;
+  font-size: 2vh;
+  padding: 0 0.5vw;
+  margin: 0;
   background-color: transparent;
   cursor: pointer;
   border: none;

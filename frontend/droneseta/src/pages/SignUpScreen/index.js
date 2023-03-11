@@ -235,13 +235,7 @@ export default function SignUp() {
                 </div>
               </SignUpDataContent>
               <ButtonsWrapper>
-                <Button
-                  title={"CADASTRAR"}
-                  height={"6vh"}
-                  width={"41vh"}
-                  padding={0}
-                  onClick={signUpHandler}
-                />
+                <Button title={"CADASTRAR"} onClick={signUpHandler} />
                 <LoginRedirect href="/">
                   Já possui uma conta? Entre
                 </LoginRedirect>

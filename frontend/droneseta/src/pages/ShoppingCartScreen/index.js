@@ -29,7 +29,7 @@ import UserService from "../../services/UserService";
 
 function ShoppingCart() {
   const navigate = useNavigate();
-  const { clearUsuarioFromLocalState } = useUsuario();
+  const { getUsuario, clearUsuarioFromLocalState } = useUsuario();
   const [produtos, setProdutos] = useState([]);
   const [valorTotal, setValorTotal] = useState(0);
   const userService = new UserService();
@@ -45,7 +45,8 @@ function ShoppingCart() {
 
   async function getTotal() {
     let somatorio = 0;
-    const response = await userService.getShoppingCart(4);
+    const user = await getUsuario();
+    const response = await userService.getShoppingCart(user.id);
     if (response.status === 200) {
       response.data.forEach((item) => (somatorio += item.produto.preco));
       setProdutos(response.data);
@@ -105,9 +106,9 @@ function ShoppingCart() {
               key={produtoCarrinho.produto.id}
               style={{
                 height: "20vh",
-                marginBottom: 50,
-                marginRight: 10,
-                marginLeft: 20,
+                marginBottom: "3vh",
+                marginRight: "1vw",
+                marginLeft: "2vw",
               }}
             >
               <ShoppingCartItem
