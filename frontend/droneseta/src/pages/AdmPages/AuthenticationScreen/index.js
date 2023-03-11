@@ -1,16 +1,44 @@
-import { useState, React } from "react";
+import { useState, React, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
-import AuthenticationService from "../../../services/AuthenticationService";
-import { Container, ContainerLogin, ImageLogin } from "./styles";
+import AdminService from "../../../services/AdminService";
+import {
+  ButtonsWrapper,
+  Container,
+  ContainerLogin,
+  Content,
+  DronesetaTitle,
+  ImageLogin,
+  LoginData,
+  LoginDataContent,
+  LoginDataContentWrapper,
+  LoginDataWrapper,
+  LoginImage,
+  LogoSVG,
+  LogoWrapper,
+  SignUpRedirect,
+  Title,
+} from "./styles";
+import Vector from "../../../assets/Vector.svg";
+import loginBackgroundImage from "../../../assets/background-login.png";
 
 export default function AuthenticationScreen() {
-
-  const [user, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+  const [user, setEmail] = useState("");
+  const [pass, setPass] = useState("");
   const navigate = useNavigate();
-  const authService = new AuthenticationService();
+  const adminService = new AdminService();
+
+  useEffect(() => {
+    getAdministradorInLocalStorage();
+  }, []);
+
+  function getAdministradorInLocalStorage() {
+    const admin = localStorage.getItem("authLoginAdmin");
+    if (admin === "true") {
+      navigate("/home/admin");
+    }
+  }
 
   function userHandler(text) {
     setEmail(text);
@@ -20,30 +48,66 @@ export default function AuthenticationScreen() {
     setPass(text);
   }
 
-  function loginHandler() {
-    //TODO validar com a funcao correta depois
-    const {response} = authService.validaLogin(user, pass);
-    if (response) {
-        localStorage.setItem('authLoginAdmin', true);
-        navigate('/home/admin');
+  async function loginHandler() {
+    const { data } = await adminService.loginAdmin(user, pass);
+    if (data === "Logou") {
+      localStorage.setItem("authLoginAdmin", true);
+      navigate("/home/admin");
     }
   }
 
   return (
     <Container>
-      <ImageLogin>
-        <ContainerLogin>
-          <div>
-            <Input type="text" placeholder="Usuario" name="user" value={user} onChange={(event) => userHandler(event.target.value)}/>
-          </div>
-          <div>
-            <Input type="password" placeholder="Senha" name="pass" value={pass} onChange={(event) => passwordHandler(event.target.value)} />
-          </div>
-          <div>
-            <Button type="button" name="login" onClick={loginHandler} title="ENTRAR" />
-          </div>
-        </ContainerLogin>
-      </ImageLogin>
+      <Content>
+        <LogoWrapper>
+          <LogoSVG src={Vector} />
+          <DronesetaTitle>Painel do</DronesetaTitle>
+          <DronesetaTitle>Administrador</DronesetaTitle>
+        </LogoWrapper>
+        <LoginDataWrapper>
+          <LoginImage src={loginBackgroundImage}></LoginImage>
+          <LoginData>
+            <LoginDataContentWrapper>
+              <LoginDataContent>
+                <Title>Droneseta</Title>
+                <div>
+                  <Input
+                    type="text"
+                    placeholder="Email"
+                    name="email"
+                    value={user}
+                    onChange={(event) => userHandler(event.target.value)}
+                    width={"35vh"}
+                    height={"2vh"}
+                    margin={"0 0 2.5vh 0"}
+                  />
+                </div>
+                <div>
+                  <Input
+                    type="password"
+                    placeholder="Senha"
+                    name="pass"
+                    value={pass}
+                    onChange={(event) => passwordHandler(event.target.value)}
+                    width={"35vh"}
+                    height={"2vh"}
+                    margin={"0 0 2.5vh 0"}
+                  />
+                </div>
+              </LoginDataContent>
+              <ButtonsWrapper>
+                <Button
+                  title={"ENTRAR"}
+                  height={"6vh"}
+                  width={"41vh"}
+                  padding={0}
+                  onClick={loginHandler}
+                />
+              </ButtonsWrapper>
+            </LoginDataContentWrapper>
+          </LoginData>
+        </LoginDataWrapper>
+      </Content>
     </Container>
   );
 }
