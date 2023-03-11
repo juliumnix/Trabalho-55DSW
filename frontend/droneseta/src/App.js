@@ -10,6 +10,7 @@ import AdminRoute from "./routes/AdminRoute";
 import RegisterScreen from "./pages/AdmPages/RegisterScreen";
 import AppProvider from "./AppProvider";
 import MenStoreScreen from "./pages/MenStoreScreen";
+import ProductSelectedScreen from "./pages/ProductSelectedScreen";
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
           }
         />
         <Route
-          path="/home/admin"
+          path="/home-admin"
           element={
             <AdminRoute>
               <RegisterScreen />
@@ -48,6 +49,14 @@ function App() {
           element={
             <PrivatedRoute>
               <ShoppingCart />
+            </PrivatedRoute>
+          }
+        />
+        <Route
+          path="/product-selected/:id"
+          element={
+            <PrivatedRoute>
+              <ProductSelectedScreen />
             </PrivatedRoute>
           }
         />
