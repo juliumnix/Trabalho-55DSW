@@ -17,6 +17,12 @@ import {
   DivInfos,
   DivButton,
   Title,
+  Price,
+  ContainerImagem,
+  InputCheckBox,
+  Label,
+  DivSizes,
+  Divider,
 } from "./styles";
 import Header from "../../components/Header";
 import ProductService from "../../services/ProductService";
@@ -26,6 +32,11 @@ export default function ProductSelectedScreen() {
   const { id } = useParams();
   const productService = new ProductService();
   const [product, setProduct] = useState("");
+  const sizeSelected =
+  {
+    "sigla": "",
+    "ativo": false
+  }
 
   useEffect(() => {
     initProduct();
@@ -33,13 +44,17 @@ export default function ProductSelectedScreen() {
 
   async function initProduct() {
     const { data } = await productService.resgataProduto(id);
-    console.log(data);
     setProduct(data);
   }
 
   function logout() {
     console.log(product.descricao);
     navigate("/");
+  }
+
+  function verifySize(sigla, checked){
+    sizeSelected.sigla = sigla;
+    sizeSelected.ativo = checked;
   }
 
   return (
@@ -86,11 +101,29 @@ export default function ProductSelectedScreen() {
       />
       <Container>
         <Card>
-          <CardLeft></CardLeft>
+          <CardLeft>
+            <ContainerImagem src={product.urlImagem} />
+          </CardLeft>
           <CardRight>
             <DivInfos>
-              <Title>{product.descricao}</Title>
+              <div>
+                <Title>{product.descricao}</Title>
+              </div>
+              <Divider/>
+              <div>
+                <Price>{product.preco}</Price>
+              </div>
             </DivInfos>
+            <DivSizes>
+                {product.estoques?.map((estoque) => (
+                  estoque.quantidade > 0 ?
+                  <div>
+                    <InputCheckBox id={estoque.id} type="checkbox" onChange={(event) => verifySize(estoque.tamanho.sigla, event.target.checked)} />
+                    <Label htmlFor={estoque.id}>{estoque.tamanho.sigla}</Label>
+                  </div> :
+                  <div></div>
+                ))}
+              </DivSizes>
             <DivButton>
               <CollectionButton>ADICIONAR AO CARRINHO</CollectionButton>
             </DivButton>
