@@ -29,6 +29,17 @@ public class ControladorAdministrador {
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
+
+    @GetMapping("/administradores/login/{email}/{senha}")
+    public String loginAdministrador(@PathVariable String email, @PathVariable String senha){
+        String haveAccount  = AdministradorDAO.temLoginAdministrador(email, senha, repositorioAdministrador);
+        return haveAccount;
+    }
+
+    @GetMapping("/administradores/email/{email}")
+    public Administrador recuperaAdministradorPeloEmail(@PathVariable String email){
+        return repositorioAdministrador.findByEmail(email).get();
+    }
     
     @DeleteMapping("/administradores/{id}")
     public ResponseEntity<HttpStatus> deletarAdministrador(@PathVariable("id") long id) {
