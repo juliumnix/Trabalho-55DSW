@@ -36,7 +36,7 @@ export default function AuthenticationScreen() {
   function getAdministradorInLocalStorage() {
     const admin = localStorage.getItem("authLoginAdmin");
     if (admin === "true") {
-      navigate("/home/admin");
+      navigate("/home-admin");
     }
   }
 

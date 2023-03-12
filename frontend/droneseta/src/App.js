@@ -11,6 +11,7 @@ import RegisterScreen from "./pages/AdmPages/RegisterScreen";
 import AppProvider from "./AppProvider";
 import MenStoreScreen from "./pages/MenStoreScreen";
 import ProductSelectedScreen from "./pages/ProductSelectedScreen";
+import SizeScreen from "./pages/AdmPages/SizeScreen";
 
 function App() {
   return (
@@ -33,6 +34,14 @@ function App() {
           element={
             <AdminRoute>
               <RegisterScreen />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/size-admin"
+          element={
+            <AdminRoute>
+              <SizeScreen />
             </AdminRoute>
           }
         />
