@@ -69,6 +69,39 @@ public class ControladorCliente {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
+    @PutMapping("/clientes/{idCliente}/carrinho/{idProdutoCarrinho}/aumentar")
+    public ResponseEntity<ProdutoCarrinho> aumentarProdutoCarrinhoDoCliente(@PathVariable("idCliente") long idCliente, @PathVariable("idProdutoCarrinho") long idProdutoCarrinho) {
+        Cliente cliente = ClienteDAO.procurarCliente(idCliente, repositorioCliente);
+        ProdutoCarrinho produtoCarrinho = ProdutoCarrinhoDAO.procurarProdutoCarrinho(idProdutoCarrinho, repositorioProdutoCarrinho);
+        if(cliente != null && produtoCarrinho != null) {
+            if(cliente.getCarrinho().contains(produtoCarrinho)) {
+                produtoCarrinho.setQuantidade(produtoCarrinho.getQuantidade()+1);
+                repositorioCliente.save(cliente);
+                return new ResponseEntity<>(produtoCarrinho, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
+    @PutMapping("/clientes/{idCliente}/carrinho/{idProdutoCarrinho}/diminuir")
+    public ResponseEntity<ProdutoCarrinho> diminuirProdutoCarrinhoDoCliente(@PathVariable("idCliente") long idCliente, @PathVariable("idProdutoCarrinho") long idProdutoCarrinho) {
+        Cliente cliente = ClienteDAO.procurarCliente(idCliente, repositorioCliente);
+        ProdutoCarrinho produtoCarrinho = ProdutoCarrinhoDAO.procurarProdutoCarrinho(idProdutoCarrinho, repositorioProdutoCarrinho);
+        if(cliente != null && produtoCarrinho != null) {
+            if(cliente.getCarrinho().contains(produtoCarrinho)) {
+                if (produtoCarrinho.getQuantidade() > 1) {
+                    produtoCarrinho.setQuantidade(produtoCarrinho.getQuantidade() - 1);
+                    repositorioCliente.save(cliente);
+                    return new ResponseEntity<>(produtoCarrinho, HttpStatus.OK);
+                }
+                return new ResponseEntity<>(deletarProdutoCarrinhoDoCliente(idCliente, idProdutoCarrinho).getStatusCode());
+            }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
     @DeleteMapping("/clientes/{id}")
     public ResponseEntity<HttpStatus> deletarCliente(@PathVariable("id") long id) {
         try {

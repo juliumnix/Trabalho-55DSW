@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  height: 94svh;
+  height: 94vh;
 `;
 
 export const ContainerList = styled.div`
@@ -43,17 +43,20 @@ export const BottomItems = styled.div`
   padding-left: 1vw;
   padding-right: 1vw;
   flex-direction: column;
-  border: 1px solid #e3e3e3;
-  box-shadow: 0px 0px 20px #c6c6c6;
+  border: 0.1vh solid #e3e3e3;
+  box-shadow: 0px 0px 2.6vh #c6c6c6;
+  margin: 0;
 `;
 
 export const TitleBottom = styled.p`
   font-weight: bold;
+  font-size: 2.6vh;
   margin-bottom: 1.3vh;
 `;
 
 export const SubtitleBottom = styled.p`
   font-weight: normal;
+  font-size: 2vh;
   color: #757575;
 `;
 
@@ -79,5 +82,5 @@ export const InternalContainer = styled.div`
 
 export const TextPay = styled.p`
   font-weight: bold;
-  font-size: 36px;
+  font-size: 5vh;
 `;
