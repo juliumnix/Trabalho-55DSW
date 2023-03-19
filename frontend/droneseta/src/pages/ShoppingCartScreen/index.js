@@ -29,7 +29,7 @@ import UserService from "../../services/UserService";
 
 function ShoppingCart() {
   const navigate = useNavigate();
-  const { getUsuario, clearUsuarioFromLocalState } = useUsuario();
+  const { getUsuarioFromLocalState, clearUsuarioFromLocalState } = useUsuario();
   const [produtos, setProdutos] = useState([]);
   const [valorTotal, setValorTotal] = useState(0);
   const userService = new UserService();
@@ -45,7 +45,7 @@ function ShoppingCart() {
 
   async function getTotal() {
     let somatorio = 0;
-    const user = await getUsuario();
+    const user = await getUsuarioFromLocalState();
     const response = await userService.getShoppingCart(user.id);
     if (response.status === 200) {
       response.data.forEach(
@@ -56,6 +56,38 @@ function ShoppingCart() {
     } else {
       return;
     }
+  }
+
+  async function realizarCompra() {
+    const user = await getUsuarioFromLocalState();
+    const response = await userService.getShoppingCart(user.id);
+
+    let produtos = response.data.map((item) => {
+      return {
+        id: item.produto.id,
+        descricao: item.produto.descricao,
+        urlImagem: item.produto.urlImagem,
+        preco: item.produto.preco,
+        tamanhos: item.produto.tamanhos,
+        estoques: item.produto.estoques,
+      };
+    });
+
+    await userService.finalizarCompra(
+      user.id,
+      produtos,
+      Number(valorTotal),
+      true,
+      false
+    );
+    response.data.map(async (item) => {
+      await deleteAllCarrinho(user.id, item.id);
+    });
+  }
+
+  async function deleteAllCarrinho(userId, id) {
+    await userService.removeItem(userId, id);
+    await getTotal();
   }
 
   return (
@@ -123,7 +155,7 @@ function ShoppingCart() {
                 key={produtoCarrinho.id}
                 preco={produtoCarrinho.produto.preco}
                 quantidade={produtoCarrinho.quantidade}
-                tamanhos={produtoCarrinho.produto.tamanhos}
+                tamanhos={produtoCarrinho.tamanho}
                 urlImagem={produtoCarrinho.produto.urlImagem}
               />
             </div>
@@ -135,8 +167,7 @@ function ShoppingCart() {
               <TitleBottom>ENDEREÇO DE ENTREGA</TitleBottom>
 
               <SubtitleBottom>
-                Rua João Bento da Silva Sauro, 2012 - Ibirama/SC <br /> CEP:
-                89123-400
+                {getUsuarioFromLocalState().endEntrega}
               </SubtitleBottom>
             </BottomItems>
             <Spacer />
@@ -145,7 +176,8 @@ function ShoppingCart() {
 
               <SubtitleBottom>
                 Cartão de crédito:
-                <br /> 3453 xxxx xxxx 9875
+                <br />
+                {getUsuarioFromLocalState().numCartao}
               </SubtitleBottom>
             </BottomItems>
           </div>
@@ -156,7 +188,10 @@ function ShoppingCart() {
                 <TextPay>Total</TextPay>
                 <TextPay>{valorTotal}</TextPay>
               </InternalContainer>
-              <Button title="FINALIZAR COMPRA" />
+              <Button
+                onClick={() => realizarCompra()}
+                title="FINALIZAR COMPRA"
+              />
             </ExternalContainer>
           </ContainerPay>
         </ContainerBottom>

@@ -31,7 +31,7 @@ function ShoppingCartItem({
   valorTotal,
   ...rest
 }) {
-  const { getUsuario } = useUsuario();
+  const { getUsuarioFromLocalState } = useUsuario();
   const [tamanho, setTamanho] = useState("");
   const [qtd, setQtd] = useState(0);
   const [precoAtualizado, setPrecoAtualizado] = useState(0);
@@ -40,25 +40,21 @@ function ShoppingCartItem({
   useEffect(() => {
     setQtd(quantidade);
     setPrecoAtualizado(preco * quantidade);
-    setTamanho(
-      tamanhos.map((item) => {
-        return item.sigla + "";
-      })
-    );
+    setTamanho(tamanhos.sigla);
   }, []);
 
   async function increase(itemid) {
-    const user = await getUsuario();
+    const user = await getUsuarioFromLocalState();
     await userService.increaseItemCount(user.id, itemid);
   }
 
   async function decrease(itemid) {
-    const user = await getUsuario();
+    const user = await getUsuarioFromLocalState();
     await userService.decreaseItemCount(user.id, itemid);
   }
 
   async function remove(itemid) {
-    const user = await getUsuario();
+    const user = await getUsuarioFromLocalState();
     await userService.removeItem(user.id, itemid);
   }
 

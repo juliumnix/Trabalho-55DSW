@@ -24,4 +24,15 @@ export default class UserService {
     const response = await api.delete(`/clientes/${userId}/carrinho/${itemId}`);
     return response;
   }
+
+  async finalizarCompra(id, produtos, valor, pagAprovado, entregue) {
+    const json = {
+      produtos,
+      valor,
+      pagAprovado,
+      entregue,
+    };
+    const response = await api.post(`/clientes/${id}/compras`, json);
+    return response;
+  }
 }
