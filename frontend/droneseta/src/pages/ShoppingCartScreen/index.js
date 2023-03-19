@@ -48,7 +48,9 @@ function ShoppingCart() {
     const user = await getUsuario();
     const response = await userService.getShoppingCart(user.id);
     if (response.status === 200) {
-      response.data.forEach((item) => (somatorio += item.produto.preco));
+      response.data.forEach(
+        (item) => (somatorio += item.produto.preco * item.quantidade)
+      );
       setProdutos(response.data);
       setValorTotal(somatorio.toFixed(2));
     } else {
@@ -112,13 +114,13 @@ function ShoppingCart() {
               }}
             >
               <ShoppingCartItem
-                id={produtoCarrinho.produto.id}
+                id={produtoCarrinho.id}
                 valorTotal={valorTotal}
                 setValorTotal={setValorTotal}
                 setProdutos={setProdutos}
                 produtos={produtos}
                 titulo={produtoCarrinho.produto.descricao}
-                key={produtoCarrinho.produto.id}
+                key={produtoCarrinho.id}
                 preco={produtoCarrinho.produto.preco}
                 quantidade={produtoCarrinho.quantidade}
                 tamanhos={produtoCarrinho.produto.tamanhos}

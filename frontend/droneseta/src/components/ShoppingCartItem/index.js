@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { useUsuario } from "../../hooks/UsuarioHook";
+import UserService from "../../services/UserService";
 
 import {
   Container,
@@ -29,13 +31,15 @@ function ShoppingCartItem({
   valorTotal,
   ...rest
 }) {
+  const { getUsuario } = useUsuario();
   const [tamanho, setTamanho] = useState("");
   const [qtd, setQtd] = useState(0);
   const [precoAtualizado, setPrecoAtualizado] = useState(0);
+  const userService = new UserService();
 
   useEffect(() => {
     setQtd(quantidade);
-    setPrecoAtualizado(preco);
+    setPrecoAtualizado(preco * quantidade);
     setTamanho(
       tamanhos.map((item) => {
         return item.sigla + "";
@@ -43,7 +47,23 @@ function ShoppingCartItem({
     );
   }, []);
 
-  function removeItem() {
+  async function increase(itemid) {
+    const user = await getUsuario();
+    await userService.increaseItemCount(user.id, itemid);
+  }
+
+  async function decrease(itemid) {
+    const user = await getUsuario();
+    await userService.decreaseItemCount(user.id, itemid);
+  }
+
+  async function remove(itemid) {
+    const user = await getUsuario();
+    await userService.removeItem(user.id, itemid);
+  }
+
+  async function removeItem() {
+    await remove(id);
     const novaLista = [...produtos];
     const response = novaLista.filter((item) => item.id !== id);
     const novoValorFinal = preco * qtd;
@@ -52,8 +72,9 @@ function ShoppingCartItem({
     setProdutos(response);
   }
 
-  function addQtd() {
+  async function addQtd() {
     const novaQtd = qtd + 1;
+    await increase(id);
     setQtd(novaQtd);
 
     const novoValorTotal = Number(valorTotal) + preco;
@@ -63,9 +84,10 @@ function ShoppingCartItem({
     setValorTotal(novoValorTotal.toFixed(2));
   }
 
-  function removeQtd() {
+  async function removeQtd() {
     const novaQtd = qtd - 1;
     if (novaQtd >= 1) {
+      await decrease(id);
       setQtd(novaQtd);
       const novoValorTotal = Number(valorTotal) - preco;
       const valorDoQTD = preco * novaQtd;
