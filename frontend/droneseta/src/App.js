@@ -12,6 +12,9 @@ import AppProvider from "./AppProvider";
 import MenStoreScreen from "./pages/MenStoreScreen";
 import ProductSelectedScreen from "./pages/ProductSelectedScreen";
 import SizeScreen from "./pages/AdmPages/SizeScreen";
+import DeliveryScreen from "./pages/AdmPages/DeliveryScreen";
+import ClientsScreen from "./pages/AdmPages/ClientsScreen";
+import AdministratorsScreen from "./pages/AdmPages/AdministratorsScreen";
 
 function App() {
   return (
@@ -21,6 +24,30 @@ function App() {
         <Route path="/" element={<LoginScreen />} />
         <Route path="/sign-up" element={<SignUpScreen />} />
         <Route path="/admin" element={<AuthenticationScreen />} />
+        <Route
+          path="/delivery"
+          element={
+            <AdminRoute>
+              <DeliveryScreen />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/clients"
+          element={
+            <AdminRoute>
+              <ClientsScreen />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/administrators"
+          element={
+            <AdminRoute>
+              <AdministratorsScreen />
+            </AdminRoute>
+          }
+        />
         <Route
           path="/products"
           element={

@@ -32,11 +32,12 @@ export default function ProductSelectedScreen() {
   const { id } = useParams();
   const productService = new ProductService();
   const [product, setProduct] = useState("");
-  const sizeSelected =
-  {
-    "sigla": "",
-    "ativo": false
-  }
+  const [selectedSizes, setSelectedSizes] = useState([]);
+
+  //TODO - remover esse funcionamento do sizeSelected, criar um state que armazena isso para poder recuperar depois na
+  //funcao de envio para carrinho (endpoint)
+
+  //TODO - criar funcao, de adicionar em uma estrutura (array) e verifica se está ou não lá o dado, quando remover o item da lista e vice-versa
 
   useEffect(() => {
     initProduct();
@@ -48,13 +49,30 @@ export default function ProductSelectedScreen() {
   }
 
   function logout() {
-    console.log(product.descricao);
     navigate("/");
   }
 
-  function verifySize(sigla, checked){
-    sizeSelected.sigla = sigla;
-    sizeSelected.ativo = checked;
+  function addSizeSelected(sigla) {
+    const novoArray = selectedSizes;
+    const json = {
+      sigla: sigla,
+    };
+    novoArray.push(json);
+    setSelectedSizes(novoArray);
+  }
+
+  function removeSizeSelected(sigla) {
+    const novoArray = [...selectedSizes];
+    const novaLista = novoArray.filter((item) => item.sigla !== sigla);
+    setSelectedSizes(novaLista);
+  }
+
+  function verifySize(sigla, checked) {
+    if (checked) {
+      addSizeSelected(sigla, checked);
+    } else {
+      removeSizeSelected(sigla);
+    }
   }
 
   return (
@@ -109,23 +127,38 @@ export default function ProductSelectedScreen() {
               <div>
                 <Title>{product.descricao}</Title>
               </div>
-              <Divider/>
+              <Divider />
               <div>
                 <Price>{product.preco}</Price>
               </div>
             </DivInfos>
             <DivSizes>
-                {product.estoques?.map((estoque) => (
-                  estoque.quantidade > 0 ?
-                  <div>
-                    <InputCheckBox id={estoque.id} type="checkbox" onChange={(event) => verifySize(estoque.tamanho.sigla, event.target.checked)} />
+              {product.estoques?.map((estoque) =>
+                estoque.quantidade > 0 ? (
+                  <div key={estoque.id}>
+                    <InputCheckBox
+                      key={estoque.id}
+                      id={estoque.id}
+                      type="checkbox"
+                      onChange={(event) =>
+                        verifySize(estoque.tamanho.sigla, event.target.checked)
+                      }
+                    />
                     <Label htmlFor={estoque.id}>{estoque.tamanho.sigla}</Label>
-                  </div> :
+                  </div>
+                ) : (
                   <div></div>
-                ))}
-              </DivSizes>
+                )
+              )}
+            </DivSizes>
             <DivButton>
-              <CollectionButton>ADICIONAR AO CARRINHO</CollectionButton>
+              <CollectionButton
+                onClick={() => {
+                  console.log(selectedSizes);
+                }}
+              >
+                ADICIONAR AO CARRINHO
+              </CollectionButton>
             </DivButton>
           </CardRight>
         </Card>
