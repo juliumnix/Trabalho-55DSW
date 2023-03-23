@@ -27,11 +27,15 @@ import {
 import Header from "../../components/Header";
 import ProductService from "../../services/ProductService";
 import SizesService from "../../services/SizesService";
+import UserService from "../../services/UserService";
+import { useUsuario } from "../../hooks/UsuarioHook";
 
 export default function ProductSelectedScreen() {
   const navigate = useNavigate();
+  const { getUsuarioFromLocalState } = useUsuario();
   const { id } = useParams();
   const productService = new ProductService();
+  const userService = new UserService();
   const [product, setProduct] = useState("");
   const [selectedSizes, setSelectedSizes] = useState([]);
   const sizesService = new SizesService();
@@ -78,6 +82,17 @@ export default function ProductSelectedScreen() {
     } else {
       removeSizeSelected(sigla);
     }
+  }
+
+  async function sendProductsToShoppingCart() {
+    const user = getUsuarioFromLocalState();
+    console.log(user.id);
+    selectedSizes.forEach(async (item) => {
+      const jsonProduto = {
+        id: id,
+      };
+      await userService.addCarrinho(user.id, jsonProduto, item, 1);
+    });
   }
 
   return (
@@ -159,7 +174,7 @@ export default function ProductSelectedScreen() {
             <DivButton>
               <CollectionButton
                 onClick={() => {
-                  console.log(selectedSizes);
+                  sendProductsToShoppingCart();
                 }}
               >
                 ADICIONAR AO CARRINHO
