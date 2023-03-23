@@ -100,6 +100,7 @@ export const Price = styled.label`
 export const ContainerImagem = styled.img`
   width: 100%;
   height: 100%;
+  object-fit: fill;
 `;
 
 export const Label = styled.label`

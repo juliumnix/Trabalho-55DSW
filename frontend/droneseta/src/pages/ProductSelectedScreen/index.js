@@ -26,6 +26,7 @@ import {
 } from "./styles";
 import Header from "../../components/Header";
 import ProductService from "../../services/ProductService";
+import SizesService from "../../services/SizesService";
 
 export default function ProductSelectedScreen() {
   const navigate = useNavigate();
@@ -33,11 +34,7 @@ export default function ProductSelectedScreen() {
   const productService = new ProductService();
   const [product, setProduct] = useState("");
   const [selectedSizes, setSelectedSizes] = useState([]);
-
-  //TODO - remover esse funcionamento do sizeSelected, criar um state que armazena isso para poder recuperar depois na
-  //funcao de envio para carrinho (endpoint)
-
-  //TODO - criar funcao, de adicionar em uma estrutura (array) e verifica se está ou não lá o dado, quando remover o item da lista e vice-versa
+  const sizesService = new SizesService();
 
   useEffect(() => {
     initProduct();
@@ -52,16 +49,24 @@ export default function ProductSelectedScreen() {
     navigate("/");
   }
 
-  function addSizeSelected(sigla) {
+  async function addSizeSelected(sigla) {
+    const { data } = await sizesService.getSizes();
+    let id = null;
+    data.forEach((item) => {
+      if (item.sigla === sigla) {
+        id = item.id;
+      }
+    });
     const novoArray = selectedSizes;
     const json = {
       sigla: sigla,
+      id: id,
     };
     novoArray.push(json);
     setSelectedSizes(novoArray);
   }
 
-  function removeSizeSelected(sigla) {
+  async function removeSizeSelected(sigla) {
     const novoArray = [...selectedSizes];
     const novaLista = novoArray.filter((item) => item.sigla !== sigla);
     setSelectedSizes(novaLista);
