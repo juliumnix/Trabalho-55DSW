@@ -116,6 +116,20 @@ public class ControladorCliente {
         }
     }
     
+    @DeleteMapping("/clientes/{id}/carrinho")
+    public ResponseEntity<Cliente> deletarProdutosCarrinhoDoCliente(@PathVariable("id") long id) {
+        try {
+            Cliente cliente = ClienteDAO.procurarCliente(id, repositorioCliente);
+            if(cliente != null) {
+                cliente.getCarrinho().clear();
+                return new ResponseEntity<>(repositorioCliente.save(cliente), HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch(Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
     @DeleteMapping("/clientes/{idCliente}/carrinho/{idProdutoCarrinho}")
     public ResponseEntity<Cliente> deletarProdutoCarrinhoDoCliente(@PathVariable("idCliente") long idCliente, @PathVariable("idProdutoCarrinho") long idProdutoCarrinho) {
         try {
@@ -148,7 +162,7 @@ public class ControladorCliente {
             Produto produto = ProdutoDAO.procurarProduto(produtoCarrinho.getProduto().getId(), repositorioProduto);
             if (produto != null) {
                 for(ProdutoCarrinho pC : cliente.getCarrinho()) {
-                    if(pC.getProduto().getId() == produto.getId()) {
+                    if(pC.getProduto().getId() == produto.getId() && pC.getTamanho().getSigla().equals(produtoCarrinho.getTamanho().getSigla())) {
                         pC.setQuantidade(pC.getQuantidade() + produtoCarrinho.getQuantidade());
                         return new ResponseEntity<>(repositorioCliente.save(cliente), HttpStatus.OK);
                     }

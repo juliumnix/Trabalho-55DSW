@@ -80,14 +80,9 @@ function ShoppingCart() {
       true,
       false
     );
-    response.data.map(async (item) => {
-      await deleteAllCarrinho(user.id, item.id);
-    });
-  }
 
-  async function deleteAllCarrinho(userId, id) {
-    await userService.removeItem(userId, id);
-    await getTotal();
+    await userService.removeAllItems(user.id);
+    getTotal();
   }
 
   return (

@@ -25,6 +25,11 @@ export default class UserService {
     return response;
   }
 
+  async removeAllItems(userId) {
+    const response = await api.delete(`/clientes/${userId}/carrinho`);
+    return response;
+  }
+
   async finalizarCompra(id, produtos, valor, pagAprovado, entregue) {
     const json = {
       produtos,
