@@ -40,4 +40,14 @@ export default class UserService {
     const response = await api.post(`/clientes/${id}/compras`, json);
     return response;
   }
+
+  async addCarrinho(idCliente, produto, tamanho, quantidade) {
+    const json = {
+      produto,
+      tamanho,
+      quantidade,
+    };
+    const response = await api.post(`clientes/${idCliente}/carrinho`, json);
+    return response;
+  }
 }

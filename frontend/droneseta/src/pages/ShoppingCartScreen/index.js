@@ -52,6 +52,7 @@ function ShoppingCart() {
         (item) => (somatorio += item.produto.preco * item.quantidade)
       );
       setProdutos(response.data);
+      console.log(response.data);
       setValorTotal(somatorio.toFixed(2));
     } else {
       return;
@@ -132,7 +133,7 @@ function ShoppingCart() {
         <ContainerList>
           {produtos.map((produtoCarrinho) => (
             <div
-              key={produtoCarrinho.produto.id}
+              key={produtoCarrinho.id}
               style={{
                 height: "20vh",
                 marginBottom: "3vh",
