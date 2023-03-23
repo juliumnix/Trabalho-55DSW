@@ -40,7 +40,7 @@ function MenStoreScreen() {
     setProdutos(arrayDeArrays);
   }
 
-  function onRowSelect(id){
+  function onRowSelect(id) {
     navigate(`/product-selected/${id}`);
   }
 
@@ -97,9 +97,12 @@ function MenStoreScreen() {
               width: "100%",
             }}
           >
-            {item.map((subitem) => (
+            {item.map((subitem, index) => (
               <MenStoreItem
-                onClick={() => {onRowSelect(subitem.id)}}
+                key={index}
+                onClick={() => {
+                  onRowSelect(subitem.id);
+                }}
                 titulo={subitem.descricao}
                 imagem={subitem.urlImagem}
                 preco={subitem.preco}
