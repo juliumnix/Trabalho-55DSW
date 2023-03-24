@@ -1,4 +1,5 @@
 import React from "react";
+import Loading from "../Loading";
 
 import {
   Container,
@@ -8,15 +9,23 @@ import {
   Title,
 } from "./styles";
 
-function MenStoreItem({ imagem, titulo, preco, ...rest }) {
+function MenStoreItem({ imagem, titulo, preco, isLoading, ...rest }) {
   return (
-    <Container {...rest}>
-      <ContainerImagem src={imagem} />
-      <ContainerInfos>
-        <Title>{titulo}</Title>
-        <Price>R$ {preco}</Price>
-      </ContainerInfos>
-    </Container>
+    <>
+      <Container {...rest}>
+        {isLoading ? (
+          <Loading isBlack />
+        ) : (
+          <>
+            <ContainerImagem src={imagem} />
+            <ContainerInfos>
+              <Title>{titulo}</Title>
+              <Price>R$ {preco}</Price>
+            </ContainerInfos>
+          </>
+        )}
+      </Container>
+    </>
   );
 }
 

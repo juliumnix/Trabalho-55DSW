@@ -20,6 +20,7 @@ function MenStoreScreen() {
   const { clearUsuarioFromLocalState } = useUsuario();
   const [produtos, setProdutos] = useState([]);
   const productService = new ProductService();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     splitArrayToLines();
@@ -38,6 +39,7 @@ function MenStoreScreen() {
       arrayDeArrays.push(response.data.slice(index, index + 4));
     }
     setProdutos(arrayDeArrays);
+    setLoading(false);
   }
 
   function onRowSelect(id) {
@@ -100,6 +102,7 @@ function MenStoreScreen() {
             {item.map((subitem, index) => (
               <MenStoreItem
                 key={index}
+                isLoading={loading}
                 onClick={() => {
                   onRowSelect(subitem.id);
                 }}

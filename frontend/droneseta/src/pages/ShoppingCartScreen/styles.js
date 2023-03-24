@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const DivAnimation = styled.div`
+  transition-duration: 1s;
+  transition-timing-function: linear;
+`;
+
 export const Container = styled.div`
   height: 94vh;
 `;
