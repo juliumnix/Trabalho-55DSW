@@ -15,6 +15,7 @@ import SizeScreen from "./pages/AdmPages/SizeScreen";
 import DeliveryScreen from "./pages/AdmPages/DeliveryScreen";
 import ClientsScreen from "./pages/AdmPages/ClientsScreen";
 import AdministratorsScreen from "./pages/AdmPages/AdministratorsScreen";
+import FinishScreen from "./pages/FinishScreen";
 
 function App() {
   return (
@@ -93,6 +94,14 @@ function App() {
           element={
             <PrivatedRoute>
               <ProductSelectedScreen />
+            </PrivatedRoute>
+          }
+        />
+        <Route
+          path="/finish"
+          element={
+            <PrivatedRoute>
+              <FinishScreen />
             </PrivatedRoute>
           }
         />
