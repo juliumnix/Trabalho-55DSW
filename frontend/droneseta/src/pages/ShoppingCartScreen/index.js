@@ -60,18 +60,6 @@ function ShoppingCart() {
 
   async function realizarCompra() {
     const user = await getUsuarioFromLocalState();
-    const response = await userService.getShoppingCart(user.id);
-
-    let produtos = response.data.map((item) => {
-      return {
-        id: item.produto.id,
-        descricao: item.produto.descricao,
-        urlImagem: item.produto.urlImagem,
-        preco: item.produto.preco,
-        tamanhos: item.produto.tamanhos,
-        estoques: item.produto.estoques,
-      };
-    });
 
     await userService.finalizarCompra(
       user.id,
