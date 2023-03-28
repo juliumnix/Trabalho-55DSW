@@ -64,7 +64,7 @@ public class ControladorCliente {
                 }
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
-            return deletarProdutoCarrinhoDoCliente(idCliente, idProdutoCarrinho);
+            return limparProdutoCarrinhoDoCliente(idCliente, idProdutoCarrinho);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -95,20 +95,26 @@ public class ControladorCliente {
                     repositorioCliente.save(cliente);
                     return new ResponseEntity<>(produtoCarrinho, HttpStatus.OK);
                 }
-                return new ResponseEntity<>(deletarProdutoCarrinhoDoCliente(idCliente, idProdutoCarrinho).getStatusCode());
+                return new ResponseEntity<>(limparProdutoCarrinhoDoCliente(idCliente, idProdutoCarrinho).getStatusCode());
             }
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
     
-    @DeleteMapping("/clientes/{id}")
-    public ResponseEntity<HttpStatus> deletarCliente(@PathVariable("id") long id) {
+    @PutMapping("/clientes/{idCliente}/carrinho/limpar/{idProdutoCarrinho}")
+    public ResponseEntity<Cliente> limparProdutoCarrinhoDoCliente(@PathVariable("idCliente") long idCliente, @PathVariable("idProdutoCarrinho") long idProdutoCarrinho) {
         try {
-            Cliente cliente = ClienteDAO.procurarCliente(id, repositorioCliente);
-            if(cliente != null) {
-                repositorioCliente.deleteById(id);
-                return new ResponseEntity<>(HttpStatus.OK);
+            Cliente cliente = ClienteDAO.procurarCliente(idCliente, repositorioCliente);
+            ProdutoCarrinho produtoCarrinho = ProdutoCarrinhoDAO.procurarProdutoCarrinho(idProdutoCarrinho, repositorioProdutoCarrinho);
+            if(cliente != null && produtoCarrinho != null) {
+                if(cliente.getCarrinho().contains(produtoCarrinho)) {
+                    cliente.getCarrinho().remove(produtoCarrinho);
+                    cliente = repositorioCliente.save(cliente);
+                    repositorioProdutoCarrinho.deleteById(produtoCarrinho.getId());
+                    return new ResponseEntity<>(cliente, HttpStatus.OK);
+                }
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch(Exception e) {
@@ -116,8 +122,8 @@ public class ControladorCliente {
         }
     }
     
-    @DeleteMapping("/clientes/{id}/carrinho")
-    public ResponseEntity<Cliente> deletarProdutosCarrinhoDoCliente(@PathVariable("id") long id) {
+    @PutMapping("/clientes/{id}/carrinho/limpar")
+    public ResponseEntity<Cliente> limparProdutosCarrinhoDoCliente(@PathVariable("id") long id) {
         try {
             Cliente cliente = ClienteDAO.procurarCliente(id, repositorioCliente);
             if(cliente != null) {
@@ -130,17 +136,13 @@ public class ControladorCliente {
         }
     }
     
-    @DeleteMapping("/clientes/{idCliente}/carrinho/{idProdutoCarrinho}")
-    public ResponseEntity<Cliente> deletarProdutoCarrinhoDoCliente(@PathVariable("idCliente") long idCliente, @PathVariable("idProdutoCarrinho") long idProdutoCarrinho) {
+    @DeleteMapping("/clientes/{id}")
+    public ResponseEntity<HttpStatus> deletarCliente(@PathVariable("id") long id) {
         try {
-            Cliente cliente = ClienteDAO.procurarCliente(idCliente, repositorioCliente);
-            ProdutoCarrinho produtoCarrinho = ProdutoCarrinhoDAO.procurarProdutoCarrinho(idProdutoCarrinho, repositorioProdutoCarrinho);
-            if(cliente != null && produtoCarrinho != null) {
-                if(cliente.getCarrinho().contains(produtoCarrinho)) {
-                    cliente.getCarrinho().remove(produtoCarrinho);
-                    return new ResponseEntity<>(repositorioCliente.save(cliente), HttpStatus.OK);
-                }
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            Cliente cliente = ClienteDAO.procurarCliente(id, repositorioCliente);
+            if(cliente != null) {
+                repositorioCliente.deleteById(id);
+                return new ResponseEntity<>(HttpStatus.OK);
             }
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         } catch(Exception e) {

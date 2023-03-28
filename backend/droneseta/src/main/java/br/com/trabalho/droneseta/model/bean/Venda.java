@@ -19,7 +19,7 @@ public class Venda {
     private Cliente cliente;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<Produto> produtos;
+    private List<ProdutoCarrinho> produtos;
 
     @Column(scale = 2)
     @Min(0)
@@ -33,7 +33,7 @@ public class Venda {
 
     public Venda() {}
 
-    public Venda(Cliente cliente, List<Produto> produtos, double valor, boolean isPagAprovado, boolean isEntregue) {
+    public Venda(Cliente cliente, List<ProdutoCarrinho> produtos, double valor, boolean isPagAprovado, boolean isEntregue) {
         this.cliente = cliente;
         this.produtos = produtos;
         this.valor = valor;
@@ -57,11 +57,11 @@ public class Venda {
         this.cliente = cliente;
     }
 
-    public List<Produto> getProdutos() {
+    public List<ProdutoCarrinho> getProdutos() {
         return produtos;
     }
 
-    public void setProdutos(List<Produto> produtos) {
+    public void setProdutos(List<ProdutoCarrinho> produtos) {
         this.produtos = produtos;
     }
 

@@ -21,12 +21,14 @@ export default class UserService {
   }
 
   async removeItem(userId, itemId) {
-    const response = await api.delete(`/clientes/${userId}/carrinho/${itemId}`);
+    const response = await api.put(
+      `/clientes/${userId}/carrinho/limpar/${itemId}`
+    );
     return response;
   }
 
   async removeAllItems(userId) {
-    const response = await api.delete(`/clientes/${userId}/carrinho`);
+    const response = await api.put(`/clientes/${userId}/carrinho/limpar`);
     return response;
   }
 
