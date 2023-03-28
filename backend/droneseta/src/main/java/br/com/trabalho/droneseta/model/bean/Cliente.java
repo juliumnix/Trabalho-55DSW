@@ -38,7 +38,7 @@ public class Cliente {
     @Size(min = 1)
     private String endEntrega;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<ProdutoCarrinho> carrinho;
     
     @OneToMany

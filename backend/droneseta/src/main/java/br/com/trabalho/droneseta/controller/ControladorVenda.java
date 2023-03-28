@@ -27,10 +27,21 @@ public class ControladorVenda {
         Venda venda = VendaDAO.procurarVenda(id, repositorioVenda);
         if (venda != null) {
             venda.setCliente(vendaAtualizada.getCliente());
-            venda.setProdutos(vendaAtualizada.getProdutos());
+            venda.getProdutos().clear();
+            venda.getProdutos().addAll(venda.getProdutos());
             venda.setValor(vendaAtualizada.getValor());
             venda.setPagAprovado(vendaAtualizada.isPagAprovado());
             venda.setEntregue(vendaAtualizada.isEntregue());
+            return new ResponseEntity<>(repositorioVenda.save(venda), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
+    @PutMapping("/vendas/{id}/entregar")
+    public ResponseEntity<Venda> entregarVenda(@PathVariable("id") long id) {
+        Venda venda = VendaDAO.procurarVenda(id, repositorioVenda);
+        if (venda != null) {
+            venda.setEntregue(true);
             return new ResponseEntity<>(repositorioVenda.save(venda), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
