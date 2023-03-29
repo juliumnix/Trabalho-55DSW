@@ -36,6 +36,9 @@ public class ControladorCliente {
     @Autowired
     RepositorioVenda repositorioVenda;
     
+    @Autowired
+    ControladorProduto controladorProduto;
+    
     @PutMapping("/clientes/{id}")
     public ResponseEntity<Cliente> atualizarCliente(@PathVariable("id") long id, @Valid @RequestBody Cliente clienteAtualizado) {
         Cliente cliente = ClienteDAO.procurarCliente(id, repositorioCliente);
@@ -182,6 +185,7 @@ public class ControladorCliente {
         Cliente cliente = ClienteDAO.procurarCliente(id, repositorioCliente);
         if (cliente != null) {
             venda.setCliente(cliente);
+            venda.getProdutos().forEach(v -> controladorProduto.diminuirEstoqueProduto(v.getProduto().getId(), v.getTamanho().getId(), v.getQuantidade()));
             return new ResponseEntity<>(repositorioVenda.save(venda), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);

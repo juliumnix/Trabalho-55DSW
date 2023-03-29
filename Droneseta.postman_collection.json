@@ -902,6 +902,103 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Publicar Historicos Drone",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"vendas\": [\r\n        {\r\n            \"id\": 1,\r\n            \"produtos\": [\r\n                {\r\n                    \"id\": 1,\r\n                    \"produto\": {\r\n                        \"id\": 1,\r\n                        \"descricao\": \"Camiseta Branca\",\r\n                        \"urlImagem\": \"https://cdn.awsli.com.br/600x700/1897/1897332/produto/94064219/24840df940.jpg\",\r\n                        \"preco\": 20.0,\r\n                        \"tamanhos\": [\r\n                            {\r\n                                \"id\": 1,\r\n                                \"sigla\": \"PP\"\r\n                            },\r\n                            {\r\n                                \"id\": 2,\r\n                                \"sigla\": \"P\"\r\n                            },\r\n                            {\r\n                                \"id\": 3,\r\n                                \"sigla\": \"M\"\r\n                            },\r\n                            {\r\n                                \"id\": 4,\r\n                                \"sigla\": \"G\"\r\n                            },\r\n                            {\r\n                                \"id\": 5,\r\n                                \"sigla\": \"GG\"\r\n                            }\r\n                        ],\r\n                        \"estoques\": [\r\n                            {\r\n                                \"id\": 5,\r\n                                \"tamanho\": {\r\n                                    \"id\": 5,\r\n                                    \"sigla\": \"GG\"\r\n                                },\r\n                                \"quantidade\": 20\r\n                            },\r\n                            {\r\n                                \"id\": 1,\r\n                                \"tamanho\": {\r\n                                    \"id\": 1,\r\n                                    \"sigla\": \"PP\"\r\n                                },\r\n                                \"quantidade\": 20\r\n                            },\r\n                            {\r\n                                \"id\": 2,\r\n                                \"tamanho\": {\r\n                                    \"id\": 2,\r\n                                    \"sigla\": \"P\"\r\n                                },\r\n                                \"quantidade\": 20\r\n                            },\r\n                            {\r\n                                \"id\": 4,\r\n                                \"tamanho\": {\r\n                                    \"id\": 4,\r\n                                    \"sigla\": \"G\"\r\n                                },\r\n                                \"quantidade\": 20\r\n                            },\r\n                            {\r\n                                \"id\": 3,\r\n                                \"tamanho\": {\r\n                                    \"id\": 3,\r\n                                    \"sigla\": \"M\"\r\n                                },\r\n                                \"quantidade\": 20\r\n                            }\r\n                        ]\r\n                    },\r\n                    \"tamanho\": {\r\n                        \"id\": 1,\r\n                        \"sigla\": \"PP\"\r\n                    },\r\n                    \"quantidade\": 1\r\n               }\r\n            ],\r\n            \"valor\": 20.0,\r\n            \"entregue\": true,\r\n            \"pagAprovado\": true\r\n        },\r\n        {\r\n            \"id\": 2,\r\n            \"produtos\": [\r\n                {\r\n                    \"id\": 1,\r\n                    \"produto\": {\r\n                        \"id\": 1,\r\n                        \"descricao\": \"Camiseta Branca\",\r\n                        \"urlImagem\": \"https://cdn.awsli.com.br/600x700/1897/1897332/produto/94064219/24840df940.jpg\",\r\n                        \"preco\": 20.0,\r\n                        \"tamanhos\": [\r\n                            {\r\n                                \"id\": 1,\r\n                                \"sigla\": \"PP\"\r\n                            },\r\n                            {\r\n                                \"id\": 2,\r\n                                \"sigla\": \"P\"\r\n                            },\r\n                            {\r\n                                \"id\": 3,\r\n                                \"sigla\": \"M\"\r\n                            },\r\n                            {\r\n                                \"id\": 4,\r\n                                \"sigla\": \"G\"\r\n                            },\r\n                            {\r\n                                \"id\": 5,\r\n                                \"sigla\": \"GG\"\r\n                            }\r\n                        ],\r\n                        \"estoques\": [\r\n                            {\r\n                                \"id\": 5,\r\n                                \"tamanho\": {\r\n                                    \"id\": 5,\r\n                                    \"sigla\": \"GG\"\r\n                                },\r\n                                \"quantidade\": 20\r\n                            },\r\n                            {\r\n                                \"id\": 1,\r\n                                \"tamanho\": {\r\n                                    \"id\": 1,\r\n                                    \"sigla\": \"PP\"\r\n                                },\r\n                                \"quantidade\": 20\r\n                            },\r\n                            {\r\n                                \"id\": 2,\r\n                                \"tamanho\": {\r\n                                    \"id\": 2,\r\n                                    \"sigla\": \"P\"\r\n                                },\r\n                                \"quantidade\": 20\r\n                            },\r\n                            {\r\n                                \"id\": 4,\r\n                                \"tamanho\": {\r\n                                    \"id\": 4,\r\n                                    \"sigla\": \"G\"\r\n                                },\r\n                                \"quantidade\": 20\r\n                            },\r\n                            {\r\n                                \"id\": 3,\r\n                                \"tamanho\": {\r\n                                    \"id\": 3,\r\n                                    \"sigla\": \"M\"\r\n                                },\r\n                                \"quantidade\": 20\r\n                            }\r\n                        ]\r\n                    },\r\n                    \"tamanho\": {\r\n                        \"id\": 1,\r\n                        \"sigla\": \"PP\"\r\n                    },\r\n                    \"quantidade\": 1\r\n               }\r\n            ],\r\n            \"valor\": 20.0,\r\n            \"entregue\": true,\r\n            \"pagAprovado\": true\r\n        }\r\n    ],\r\n    \"quantidadeEntregue\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/historicos-drone",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"historicos-drone"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resgatar Historico Drone",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/historicos-drone/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"historicos-drone",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resgatar Historicos Drone",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/historicos-drone",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"historicos-drone"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
