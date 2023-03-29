@@ -4,7 +4,7 @@ import CartAnimation from "../../animations/cart-animated.riv";
 import { ButtonNoShadow } from "./styles";
 import { useNavigate } from "react-router-dom";
 
-function FinishScreen() {
+function FinishScreen({ address, card }) {
   const navigate = useNavigate();
   const { rive, RiveComponent } = useRive({
     src: CartAnimation,
@@ -53,6 +53,26 @@ function FinishScreen() {
           }}
         >
           Logo logo, seus produtos estarão em suas mãos
+        </p>
+        <p
+          style={{
+            fontSize: "2.5vw",
+            fontWeight: "bold",
+            color: "white",
+            opacity: "0.5",
+          }}
+        >
+          Endereço de entrega: {address}
+        </p>
+        <p
+          style={{
+            fontSize: "2.5vw",
+            fontWeight: "bold",
+            color: "white",
+            opacity: "0.5",
+          }}
+        >
+          Cartão {card}
         </p>
         <div style={{ paddingTop: "3vh" }}>
           <ButtonNoShadow

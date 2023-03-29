@@ -13,6 +13,7 @@ import {
 import { Container, ContainerProdutos } from "./styles";
 import LogoutIcon from "@mui/icons-material/Logout";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import HistoryIcon from "@mui/icons-material/History";
 import ProductService from "../../services/ProductService";
 
 function MenStoreScreen() {
@@ -78,6 +79,14 @@ function MenStoreScreen() {
               }}
             >
               <ShoppingCartIcon sx={{ fontSize: "4vh", cursor: "pointer" }} />
+            </ClickMenu>
+
+            <Spacer />
+            <ClickMenu
+              style={{ padding: 0 }}
+              onClick={() => navigate("/history")}
+            >
+              <HistoryIcon sx={{ fontSize: "4vh", cursor: "pointer" }} />
             </ClickMenu>
 
             <Spacer />
