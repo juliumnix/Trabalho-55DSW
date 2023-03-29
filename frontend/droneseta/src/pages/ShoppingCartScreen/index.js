@@ -28,6 +28,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import UserService from "../../services/UserService";
 import FinishScreen from "../FinishScreen";
+import HistoryIcon from "@mui/icons-material/History";
 
 function ShoppingCart() {
   const navigate = useNavigate();
@@ -63,6 +64,10 @@ function ShoppingCart() {
   }
 
   async function realizarCompra() {
+    if (produtos.length === 0) {
+      return;
+    }
+
     const user = await getUsuarioFromLocalState();
 
     await userService.finalizarCompra(
@@ -73,7 +78,7 @@ function ShoppingCart() {
       false
     );
 
-    await userService.removeAllItems(user.id);
+    // await userService.removeAllItems(user.id);
     getTotal();
     setIsFinalized(true);
   }
@@ -82,7 +87,10 @@ function ShoppingCart() {
     <DivAnimation>
       {isFinalized ? (
         <DivAnimation>
-          <FinishScreen />
+          <FinishScreen
+            address={getUsuarioFromLocalState().endEntrega}
+            card={getUsuarioFromLocalState().numCartao}
+          />
         </DivAnimation>
       ) : (
         <>
@@ -118,6 +126,13 @@ function ShoppingCart() {
                   <ShoppingCartIcon
                     sx={{ fontSize: "4vh", cursor: "pointer" }}
                   />
+                </ClickMenu>
+                <Spacer />
+                <ClickMenu
+                  style={{ padding: 0 }}
+                  onClick={() => navigate("/history")}
+                >
+                  <HistoryIcon sx={{ fontSize: "4vh", cursor: "pointer" }} />
                 </ClickMenu>
 
                 <Spacer />

@@ -16,6 +16,7 @@ import DeliveryScreen from "./pages/AdmPages/DeliveryScreen";
 import ClientsScreen from "./pages/AdmPages/ClientsScreen";
 import AdministratorsScreen from "./pages/AdmPages/AdministratorsScreen";
 import FinishScreen from "./pages/FinishScreen";
+import HistoryScreen from "./pages/HistoryScreen";
 
 function App() {
   return (
@@ -98,10 +99,10 @@ function App() {
           }
         />
         <Route
-          path="/finish"
+          path="/history"
           element={
             <PrivatedRoute>
-              <FinishScreen />
+              <HistoryScreen />
             </PrivatedRoute>
           }
         />

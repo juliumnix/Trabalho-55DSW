@@ -52,4 +52,9 @@ export default class UserService {
     const response = await api.post(`clientes/${idCliente}/carrinho`, json);
     return response;
   }
+
+  async getHistorico(id) {
+    const response = await api.get(`/clientes/${id}/compras`);
+    return response;
+  }
 }
