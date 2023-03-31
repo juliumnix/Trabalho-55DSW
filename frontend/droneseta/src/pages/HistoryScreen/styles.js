@@ -23,3 +23,9 @@ export const ContainerList = styled.div`
     height: 0.5vh;
   }
 `;
+
+export const HeaderInformations = styled.p`
+  margin-left: 24vh;
+  font-size: 4vh;
+  font-weight: bold;
+`;

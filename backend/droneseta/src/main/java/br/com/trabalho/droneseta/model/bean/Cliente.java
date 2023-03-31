@@ -1,5 +1,6 @@
 package br.com.trabalho.droneseta.model.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
@@ -14,6 +15,10 @@ public class Cliente {
 
     @Size(min = 1)
     private String nome;
+
+    @Size(min = 1)
+    @JsonIgnore
+    private String salt;
 
     @Column(unique = true)
     @Size(min = 1)
@@ -40,14 +45,15 @@ public class Cliente {
 
     @OneToMany(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<ProdutoCarrinho> carrinho;
-    
+
     @OneToMany
-    @JoinTable(name = "compras_cliente", joinColumns = {@JoinColumn(name = "cliente_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "venda_id" , referencedColumnName = "id")})
+    @JoinTable(name = "compras_cliente", joinColumns = {@JoinColumn(name = "cliente_id", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "venda_id", referencedColumnName = "id")})
     private List<Venda> compras;
 
-    public Cliente() {}
+    public Cliente() {
+    }
 
-    public Cliente (String nome, String email, String senha, String cpf, String numCartao, String endCobranca, String endEntrega, List<ProdutoCarrinho> carrinho, List<Venda> compras) {
+    public Cliente(String nome, String email, String senha, String cpf, String numCartao, String endCobranca, String endEntrega, List<ProdutoCarrinho> carrinho, List<Venda> compras) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -57,6 +63,14 @@ public class Cliente {
         this.endEntrega = endEntrega;
         this.carrinho = carrinho;
         this.compras = compras;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public long getId() {
@@ -130,15 +144,15 @@ public class Cliente {
     public void setCarrinho(List<ProdutoCarrinho> carrinho) {
         this.carrinho = carrinho;
     }
-    
+
     public List<Venda> getCompras() {
         return compras;
     }
-    
+
     public void setCompras(List<Venda> compras) {
         this.compras = compras;
     }
-    
+
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("{")

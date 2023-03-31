@@ -4,6 +4,7 @@ import br.com.trabalho.droneseta.DAO.AdministradorDAO;
 import br.com.trabalho.droneseta.model.bean.Administrador;
 import br.com.trabalho.droneseta.repository.RepositorioAdministrador;
 import jakarta.validation.Valid;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,6 +58,9 @@ public class ControladorAdministrador {
     
     @PostMapping("/administradores")
     public ResponseEntity<Administrador> publicarAdministrador(@Valid @RequestBody Administrador administrador) {
+        final String salt = BCrypt.gensalt();
+        administrador.setSalt(salt);
+        administrador.setSenha(BCrypt.hashpw(administrador.getSenha(), salt));
         return new ResponseEntity<>(repositorioAdministrador.save(administrador), HttpStatus.OK);
     }
     

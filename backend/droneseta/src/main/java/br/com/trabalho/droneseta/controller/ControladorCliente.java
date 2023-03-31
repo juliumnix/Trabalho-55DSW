@@ -12,6 +12,7 @@ import br.com.trabalho.droneseta.repository.RepositorioProduto;
 import br.com.trabalho.droneseta.repository.RepositorioProdutoCarrinho;
 import br.com.trabalho.droneseta.repository.RepositorioVenda;
 import jakarta.validation.Valid;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -155,6 +156,9 @@ public class ControladorCliente {
     
     @PostMapping("/clientes")
     public ResponseEntity<Cliente> publicarCliente(@Valid @RequestBody Cliente cliente) {
+        final String salt = BCrypt.gensalt();
+        cliente.setSalt(salt);
+        cliente.setSenha(BCrypt.hashpw(cliente.getSenha(), salt));
         cliente.setCarrinho(new ArrayList<>());
         cliente.setCompras(new ArrayList<>());
         return new ResponseEntity<>(repositorioCliente.save(cliente), HttpStatus.OK);
