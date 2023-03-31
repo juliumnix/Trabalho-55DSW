@@ -1,5 +1,6 @@
 package br.com.trabalho.droneseta.model.bean;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
@@ -12,6 +13,10 @@ public class Administrador {
 
     @Size(min = 1)
     private String nome;
+
+    @Size(min = 1)
+    @JsonIgnore
+    private String salt;
 
     @Column(unique = true)
     @Size(min = 1)
@@ -26,6 +31,14 @@ public class Administrador {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
+    }
+
+    public String getSalt() {
+        return salt;
+    }
+
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public long getId() {
