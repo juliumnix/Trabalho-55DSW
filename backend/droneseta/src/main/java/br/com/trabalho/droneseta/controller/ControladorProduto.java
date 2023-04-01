@@ -1,18 +1,25 @@
 package br.com.trabalho.droneseta.controller;
 
-import br.com.trabalho.droneseta.DAO.ProdutoDAO;
-import br.com.trabalho.droneseta.model.bean.Estoque;
-import br.com.trabalho.droneseta.model.bean.Produto;
-import br.com.trabalho.droneseta.model.bean.Tamanho;
-import br.com.trabalho.droneseta.repository.RepositorioProduto;
-import jakarta.validation.Valid;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-import java.util.Optional;
+import br.com.trabalho.droneseta.DAO.ProdutoDAO;
+import br.com.trabalho.droneseta.model.bean.Estoque;
+import br.com.trabalho.droneseta.model.bean.Produto;
+import br.com.trabalho.droneseta.repository.RepositorioProduto;
+import jakarta.validation.Valid;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -21,7 +28,8 @@ public class ControladorProduto {
     @Autowired
     RepositorioProduto repositorioProduto;
     
-    @PutMapping("/produtos/{id}")
+
+	@PutMapping("/produtos/{id}")
     public ResponseEntity<Produto> atualizarProduto(@PathVariable("id") long id, @Valid @RequestBody Produto produtoAtualizado) {
         Produto produto = ProdutoDAO.procurarProduto(id, repositorioProduto);
         if (produto != null) {
@@ -104,4 +112,7 @@ public class ControladorProduto {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    
+
+
 }
