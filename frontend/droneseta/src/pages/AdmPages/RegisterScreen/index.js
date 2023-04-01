@@ -17,7 +17,6 @@ import {
   ContainerCad,
 } from "./styles";
 import { Logo } from "../../../components/Header/styles";
-import ImageButton from "../../../components/ImageButton";
 import Button from "../../../components/Button";
 import Input from "../../../components/Input";
 import ProductService from "../../../services/ProductService";
@@ -25,59 +24,42 @@ import TopHeader from "../../../components/TopHeader";
 import { ClickMenu } from "../../../components/Header/styles";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
+import UploadImageService from "../../../services/UploadImageService";
 
 export default function RegisterScreen() {
   const [dsc, setDsc] = useState("");
   const [price, setPrice] = useState("");
-  const [qtdPP, setQtdPP] = useState("");
-  const [qtdP, setQtdP] = useState("");
-  const [qtdM, setQtdM] = useState("");
-  const [qtdG, setQtdG] = useState("");
-  const [qtdGG, setQtdGG] = useState("");
-  const [pp, setPP] = useState(false);
-  const [p, setP] = useState(false);
-  const [m, setM] = useState(false);
-  const [g, setG] = useState(false);
-  const [gg, setGG] = useState(false);
   const [file, setFile] = useState();
   const productService = new ProductService();
+  const uploadImageService = new UploadImageService(); 
   const [products, setProducts] = useState([]);
   const [sizes, setSizes] = useState([]);
   const navigate = useNavigate();
-  const jsonSizes = [
-    {
-      sigla: "PP",
-      ativo: pp,
-      quantidade: qtdPP,
-    },
-    {
-      sigla: "P",
-      ativo: p,
-      quantidade: qtdP,
-    },
-    {
-      sigla: "M",
-      ativo: m,
-      quantidade: qtdM,
-    },
-    {
-      sigla: "G",
-      ativo: g,
-      quantidade: qtdG,
-    },
-    {
-      sigla: "GG",
-      ativo: gg,
-      quantidade: qtdGG,
-    },
-  ];
+  const [jsonSizes, setJsonSizes] = useState([]);
   const arrayEstoque = [];
   const arrayTamanho = [];
 
   useEffect(() => {
-    initProduct();
-    initSize();
+    load();
   }, []);
+
+  async function load(){
+    await initProduct();
+    await initSize();
+  }
+  
+ async function initJsonSizes(data){
+    const json = [];
+    console.log(data)
+    for(let i = 0; i < data.length; i++){
+      json.push({
+        sigla: data[i].sigla,
+        ativo: false,
+        quantidade: '',
+      })
+    }
+    setJsonSizes(json);
+  }
 
   async function initProduct() {
     const { data } = await productService.resgataProdutos();
@@ -87,9 +69,11 @@ export default function RegisterScreen() {
   async function initSize() {
     const { data } = await productService.resgataTamanhos();
     setSizes(data);
+    await initJsonSizes(data);
   }
 
   async function registerHandler() {
+    handleSubmit();
     if (validateFields()) {
       for (let i = 0; i < jsonSizes.length; i++) {
         //Caminha pelo array de json verificando qual dos tamanhos foi selecionado pelo usuário
@@ -130,7 +114,7 @@ export default function RegisterScreen() {
   function createJson() {
     return {
       descricao: dsc,
-      urlImagem: "imagem",
+      urlImagem: file.name,
       preco: price,
       tamanhos: arrayTamanho,
       estoques: arrayEstoque,
@@ -138,27 +122,7 @@ export default function RegisterScreen() {
   }
 
   function cleanFields() {
-    setPP(false);
-    setP(false);
-    setM(false);
-    setG(false);
-    setGG(false);
-    setQtdPP("");
-    setQtdP("");
-    setQtdM("");
-    setQtdG("");
-    setQtdGG("");
-    setDsc("");
-    setPrice("");
-    document.getElementById("PPsize").checked = false;
-    document.getElementById("Psize").checked = false;
-    document.getElementById("Msize").checked = false;
-    document.getElementById("Gsize").checked = false;
-    document.getElementById("GGsize").checked = false;
-  }
-
-  function handleChange(event) {
-    setFile(event.target.files[0]);
+    
   }
 
   function validateFields() {
@@ -185,6 +149,26 @@ export default function RegisterScreen() {
     localStorage.clear();
     navigate("/admin");
   }
+
+  function verifySize(sigla, checked) {
+    jsonSizes.forEach(function(size) {
+      if(size.sigla === sigla){
+        size.ativo = checked;
+        //const element = document.getElementById("qtd"+sigla);
+        //console.log(element);
+        //element.disabled = !checked;
+      }
+  });
+  }
+
+  async function handleSubmit() {
+    const formData = new FormData();
+    formData.append("file", file);
+    console.log(formData);
+    const image = uploadImageService.uploadImage(formData);
+     console.log(image);
+  }
+
 
   return (
     <>
@@ -216,7 +200,7 @@ export default function RegisterScreen() {
               name="file"
               accept="image/png, image/jpeg"
               multiple
-              onChange={handleChange}
+              onChange={(event) => setFile(event.target.files[0])}
             />
             <UploadLabel htmlFor="inputImage">
               <UploadImage src={require("../../../assets/upload_image.png")} />
@@ -240,113 +224,30 @@ export default function RegisterScreen() {
               onChange={(event) => setPrice(event.target.value)}
             />
           </div>
-          <ItemContainer>
-            <div>
-              <InputCheckBox
-                id="PPsize"
-                type="checkbox"
-                onChange={(event) => setPP(event.target.checked)}
-              />
-              <Label htmlFor="PPsize">PP</Label>
-            </div>
-            <div>
-              <Input
-                disabled={!pp}
-                type="number"
-                placeholder="Quantidade"
-                name="qtdPP"
-                value={qtdPP}
-                width={"170px"}
-                onChange={(event) => setQtdPP(event.target.value)}
-              />
-            </div>
-          </ItemContainer>
 
-          <ItemContainer>
-            <div>
-              <InputCheckBox
-                id="Psize"
-                type="checkbox"
-                onChange={(event) => setP(event.target.checked)}
-              />
-              <Label htmlFor="Psize">P</Label>
-            </div>
-            <div>
-              <Input
-                disabled={!p}
-                type="number"
-                placeholder="Quantidade"
-                name="qtdP"
-                value={qtdP}
-                width={"170px"}
-                onChange={(event) => setQtdP(event.target.value)}
-              />
-            </div>
-          </ItemContainer>
-
-          <ItemContainer>
-            <div>
-              <InputCheckBox
-                id="Msize"
-                type="checkbox"
-                onChange={(event) => setM(event.target.checked)}
-              />
-              <Label htmlFor="Msize">M</Label>
-            </div>
-            <div>
-              <Input
-                disabled={!m}
-                type="number"
-                placeholder="Quantidade"
-                name="qtdM"
-                value={qtdM}
-                width={"170px"}
-                onChange={(event) => setQtdM(event.target.value)}
-              />
-            </div>
-          </ItemContainer>
-          <ItemContainer>
-            <div>
-              <InputCheckBox
-                id="Gsize"
-                type="checkbox"
-                onChange={(event) => setG(event.target.checked)}
-              />
-              <Label htmlFor="Gsize">G</Label>
-            </div>
-            <div>
-              <Input
-                disabled={!g}
-                type="number"
-                placeholder="Quantidade"
-                name="qtdG"
-                value={qtdG}
-                width={"170px"}
-                onChange={(event) => setQtdG(event.target.value)}
-              />
-            </div>
-          </ItemContainer>
-          <ItemContainer>
-            <div>
-              <InputCheckBox
-                id="GGsize"
-                type="checkbox"
-                onChange={(event) => setGG(event.target.checked)}
-              />
-              <Label htmlFor="GGsize">GG</Label>
-            </div>
-            <div>
-              <Input
-                disabled={!gg}
-                type="number"
-                placeholder="Quantidade"
-                name="qtdGG"
-                value={qtdGG}
-                width={"170px"}
-                onChange={(event) => setQtdGG(event.target.value)}
-              />
-            </div>
-          </ItemContainer>
+          {sizes.map((size, index) => (
+            <ItemContainer key={index}>
+              <div key={index}>
+                <InputCheckBox
+                  id={size.id}
+                  type="checkbox"
+                  onChange={(event) =>{
+                    verifySize(size.sigla, event.target.checked)
+                  }}
+                />
+                <Label htmlFor={size.id}>{size.sigla}</Label>
+              </div>
+              <div>
+                <Input
+                  id={"qtd"+size.sigla}
+                  type="number"
+                  placeholder="Quantidade"
+                  width={"170px"}
+                  disabled={true}
+                />
+              </div>
+            </ItemContainer>
+          ))}
           <div>
             <Button
               type="submit"

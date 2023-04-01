@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Loading from "../Loading";
 
 import {
@@ -8,6 +8,7 @@ import {
   Price,
   Title,
 } from "./styles";
+import api from "../../services/AxiosConfig";
 
 function MenStoreItem({ imagem, titulo, preco, isLoading, ...rest }) {
   return (
@@ -17,7 +18,7 @@ function MenStoreItem({ imagem, titulo, preco, isLoading, ...rest }) {
           <Loading isBlack />
         ) : (
           <>
-            <ContainerImagem src={imagem} />
+            <ContainerImagem src={`http://localhost:8080/uploadImagem/${imagem}`} />
             <ContainerInfos>
               <Title>{titulo}</Title>
               <Price>R$ {preco}</Price>
