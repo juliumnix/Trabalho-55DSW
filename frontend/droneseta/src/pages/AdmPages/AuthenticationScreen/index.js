@@ -49,11 +49,11 @@ export default function AuthenticationScreen() {
   }
 
   async function loginHandler() {
-    console.log(user, "senha: ", pass)
+    console.log(user, "senha: ", pass);
     const { data } = await adminService.loginAdmin(user, pass);
     if (data === "Logou") {
       localStorage.setItem("authLoginAdmin", true);
-      navigate("/home/admin");
+      navigate("/home-admin");
     }
   }
 

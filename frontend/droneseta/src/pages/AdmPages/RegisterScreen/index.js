@@ -31,7 +31,7 @@ export default function RegisterScreen() {
   const [price, setPrice] = useState("");
   const [file, setFile] = useState();
   const productService = new ProductService();
-  const uploadImageService = new UploadImageService(); 
+  const uploadImageService = new UploadImageService();
   const [products, setProducts] = useState([]);
   const [sizes, setSizes] = useState([]);
   const navigate = useNavigate();
@@ -43,20 +43,19 @@ export default function RegisterScreen() {
     load();
   }, []);
 
-  async function load(){
+  async function load() {
     await initProduct();
     await initSize();
   }
-  
- async function initJsonSizes(data){
+
+  async function initJsonSizes(data) {
     const json = [];
-    console.log(data)
-    for(let i = 0; i < data.length; i++){
+    for (let i = 0; i < data.length; i++) {
       json.push({
         sigla: data[i].sigla,
         ativo: false,
-        quantidade: '',
-      })
+        quantidade: "",
+      });
     }
     setJsonSizes(json);
   }
@@ -73,23 +72,27 @@ export default function RegisterScreen() {
   }
 
   async function registerHandler() {
-    handleSubmit();
     if (validateFields()) {
       for (let i = 0; i < jsonSizes.length; i++) {
         //Caminha pelo array de json verificando qual dos tamanhos foi selecionado pelo usuário
+        console.log(jsonSizes);
         if (jsonSizes[i].ativo) {
           //Chama o método passando o json
+          console.log(jsonSizes[i]);
           getEstoqueETamanho(jsonSizes[i]);
         }
       }
-      await productService.cadastraProduto(createJson());
-      cleanFields();
-      initProduct();
+
+      console.log(createJson());
+      // await productService.cadastraProduto(createJson());
+      // cleanFields();
+      // await initProduct();
     }
   }
 
   function getEstoqueETamanho(jsonPosition) {
     //Caminha pela lista de tamanhos vinda do banco
+    console.log(jsonPosition);
     for (let i = 0; i < sizes.length; i++) {
       //Se a sigla da lista de tamanho for igual a sigla do json que o usuario selecionou
       if (sizes[i].sigla === jsonPosition.sigla) {
@@ -107,6 +110,9 @@ export default function RegisterScreen() {
         arrayEstoque.push(jsonEstoque);
         //Adiciona no array de tamanhos
         arrayTamanho.push(jsonTamanho);
+
+        // console.log(jsonEstoque);
+        // console.log(jsonTamanho);
       }
     }
   }
@@ -121,9 +127,7 @@ export default function RegisterScreen() {
     };
   }
 
-  function cleanFields() {
-    
-  }
+  function cleanFields() {}
 
   function validateFields() {
     let aux = 0;
@@ -132,7 +136,7 @@ export default function RegisterScreen() {
         aux++;
       }
     });
-    return dsc !== "" && price !== "" && aux === 0;
+    return dsc !== "" && price !== "" && aux !== 0;
   }
 
   function validateSizes(estoques, tamanho) {
@@ -151,24 +155,23 @@ export default function RegisterScreen() {
   }
 
   function verifySize(sigla, checked) {
-    jsonSizes.forEach(function(size) {
-      if(size.sigla === sigla){
+    jsonSizes.forEach(function (size) {
+      if (size.sigla === sigla) {
         size.ativo = checked;
-        //const element = document.getElementById("qtd"+sigla);
-        //console.log(element);
-        //element.disabled = !checked;
+        const element = document.getElementById("qtd" + sigla);
+        console.log(element);
+        element.disabled = !checked;
       }
-  });
+    });
   }
 
   async function handleSubmit() {
     const formData = new FormData();
     formData.append("file", file);
     console.log(formData);
-    const image = uploadImageService.uploadImage(formData);
-     console.log(image);
+    const image = await uploadImageService.uploadImage(formData);
+    console.log(image);
   }
-
 
   return (
     <>
@@ -231,19 +234,19 @@ export default function RegisterScreen() {
                 <InputCheckBox
                   id={size.id}
                   type="checkbox"
-                  onChange={(event) =>{
-                    verifySize(size.sigla, event.target.checked)
+                  onChange={(event) => {
+                    verifySize(size.sigla, event.target.checked);
                   }}
                 />
                 <Label htmlFor={size.id}>{size.sigla}</Label>
               </div>
               <div>
                 <Input
-                  id={"qtd"+size.sigla}
+                  id={"qtd" + size.sigla}
                   type="number"
                   placeholder="Quantidade"
                   width={"170px"}
-                  disabled={true}
+                  disabled
                 />
               </div>
             </ItemContainer>
