@@ -31,7 +31,7 @@ export default function RegisterScreen() {
   const [price, setPrice] = useState("");
   const [file, setFile] = useState();
   const productService = new ProductService();
-  const uploadImageService = new UploadImageService(); 
+  const uploadImageService = new UploadImageService();
   const [products, setProducts] = useState([]);
   const [sizes, setSizes] = useState([]);
   const navigate = useNavigate();
@@ -43,20 +43,20 @@ export default function RegisterScreen() {
     load();
   }, []);
 
-  async function load(){
+  async function load() {
     await initProduct();
     await initSize();
   }
-  
- async function initJsonSizes(data){
+
+  async function initJsonSizes(data) {
     const json = [];
-    console.log(data)
-    for(let i = 0; i < data.length; i++){
+    console.log(data);
+    for (let i = 0; i < data.length; i++) {
       json.push({
         sigla: data[i].sigla,
         ativo: false,
-        quantidade: '',
-      })
+        quantidade: "",
+      });
     }
     setJsonSizes(json);
   }
@@ -121,9 +121,7 @@ export default function RegisterScreen() {
     };
   }
 
-  function cleanFields() {
-    
-  }
+  function cleanFields() {}
 
   function validateFields() {
     let aux = 0;
@@ -151,30 +149,29 @@ export default function RegisterScreen() {
   }
 
   function verifySize(sigla, checked) {
-    jsonSizes.forEach(function(size) {
-      if(size.sigla === sigla){
+    jsonSizes.forEach(function (size) {
+      if (size.sigla === sigla) {
         size.ativo = checked;
-        const element = document.getElementById("qtd"+sigla);
+        const element = document.getElementById("qtd" + sigla);
         console.log(element);
         element.disabled = !checked;
       }
-  });
+    });
   }
 
-  function changeValueQtd(value, sigla){
-    jsonSizes.forEach(function(size) {
-      if(size.sigla === sigla){
+  function changeValueQtd(value, sigla) {
+    jsonSizes.forEach(function (size) {
+      if (size.sigla === sigla) {
         size.quantidade = value;
       }
-  });
+    });
   }
 
   async function handleSubmit() {
     const formData = new FormData();
     formData.append("file", file);
-    const image = uploadImageService.uploadImage(formData);
+    await uploadImageService.uploadImage(formData);
   }
-
 
   return (
     <>
@@ -237,20 +234,22 @@ export default function RegisterScreen() {
                 <InputCheckBox
                   id={size.id}
                   type="checkbox"
-                  onChange={(event) =>{
-                    verifySize(size.sigla, event.target.checked)
+                  onChange={(event) => {
+                    verifySize(size.sigla, event.target.checked);
                   }}
                 />
                 <Label htmlFor={size.id}>{size.sigla}</Label>
               </div>
               <div>
                 <Input
-                  id={"qtd"+size.sigla}
+                  id={"qtd" + size.sigla}
                   type="number"
                   placeholder="Quantidade"
                   width={"170px"}
                   disabled={true}
-                  onChange={(event) => changeValueQtd(event.target.value, size.sigla)}
+                  onChange={(event) =>
+                    changeValueQtd(event.target.value, size.sigla)
+                  }
                 />
               </div>
             </ItemContainer>

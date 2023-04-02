@@ -34,3 +34,6 @@ build/
 
 ### Config pg ###
 /application.properties
+
+### imagens ###
+/imagens

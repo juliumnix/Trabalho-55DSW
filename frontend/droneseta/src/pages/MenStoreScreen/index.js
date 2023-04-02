@@ -33,11 +33,11 @@ function MenStoreScreen() {
   }
 
   async function splitArrayToLines() {
-    const response = await productService.resgataProdutos();
-    console.log(response);
+    const { data } = await productService.resgataProdutos();
+    console.log(data);
     const arrayDeArrays = [];
-    for (let index = 0; index < response.data.length; index += 4) {
-      arrayDeArrays.push(response.data.slice(index, index + 4));
+    for (let index = 0; index < data.length; index += 4) {
+      arrayDeArrays.push(data.slice(index, index + 4));
     }
     setProdutos(arrayDeArrays);
     setLoading(false);

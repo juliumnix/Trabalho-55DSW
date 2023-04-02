@@ -9,8 +9,20 @@ import {
   Title,
 } from "./styles";
 import api from "../../services/AxiosConfig";
+import UploadImageService from "../../services/UploadImageService";
 
 function MenStoreItem({ imagem, titulo, preco, isLoading, ...rest }) {
+  const imageServices = new UploadImageService();
+  const [image, setImage] = useState();
+
+  useEffect(() => {
+    downloadImage();
+  }, []);
+
+  async function downloadImage() {
+    const response = await imageServices.servicoDeRecuperarImagem(imagem);
+    setImage(response);
+  }
   return (
     <>
       <Container {...rest}>
@@ -18,7 +30,7 @@ function MenStoreItem({ imagem, titulo, preco, isLoading, ...rest }) {
           <Loading isBlack />
         ) : (
           <>
-            <ContainerImagem src={`http://localhost:8080/uploadImagem/${imagem}`} />
+            <ContainerImagem src={image} />
             <ContainerInfos>
               <Title>{titulo}</Title>
               <Price>R$ {preco}</Price>
