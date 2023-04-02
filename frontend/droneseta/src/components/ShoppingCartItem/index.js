@@ -17,6 +17,7 @@ import {
   Subtitle,
   Title,
 } from "./styles";
+import UploadImageService from "../../services/UploadImageService";
 
 function ShoppingCartItem({
   titulo,
@@ -35,13 +36,21 @@ function ShoppingCartItem({
   const [tamanho, setTamanho] = useState("");
   const [qtd, setQtd] = useState(0);
   const [precoAtualizado, setPrecoAtualizado] = useState(0);
+  const [image, setImage] = useState("");
   const userService = new UserService();
+  const imageService = new UploadImageService();
 
   useEffect(() => {
     setQtd(quantidade);
     setPrecoAtualizado(preco * quantidade);
     setTamanho(tamanhos.sigla);
+    downloadImage();
   }, []);
+
+  async function downloadImage() {
+    const response = await imageService.servicoDeRecuperarImagem(urlImagem);
+    setImage(response);
+  }
 
   async function increase(itemid) {
     const user = await getUsuarioFromLocalState();
@@ -96,7 +105,7 @@ function ShoppingCartItem({
 
   return (
     <Container {...rest}>
-      <ContainerImage src={urlImagem} />
+      <ContainerImage src={image} />
       <ContainerLeft>
         <PrimaryInformation>
           <Title>{titulo}</Title>

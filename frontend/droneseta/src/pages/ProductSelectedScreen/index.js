@@ -29,6 +29,7 @@ import ProductService from "../../services/ProductService";
 import SizesService from "../../services/SizesService";
 import UserService from "../../services/UserService";
 import { useUsuario } from "../../hooks/UsuarioHook";
+import UploadImageService from "../../services/UploadImageService";
 
 export default function ProductSelectedScreen() {
   const navigate = useNavigate();
@@ -36,9 +37,11 @@ export default function ProductSelectedScreen() {
   const { id } = useParams();
   const productService = new ProductService();
   const userService = new UserService();
+  const imageService = new UploadImageService();
   const [product, setProduct] = useState("");
   const [selectedSizes, setSelectedSizes] = useState([]);
   const sizesService = new SizesService();
+  const [image, setImage] = useState("");
 
   useEffect(() => {
     initProduct();
@@ -47,6 +50,10 @@ export default function ProductSelectedScreen() {
   async function initProduct() {
     const { data } = await productService.resgataProduto(id);
     setProduct(data);
+    const response = await imageService.servicoDeRecuperarImagem(
+      data.urlImagem
+    );
+    setImage(response);
   }
 
   function logout() {
@@ -140,7 +147,7 @@ export default function ProductSelectedScreen() {
       <Container>
         <Card>
           <CardLeft>
-            <ContainerImagem src={product.urlImagem} />
+            <ContainerImagem src={image} />
           </CardLeft>
           <CardRight>
             <DivInfos>
@@ -149,7 +156,7 @@ export default function ProductSelectedScreen() {
               </div>
               <Divider />
               <div>
-                <Price>{product.preco}</Price>
+                <Price>R$: {product.preco}</Price>
               </div>
             </DivInfos>
             <DivSizes>
