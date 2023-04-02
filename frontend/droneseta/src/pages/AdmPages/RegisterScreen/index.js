@@ -154,9 +154,17 @@ export default function RegisterScreen() {
     jsonSizes.forEach(function(size) {
       if(size.sigla === sigla){
         size.ativo = checked;
-        //const element = document.getElementById("qtd"+sigla);
-        //console.log(element);
-        //element.disabled = !checked;
+        const element = document.getElementById("qtd"+sigla);
+        console.log(element);
+        element.disabled = !checked;
+      }
+  });
+  }
+
+  function changeValueQtd(value, sigla){
+    jsonSizes.forEach(function(size) {
+      if(size.sigla === sigla){
+        size.quantidade = value;
       }
   });
   }
@@ -164,9 +172,7 @@ export default function RegisterScreen() {
   async function handleSubmit() {
     const formData = new FormData();
     formData.append("file", file);
-    console.log(formData);
     const image = uploadImageService.uploadImage(formData);
-     console.log(image);
   }
 
 
@@ -244,6 +250,7 @@ export default function RegisterScreen() {
                   placeholder="Quantidade"
                   width={"170px"}
                   disabled={true}
+                  onChange={(event) => changeValueQtd(event.target.value, size.sigla)}
                 />
               </div>
             </ItemContainer>
