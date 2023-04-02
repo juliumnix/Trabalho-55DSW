@@ -1,11 +1,13 @@
 package br.com.trabalho.droneseta.storage;
 
+import br.com.trabalho.droneseta.utils.EnvironmentPath;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties("storage")
 public class StorageProperties {
 
-	private String location = "D:\\trabalhos\\Setimo Semestre\\desenvolvimento-web\\Trabalho-55DSW\\backend\\droneseta\\src\\main\\resources\\imagens";
+	String path = EnvironmentPath.PATH.getPath();
+	private String location = path;
 
 	public String getLocation() {
 		return location;
