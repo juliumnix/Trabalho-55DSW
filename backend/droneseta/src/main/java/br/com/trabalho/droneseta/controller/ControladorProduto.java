@@ -1,8 +1,11 @@
 package br.com.trabalho.droneseta.controller;
 
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import br.com.trabalho.droneseta.model.bean.ProdutoCarrinho;
+import br.com.trabalho.droneseta.model.bean.Venda;
+import br.com.trabalho.droneseta.repository.RepositorioVenda;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +30,9 @@ public class ControladorProduto {
     
     @Autowired
     RepositorioProduto repositorioProduto;
+    
+    @Autowired
+    RepositorioVenda repositorioVenda;
     
 
 	@PutMapping("/produtos/{id}")
@@ -113,6 +119,40 @@ public class ControladorProduto {
         }
     }
     
-
-
+    @GetMapping("/produtos/mais-vendidos")
+    public ResponseEntity<List<Produto>> recuperarProdutosMaisVendidos() {
+        try {
+            List<Venda> vendas = repositorioVenda.findAll();
+            if (vendas.size() > 0) {
+                Map<Long, Integer> quantidades = new HashMap<>();
+                for (Venda v: vendas) {
+                    for (ProdutoCarrinho p: v.getProdutos()) {
+                        long id = p.getProduto().getId();
+                        if (quantidades.containsKey(id)) {
+                            quantidades.replace(id, (quantidades.get(id) + p.getQuantidade()));
+                        } else {
+                            quantidades.put(id, p.getQuantidade());
+                        }
+                    }
+                }
+                List<Produto> produtos = new ArrayList<>();
+                quantidades.entrySet()
+                        .stream()
+                        .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+                        .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new))
+                        .forEach((key, value) -> {
+                            if (produtos.size() < 3) {
+                                Produto p = recuperarProduto(key).getBody();
+                                if(p != null) {
+                                    produtos.add(p);
+                                }
+                            }
+                        });
+                return new ResponseEntity<>(produtos, HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
