@@ -78,8 +78,8 @@ function ShoppingCart() {
       false
     );
 
-    // await userService.removeAllItems(user.id);
-    getTotal();
+    await userService.removeAllItems(user.id);
+    await getTotal();
     setIsFinalized(true);
   }
 

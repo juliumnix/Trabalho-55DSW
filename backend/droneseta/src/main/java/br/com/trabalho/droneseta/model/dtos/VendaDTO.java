@@ -5,12 +5,14 @@ import br.com.trabalho.droneseta.model.bean.Venda;
 
 public class VendaDTO {
     private final long id;
-    private int quantidadeTotal;
+    private final long idCliente;
+    private final int quantidadeTotal;
     private int quantidadeRestante;
     private int tempoEspera;
     
     public VendaDTO(Venda venda) {
         id = venda.getId();
+        idCliente = venda.getCliente().getId();
         quantidadeTotal = venda.getProdutos().stream().mapToInt(ProdutoCarrinho::getQuantidade).sum();
         quantidadeRestante = quantidadeTotal;
         tempoEspera = 0;
@@ -28,12 +30,12 @@ public class VendaDTO {
         return id;
     }
     
-    public int getQuantidadeTotal() {
-        return quantidadeTotal;
+    public long getIdCliente() {
+        return idCliente;
     }
     
-    public void setQuantidadeTotal(int quantidadeTotal) {
-        this.quantidadeTotal = quantidadeTotal;
+    public int getQuantidadeTotal() {
+        return quantidadeTotal;
     }
     
     public int getQuantidadeRestante() {

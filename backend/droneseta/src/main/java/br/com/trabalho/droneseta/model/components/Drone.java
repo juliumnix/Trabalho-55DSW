@@ -127,21 +127,21 @@ public class Drone {
         vendasEnviandoProdutosSeparados.forEach(System.out::println);
         System.out.println("----------------------");
     
-//        if (vendasSendoEntregues.size() > 0) {
-//            List<Venda> vendasEntregues = new ArrayList<>();
-//            vendasSendoEntregues.forEach(v -> {
-//                ResponseEntity<Venda> venda = controladorVenda.recuperarVenda(v.getId());
-//                if (venda != null && venda.hasBody()) {
-//                    vendasEntregues.add(venda.getBody());
-//                }
-//            });
-//            if (vendasEntregues.size() > 0) {
-//                controladorHistoricoDrone.publicarHistoricoDrone(new HistoricoDrone(vendasEntregues, quantidadeParaEntregar));
-//            }
-//        }
-//
-//        vendasSendoEntregues.removeAll(vendasEnviandoProdutosSeparados);
-//
-//        vendasSendoEntregues.forEach(v -> controladorVenda.entregarVenda(v.getId()));
+        if (vendasSendoEntregues.size() > 0) {
+            List<Venda> vendasEntregues = new ArrayList<>();
+            vendasSendoEntregues.forEach(v -> {
+                ResponseEntity<Venda> venda = controladorVenda.recuperarVenda(v.getId());
+                if (venda != null && venda.hasBody()) {
+                    vendasEntregues.add(venda.getBody());
+                }
+            });
+            if (vendasEntregues.size() > 0) {
+                controladorHistoricoDrone.publicarHistoricoDrone(new HistoricoDrone(vendasEntregues, quantidadeParaEntregar));
+            }
+        }
+
+        vendasSendoEntregues.removeAll(vendasEnviandoProdutosSeparados);
+
+        vendasSendoEntregues.forEach(v -> controladorVenda.entregarVenda(v.getId()));
     }
 }
