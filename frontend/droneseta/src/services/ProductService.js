@@ -20,4 +20,9 @@ export default class ProductService {
     const response = await api.get(`produtos/${id}`);
     return response;
   }
+
+  async resgataProdutosMaisVendidos() {
+    const response = await api.get("produtos/mais-vendidos");
+    return response;
+  }
 }
