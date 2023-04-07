@@ -80,7 +80,7 @@ public class ControladorVenda {
     public ResponseEntity<Integer> recuperarTempoEspera(@PathVariable("id") long id) {
         try {
             List<Venda> vendas = repositorioVenda.findAll();
-            if (vendas.stream().anyMatch(v -> v.getId() == id)) {
+            if (vendas.stream().anyMatch(v -> v.getId() == id && !v.isEntregue())) {
                 int tempo = 0;
                 List<VendaDTO> vendasDTO = new ArrayList<>();
                 List<VendaDTO> esperando = new ArrayList<>();

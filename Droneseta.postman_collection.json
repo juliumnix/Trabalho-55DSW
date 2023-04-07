@@ -999,6 +999,47 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Resgatar Tempo Espera",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/vendas/1/espera",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"vendas",
+						"1",
+						"espera"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resgatar Produtos Mais Vendidos",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/produtos/mais-vendidos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"produtos",
+						"mais-vendidos"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
