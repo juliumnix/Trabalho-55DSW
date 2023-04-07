@@ -17,6 +17,7 @@ import ClientsScreen from "./pages/AdmPages/ClientsScreen";
 import AdministratorsScreen from "./pages/AdmPages/AdministratorsScreen";
 import FinishScreen from "./pages/FinishScreen";
 import HistoryScreen from "./pages/HistoryScreen";
+import DashboardScreen from "./pages/AdmPages/DashboardScreen";
 
 function App() {
   return (
@@ -59,10 +60,18 @@ function App() {
           }
         />
         <Route
-          path="/home-admin"
+          path="/register-admin"
           element={
             <AdminRoute>
               <RegisterScreen />
+            </AdminRoute>
+          }
+        />
+        <Route
+          path="/home-admin"
+          element={
+            <AdminRoute>
+              <DashboardScreen />
             </AdminRoute>
           }
         />
