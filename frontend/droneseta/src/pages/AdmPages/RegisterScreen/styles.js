@@ -85,7 +85,7 @@ export const InputCheckBox = styled.input`
 `
 
 export const ContainerCad = styled.div`
-    height: 94vh;
+    height: 90vh;
     width: 30vw;
     background-position: left;
     flex-direction: column;
@@ -118,15 +118,52 @@ export const TableProduct = styled.table`
     height: 80vh;
     border-collapse: collapse;
     display: block;
-    overflow-y: scroll;
+    overflow-y: auto;
+    overflow-x: auto;
+    &::-webkit-scrollbar {
+    width: 0.5vw;
+    border-radius: 20px;
+    background-color: #d9d9d9;
+    border: 1px solid #d9d9d9;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #bfbfbf;
+    border-radius: 15px;
+    height: 0.5vh;
+  }
+    max-width: 60vw;
 
 `
-export const TableHeader = styled.th`
-    border: 1px solid black;
-    max-height: 40vh;
-    background-color: #5e92a2;
-    color: white;
+
+export const TableSizes = styled.table`
+    font-size: 16px;
+    height: 30vh;
+    border-collapse: collapse;
+    display: block;
+    overflow-y: auto;
+    margin-bottom: 1em;
+    &::-webkit-scrollbar {
+    width: 0.5vw;
+    border-radius: 20px;
+    background-color: #d9d9d9;
+    border: 1px solid #d9d9d9;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #bfbfbf;
+    border-radius: 15px;
+    height: 0.5vh;
+  }
 `
+
 export const TableData = styled.th`
-    border: 1px solid  #c6c6c6;
+    border: 1px solid  #DDDEDE;
+    font-weight: normal;
+    padding: 0.1em 1em;
+`
+
+export const TableHeader = styled.th`
+    background-color: #F4F4F4;
+    border: 1px solid #DDDEDE;
+    padding: 0.5em 1em;
+    color: black;
 `

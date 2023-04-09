@@ -25,11 +25,11 @@ export const TitleDelivery = styled.p`
 `;
 
 export const InformationStatusDelivered = styled.p`
-  border: 0.5vh solid green;
+  border: 0.5vh solid #0AC700;
   padding: 2vh;
   border-radius: 0.5vw;
   font-size: 1vw;
-  color: green;
+  color: #0AC700;
   min-width: 8vw;
 `;
 

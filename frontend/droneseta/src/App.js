@@ -18,6 +18,7 @@ import AdministratorsScreen from "./pages/AdmPages/AdministratorsScreen";
 import FinishScreen from "./pages/FinishScreen";
 import HistoryScreen from "./pages/HistoryScreen";
 import DashboardScreen from "./pages/AdmPages/DashboardScreen";
+import DroneHistoryScreen from "./pages/AdmPages/DroneHistoryScreen";
 
 function App() {
   return (
@@ -113,6 +114,14 @@ function App() {
             <PrivatedRoute>
               <HistoryScreen />
             </PrivatedRoute>
+          }
+        />
+         <Route
+          path="/drone-history"
+          element={
+            <AdminRoute>
+              <DroneHistoryScreen />
+            </AdminRoute>
           }
         />
       </Routes>

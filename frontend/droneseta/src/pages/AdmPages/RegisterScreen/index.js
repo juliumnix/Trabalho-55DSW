@@ -15,6 +15,7 @@ import {
   TableHeader,
   TableData,
   ContainerCad,
+  TableSizes
 } from "./styles";
 import { Logo } from "../../../components/Header/styles";
 import Button from "../../../components/Button";
@@ -76,9 +77,7 @@ export default function RegisterScreen() {
     handleSubmit();
     if (validateFields()) {
       for (let i = 0; i < jsonSizes.length; i++) {
-        //Caminha pelo array de json verificando qual dos tamanhos foi selecionado pelo usuário
         if (jsonSizes[i].ativo) {
-          //Chama o método passando o json
           getEstoqueETamanho(jsonSizes[i]);
         }
       }
@@ -89,11 +88,8 @@ export default function RegisterScreen() {
   }
 
   function getEstoqueETamanho(jsonPosition) {
-    //Caminha pela lista de tamanhos vinda do banco
     for (let i = 0; i < sizes.length; i++) {
-      //Se a sigla da lista de tamanho for igual a sigla do json que o usuario selecionou
       if (sizes[i].sigla === jsonPosition.sigla) {
-        //Cria um json de estoque contendo o id do tamanho e a quantidade especificada pro tamanho
         const jsonTamanho = {
           id: sizes[i].id,
         };
@@ -103,9 +99,7 @@ export default function RegisterScreen() {
           },
           quantidade: jsonPosition.quantidade,
         };
-        //Adiciona no array de estoque
         arrayEstoque.push(jsonEstoque);
-        //Adiciona no array de tamanhos
         arrayTamanho.push(jsonTamanho);
       }
     }
@@ -179,8 +173,6 @@ export default function RegisterScreen() {
         leftChildren={
           <>
             <Logo src={require("../../../assets/logo.png")} />
-            <Spacer />
-            <ItemButton>CADASTRO PRODUTOS</ItemButton>
           </>
         }
         rightChildren={
@@ -227,7 +219,7 @@ export default function RegisterScreen() {
               onChange={(event) => setPrice(event.target.value)}
             />
           </div>
-
+          <TableSizes>
           {sizes.map((size, index) => (
             <ItemContainer key={index}>
               <div key={index}>
@@ -254,6 +246,7 @@ export default function RegisterScreen() {
               </div>
             </ItemContainer>
           ))}
+          </TableSizes>
           <div>
             <Button
               type="submit"
@@ -267,8 +260,8 @@ export default function RegisterScreen() {
         <TableProduct>
           <thead>
             <tr>
-              <TableHeader>Descrição</TableHeader>
-              <TableHeader>Preço</TableHeader>
+              <TableHeader>DESCRIÇÃO</TableHeader>
+              <TableHeader>PREÇO</TableHeader>
               {sizes.map((size, index) => (
                 <TableHeader key={index}>ESTOQUE {size.sigla}</TableHeader>
               ))}

@@ -48,8 +48,6 @@ function DashboardScreen() {
         leftChildren={
           <>
             <Logo src={require("../../../assets/logo.png")} />
-            <Spacer />
-            <ItemButton>CADASTRO PRODUTOS</ItemButton>
           </>
         }
         rightChildren={
@@ -99,6 +97,13 @@ function DashboardScreen() {
             title={"Gerenciar Entregas"}
             onClick={() => {
               navigate("/delivery");
+            }}
+          />
+           <div style={{ height: "1vh" }} />
+          <Button
+            title={"Histórico de Drones"}
+            onClick={() => {
+              navigate("/drone-history");
             }}
           />
           <div style={{ height: "1vh" }} />

@@ -37,17 +37,30 @@ export const DivButton = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
+
 `;
 export const DivInfos = styled.div`
-  height: 35vh;
+  height: 28vh;
   width: 21.5vw;
   padding: 1.5em;
 `;
 
 export const DivSizes = styled.div`
-  height: 4vh;
+  height: 15vh;
   width: 21.5vw;
-  padding: 1.5em 1.5em 0em 1.5em;
+  padding: 0em 1.5em 0em 1.5em;
+  overflow-x: auto;
+    &::-webkit-scrollbar {
+    width: 0.5vw;
+    border-radius: 20px;
+    background-color: #5e92a2;
+    border: 1px solid #527F8D;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #527F8D;
+    border-radius: 15px;
+    height: 0.5vh;
+  }
 `;
 
 export const CollectionButton = styled.button`
@@ -98,13 +111,13 @@ export const Price = styled.label`
 `;
 
 export const ContainerImagem = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 45vw;
+  height: 70vh;
   object-fit: fill;
 `;
 
 export const Label = styled.label`
-  margin-right: 15px;
+  margin: 0.5em;
   align-items: center;
   box-shadow: 3px 3px 6px 3px rgba(0, 0, 0, 0.1),
     -3px -3px 3px 3px rgba(109, 170, 189, 0.5),

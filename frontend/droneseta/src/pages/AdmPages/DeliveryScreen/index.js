@@ -40,8 +40,6 @@ function DeliveryScreen() {
         leftChildren={
           <>
             <Logo src={require("../../../assets/logo.png")} />
-            <Spacer />
-            <ItemButton>CADASTRO PRODUTOS</ItemButton>
           </>
         }
         rightChildren={
