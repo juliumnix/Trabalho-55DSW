@@ -32,28 +32,6 @@ public class ControladorUpload {
 		this.storageService = storageService;
 	}
 
-//	@GetMapping("/uploadImagem/{filename:.+}")
-//	@ResponseBody
-//	public ResponseEntity<Resource> serveFile(@PathVariable String filename, HttpServletResponse response) throws IOException {
-//
-//		// Verifica se o arquivo solicitado existe no diretório de imagens
-//		Path filePath = Paths.get("D:\\workspace\\projeto-55DSWF\\Trabalho-55DSW\\backend\\droneseta\\src\\main\\resources\\imagens", filename);
-//		if (!Files.exists(filePath) || Files.isDirectory(filePath)) {
-//			return ResponseEntity.notFound().build();
-//		}
-//
-//		// Carrega o recurso de imagem do diretório 'imagens' do classpath
-//		Resource resource = new ClassPathResource(filePath.toString());
-//
-//		// Configura o cabeçalho de cache do HTTP
-//		response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-//
-//		// Retorna a imagem como um InputStreamResource
-//		return ResponseEntity.ok()
-//				.contentType(MediaType.IMAGE_JPEG)
-//				.body(new InputStreamResource(resource.getInputStream()));
-//	}
-
 	@GetMapping("/uploadImagem/{filename:.+}")
 	@ResponseBody
 	public ResponseEntity<Resource> serveFile(@PathVariable String filename, HttpServletResponse response) throws IOException {
