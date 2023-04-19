@@ -70,17 +70,21 @@ function ShoppingCart() {
 
     const user = await getUsuarioFromLocalState();
 
-    await userService.finalizarCompra(
-      user.id,
-      produtos,
-      Number(valorTotal),
-      true,
-      false
-    );
+    try {
+      await userService.finalizarCompra(
+        user.id,
+        produtos,
+        Number(valorTotal),
+        true,
+        false
+      );
 
-    await userService.removeAllItems(user.id);
-    await getTotal();
-    setIsFinalized(true);
+      await userService.removeAllItems(user.id);
+      await getTotal();
+      setIsFinalized(true);
+    } catch (error) {
+      // não finaliza a compra, pois ocorreu erro em alguma das requisitçoes
+    }
   }
 
   return (
