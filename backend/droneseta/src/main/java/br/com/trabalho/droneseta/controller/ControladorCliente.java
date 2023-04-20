@@ -3,10 +3,7 @@ package br.com.trabalho.droneseta.controller;
 import br.com.trabalho.droneseta.DAO.ClienteDAO;
 import br.com.trabalho.droneseta.DAO.ProdutoCarrinhoDAO;
 import br.com.trabalho.droneseta.DAO.ProdutoDAO;
-import br.com.trabalho.droneseta.model.bean.Cliente;
-import br.com.trabalho.droneseta.model.bean.Produto;
-import br.com.trabalho.droneseta.model.bean.ProdutoCarrinho;
-import br.com.trabalho.droneseta.model.bean.Venda;
+import br.com.trabalho.droneseta.model.bean.*;
 import br.com.trabalho.droneseta.repository.RepositorioCliente;
 import br.com.trabalho.droneseta.repository.RepositorioProduto;
 import br.com.trabalho.droneseta.repository.RepositorioProdutoCarrinho;
@@ -20,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -189,8 +187,28 @@ public class ControladorCliente {
         Cliente cliente = ClienteDAO.procurarCliente(id, repositorioCliente);
         if (cliente != null) {
             venda.setCliente(cliente);
-            venda.getProdutos().forEach(v -> controladorProduto.diminuirEstoqueProduto(v.getProduto().getId(), v.getTamanho().getId(), v.getQuantidade()));
-            return new ResponseEntity<>(repositorioVenda.save(venda), HttpStatus.OK);
+            boolean podeVender = true;
+            for (ProdutoCarrinho p : venda.getProdutos()) {
+                if (podeVender) {
+                    Produto produto = ProdutoDAO.procurarProduto(p.getProduto().getId(), repositorioProduto);
+                    if (produto != null) {
+                        Optional<Estoque> optionalEstoque = produto.getEstoques().stream().filter(e -> e.getTamanho().getId() == p.getTamanho().getId()).findFirst();
+                        if(optionalEstoque.isPresent()) {
+                            Estoque estoque = optionalEstoque.get();
+                            if(estoque.getQuantidade() < p.getQuantidade()) {
+                                podeVender = false;
+                            }
+                        }
+                    }
+                } else {
+                    break;
+                }
+            }
+            if (podeVender) {
+                venda.getProdutos().forEach(p -> controladorProduto.diminuirEstoqueProduto(p.getProduto().getId(), p.getTamanho().getId(), p.getQuantidade()));
+                return new ResponseEntity<>(repositorioVenda.save(venda), HttpStatus.OK);
+            }
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
