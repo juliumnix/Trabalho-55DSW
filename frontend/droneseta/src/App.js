@@ -19,6 +19,7 @@ import FinishScreen from "./pages/FinishScreen";
 import HistoryScreen from "./pages/HistoryScreen";
 import DashboardScreen from "./pages/AdmPages/DashboardScreen";
 import DroneHistoryScreen from "./pages/AdmPages/DroneHistoryScreen";
+import SignUpAdministratorScreen from "./pages/AdmPages/SignUpAdministratorScreen";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/" element={<LoginScreen />} />
         <Route path="/sign-up" element={<SignUpScreen />} />
         <Route path="/admin" element={<AuthenticationScreen />} />
+        <Route path="/sign-up-admin" element={<SignUpAdministratorScreen />} />
         <Route
           path="/delivery"
           element={
@@ -116,7 +118,7 @@ function App() {
             </PrivatedRoute>
           }
         />
-         <Route
+        <Route
           path="/drone-history"
           element={
             <AdminRoute>

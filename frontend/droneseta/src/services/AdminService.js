@@ -35,4 +35,13 @@ export default class AdminService {
     const response = await api.delete(`administradores/${id}`);
     return response;
   }
+
+  async createAdministrator(name, email, pass) {
+    const response = await api.post("/administradores", {
+      nome: name,
+      email: email,
+      senha: pass,
+    });
+    return response;
+  }
 }
