@@ -24,9 +24,10 @@ import {
 import Vector from "../../../assets/Vector.svg";
 import loginBackgroundImage from "../../../assets/background-login.png";
 
-export default function AuthenticationScreen() {
+export default function SignUpAdministratorScreen() {
   const [user, setEmail] = useState("");
   const [pass, setPass] = useState("");
+  const [name, setName] = useState("");
   const navigate = useNavigate();
   const adminService = new AdminService();
 
@@ -49,9 +50,13 @@ export default function AuthenticationScreen() {
     setPass(text);
   }
 
+  function nameHandler(text) {
+    setName(text);
+  }
+
   async function loginHandler() {
-    const { data } = await adminService.loginAdmin(user, pass);
-    if (data === "Logou") {
+    const { data } = await adminService.createAdministrator(name, user, pass);
+    if (data.email === user) {
       localStorage.setItem("authLoginAdmin", true);
       navigate("/home-admin");
     }
@@ -85,6 +90,18 @@ export default function AuthenticationScreen() {
                 </div>
                 <div>
                   <Input
+                    type="text"
+                    placeholder="Nome"
+                    name="name"
+                    value={name}
+                    onChange={(event) => nameHandler(event.target.value)}
+                    width={"35vh"}
+                    height={"2vh"}
+                    margin={"0 0 2.5vh 0"}
+                  />
+                </div>
+                <div>
+                  <Input
                     type="password"
                     placeholder="Senha"
                     name="pass"
@@ -98,14 +115,14 @@ export default function AuthenticationScreen() {
               </LoginDataContent>
               <ButtonsWrapper>
                 <Button
-                  title={"ENTRAR"}
+                  title={"CRIAR CONTA"}
                   height={"6vh"}
                   width={"41vh"}
                   padding={0}
                   onClick={loginHandler}
                 />
-                <LoginRedirect href="/sign-up-admin">
-                  Não possui uma conta? Cadastre-se
+                <LoginRedirect href="/admin">
+                  Já possui uma conta? Entre
                 </LoginRedirect>
               </ButtonsWrapper>
             </LoginDataContentWrapper>
