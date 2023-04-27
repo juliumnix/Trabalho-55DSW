@@ -63,22 +63,38 @@ export default function SignUp() {
     }
 
     if (useSameAddress) {
-      setBillingAddress(deliveryAddress);
-    }
-
-    const response = await signUpService.signUp(
-      name,
-      email,
-      cpf,
-      pass,
-      deliveryAddress,
-      billingAddress,
-      cardNumber
-    );
-    if (response.status === 200) {
-      handleUsuario(response.data);
-      localStorage.setItem("authLogin", JSON.stringify(response.data));
-      navigate("/home");
+      const addressTemp = deliveryAddress;
+      const response = await signUpService.signUp(
+        name,
+        email,
+        cpf,
+        pass,
+        deliveryAddress,
+        addressTemp,
+        cardNumber
+      );
+      if (response.status === 200) {
+        handleUsuario(response.data);
+        localStorage.setItem("authLogin", JSON.stringify(response.data));
+        navigate("/home");
+        return;
+      }
+    } else {
+      const response = await signUpService.signUp(
+        name,
+        email,
+        cpf,
+        pass,
+        deliveryAddress,
+        billingAddress,
+        cardNumber
+      );
+      if (response.status === 200) {
+        handleUsuario(response.data);
+        localStorage.setItem("authLogin", JSON.stringify(response.data));
+        navigate("/home");
+        return;
+      }
     }
   }
 

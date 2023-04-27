@@ -13,7 +13,11 @@ function HistoryItem({ price, id, product, isDelivered }) {
   return (
     <Container>
       <Content>
-        <ContainerImage src={product.produto.urlImagem} />
+        <ContainerImage
+          src={
+            "http://localhost:8080/uploadImagem/" + product.produto.urlImagem
+          }
+        />
         <div>
           <TextInformaticon style={{ marginBottom: "1vh" }}>
             Pedido número: {id}
