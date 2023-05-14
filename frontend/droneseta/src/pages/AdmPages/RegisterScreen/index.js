@@ -75,7 +75,7 @@ export default function RegisterScreen() {
 
   async function registerHandler() {
     handleSubmit();
-    if (validateFields()) {
+    if (validateFields() && sizes.length > 0) {
       for (let i = 0; i < jsonSizes.length; i++) {
         if (jsonSizes[i].ativo) {
           getEstoqueETamanho(jsonSizes[i]);
