@@ -24,7 +24,7 @@ public class Drone {
     @Autowired
     private ControladorHistoricoDrone controladorHistoricoDrone;
     
-    @Scheduled(fixedRate = 8000)
+    @Scheduled(fixedRate = (60 * 60 * 1000))
     private void entrega() {
         int quantidadeParaEntregar = 0;
         int quantidadeMaximaPorEntrega = 10;
